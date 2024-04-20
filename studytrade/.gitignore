@@ -22,4 +22,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # node modules
-/node_modules
+node_modules/
+studytrade/node_modules
