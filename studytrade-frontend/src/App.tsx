@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       {/*<Navigation ...Click={() => setSite("Projects") } homepageClick={() => setSite("Homepage") }></Navigation>*/}
-      {currentSite === "Homepage" && <Homepage shoppageClick={() => setSite("Shoppage")}></Homepage>}
+      {currentSite === "Homepage" && <Homepage shoppageClick={() => setSite("Shoppage")} profilepageClick={() => setSite("Profilepage")}></Homepage>}
       {currentSite === "Shoppage" && <Shoppage homepageClick={() => setSite("Homepage")}></Shoppage>}
       {currentSite === "Profilepage" && <Profilepage homepageClick={() => setSite("Homepage")}></Profilepage>}
     </div>
