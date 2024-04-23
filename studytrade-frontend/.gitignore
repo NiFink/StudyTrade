@@ -25,3 +25,6 @@ yarn-error.log*
 /node_modules
 node_modules/
 studytrade/node_modules
+
+#vscode
+.vscode
