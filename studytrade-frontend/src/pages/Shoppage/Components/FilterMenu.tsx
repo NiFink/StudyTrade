@@ -5,8 +5,8 @@ interface FilterMenuProps{
 function FilterMenu({homepageClick}: FilterMenuProps){
 
     return <div>
-            <p>FilterMenu</p>
-            <button onClick={homepageClick}>Homepage</button>
-    </div>
+                <p className="text-sm font-medium text-red-900 flec">FilterMenu</p>
+                <button onClick={homepageClick}>Homepage</button>
+            </div>
 }
 export default FilterMenu;
