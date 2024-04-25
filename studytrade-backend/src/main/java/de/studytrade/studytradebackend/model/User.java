@@ -23,6 +23,7 @@ public class User {
     private char password;
     private String mail;
     private Date creationDate;
+    private String profileImage;
     @DocumentReference
     private List<Product> favorites;
 }
