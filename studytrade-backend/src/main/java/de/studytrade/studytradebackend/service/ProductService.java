@@ -18,7 +18,7 @@ public class ProductService implements ProductInterface{
         return productRepository.findAll();
     }
     @Override
-    public Optional<Product> singleProduct(ObjectId id) {
-        return productRepository.findById(id);
+    public Optional<Product> singleProduct(int productId) {
+        return productRepository.findProductByProductId(productId);
     }
 }

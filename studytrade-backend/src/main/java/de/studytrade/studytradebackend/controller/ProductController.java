@@ -25,9 +25,9 @@ public class ProductController {
         return new ResponseEntity<List<Product>>(productService.allProducts(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Product>> getSingleProduct(@PathVariable ObjectId id) {
-        return new ResponseEntity<Optional<Product>>(productService.singleProduct(id), HttpStatus.OK);
+    @GetMapping("/{productId}")
+    public ResponseEntity<Optional<Product>> getSingleProduct(@PathVariable int productId) {
+        return new ResponseEntity<Optional<Product>>(productService.singleProduct(productId), HttpStatus.OK);
     }
 
 }

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ProductInterface {
     List<Product> allProducts();
-    Optional<Product> singleProduct(ObjectId id);
+    Optional<Product> singleProduct(int productId);
 }
