@@ -20,10 +20,20 @@ public class User {
     private ObjectId id;
     private int userId;
     private String userName;
-    private char password;
+    private String password;
     private String mail;
     private Date creationDate;
     private String profileImage;
     @DocumentReference
     private List<Product> favorites;
+
+    public User(User user) {
+        this.userId = user.getUserId();
+        this.userName = user.getUserName();
+        this.password = user.getPassword();
+        this.mail = user.getMail();
+        this.creationDate = user.getCreationDate();
+        this.profileImage = user.getProfileImage();
+        this.favorites = user.getFavorites();
+    }
 }

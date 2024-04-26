@@ -1,7 +1,5 @@
 package de.studytrade.studytradebackend.repository;
 
-
-import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.model.User;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
