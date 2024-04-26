@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface ProductInterface {
     List<Product> allProducts();
     Optional<Product> singleProduct(int productId);
+    void newProduct(Product product);
 }

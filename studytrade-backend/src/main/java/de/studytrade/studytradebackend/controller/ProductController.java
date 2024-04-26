@@ -6,10 +6,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,4 +27,13 @@ public class ProductController {
         return new ResponseEntity<Optional<Product>>(productService.singleProduct(productId), HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<String> addNewProduct(@RequestBody Product product){
+        try{
+            productService.newProduct(product);
+            return new ResponseEntity<>("Product added successfully", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to add product: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
