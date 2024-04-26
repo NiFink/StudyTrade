@@ -2,6 +2,7 @@ package de.studytrade.studytradebackend.controller;
 
 import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.service.ProductInterface;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

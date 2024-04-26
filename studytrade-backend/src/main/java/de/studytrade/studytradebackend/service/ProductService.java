@@ -2,6 +2,7 @@ package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.repository.ProductRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
