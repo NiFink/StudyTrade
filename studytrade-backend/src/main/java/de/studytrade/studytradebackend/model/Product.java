@@ -27,4 +27,15 @@ public class Product {
     private int productId;
     private Date creationDate;
 
+    public Product(Product product){
+        this.name = product.getName();
+        this.description = product.getDescription();
+        this.category = product.getCategory();
+        this.condition = product.getCondition();
+        this.price = product.getPrice();
+        this.img = product.getImg();
+        this.productId = product.getProductId();
+        this.creationDate = product.getCreationDate();
+    }
+
 }

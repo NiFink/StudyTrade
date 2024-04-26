@@ -21,4 +21,9 @@ public class ProductService implements ProductInterface{
     public Optional<Product> singleProduct(int productId) {
         return productRepository.findProductByProductId(productId);
     }
+    @Override
+    public void newProduct(Product product){
+        Product newProduct = new Product(product);
+        productRepository.insert(newProduct);
+    }
 }
