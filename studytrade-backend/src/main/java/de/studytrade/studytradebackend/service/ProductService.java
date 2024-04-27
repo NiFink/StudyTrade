@@ -26,4 +26,8 @@ public class ProductService implements ProductInterface{
         Product newProduct = new Product(product);
         productRepository.insert(newProduct);
     }
+    @Override
+    public void deleteProduct(int productId){
+        productRepository.deleteByProductId(productId);
+    }
 }

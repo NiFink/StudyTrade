@@ -8,4 +8,5 @@ public interface UserInterface {
     List<User> allUsers();
     void addUser(User user);
     Optional<User> singleUser(int userId);
+    void deleteUser(int userId);
 }

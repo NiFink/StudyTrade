@@ -8,4 +8,5 @@ public interface ProductInterface {
     List<Product> allProducts();
     Optional<Product> singleProduct(int productId);
     void newProduct(Product product);
+    void deleteProduct(int productId);
 }

@@ -24,4 +24,8 @@ public class UserService implements UserInterface{
     public Optional<User> singleUser(int userId){
         return userRepository.findUserByUserId(userId);
     }
+    @Override
+    public void deleteUser(int userId){
+        userRepository.deleteByUserId(userId);
+    }
 }

@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends MongoRepository<User, ObjectId> {
     Optional<User> findUserByUserId(int userId);
+    void deleteByUserId(int userId);
 }

@@ -36,4 +36,13 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> deleteProduct(@PathVariable int userId){
+        try{
+            userService.deleteUser(userId);
+            return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>("Failed to delete user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
