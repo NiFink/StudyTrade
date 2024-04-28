@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
+
+
 interface FilterBarProps {
-    homepageClick?: () => void;
     toggleMenu: () => void;
     isMenuOpen: boolean;
 }
 
-function FilterBar({ homepageClick, toggleMenu, isMenuOpen }: FilterBarProps) {
-    const [zIndex, setZIndex] = useState<number>(1); // Initialer z-index-Wert für die FilterBar
+function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
+    const [zIndex, setZIndex] = useState<number>(1); 
 
     const dropdown = () => {
         document.querySelector("#submenu")?.classList.toggle("hidden");
@@ -15,26 +16,26 @@ function FilterBar({ homepageClick, toggleMenu, isMenuOpen }: FilterBarProps) {
     }
 
     const handleMenuOpen = () => {
-        setZIndex(2); // Setze den z-index der FilterBar auf einen Wert, der höher ist als der der Items
-        toggleMenu(); // Öffne das Menü
+        setZIndex(2); 
+        toggleMenu(); 
     }
 
     const handleMenuClose = () => {
-        setZIndex(1); // Setze den z-index der FilterBar wieder auf den ursprünglichen Wert
-        toggleMenu(); // Schließe das Menü
+        setZIndex(1); 
+        toggleMenu(); 
     }
 
     return (
         <div className="flex">
-            <div className={`bg-gray-500 lg:w-72`} style={{ zIndex: isMenuOpen ? 2 : 1 }}>
-                <span className="text-black text-4x1 cursor-pointer" onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}>
+            <div className={`lg:w-72`} style={{ zIndex: isMenuOpen ? 2 : 1 }}>
+                <span className="text-black text-4x1 cursor-pointer" onClick={handleMenuOpen}>
                     Categories
                 </span>
                 <div className={`sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-white ${isMenuOpen ? '' : 'left-[-300px]'}`}>
                     <div className="text-sm font-medium text-black"></div>
                     <div className="p-2.5 mt-1 flex justify-between">
                         <h1 className="font-bold text-[15px] ml-3">Categories</h1>
-                        <i className="bi bi-arrow-right lg:hidden cursor-pointer" onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}></i>
+                        <i className="bi bi-arrow-right lg:hidden cursor-pointer" onClick={handleMenuClose }></i>
                     </div>
                     <hr className="my-2 text-black" />
                     <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
