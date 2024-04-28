@@ -25,7 +25,7 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
 
   return (
     <div className="flex">
-      <div className="lg:w-72" style={{ zIndex: isMenuOpen ? 2 : zIndex }}>
+      <div className="lg:w-72" style={{ zIndex: isMenuOpen ? 2 : 0 }}>
         <span
           className="text-black text-4x1 cursor-pointer"
           onClick={handleMenuOpen}

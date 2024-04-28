@@ -51,11 +51,12 @@ function ProductDetails({
     <>
       <div className="relative">
         {isDetailsOpen && (
-          <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-40 z-0"></div>
+          <div className="fixed top-0 left-0 w-full h-full  bg-gray-800 bg-opacity-40 z-1"></div>
+          
         )}
         <div
           className="flex justify-center items-center"
-          style={{ zIndex: isDetailsOpen ? 20 : -1 }}
+          style={{ zIndex: isDetailsOpen ? 20 : 1 }}
         >
           <div
             ref={detailsRef}
