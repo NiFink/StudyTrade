@@ -27,7 +27,7 @@ public class Product {
     private int productId;
     private Date creationDate;
 
-    public Product(Product product){
+    public Product(Product product) {
         this.name = product.getName();
         this.description = product.getDescription();
         this.category = product.getCategory();
@@ -37,5 +37,4 @@ public class Product {
         this.productId = product.getProductId();
         this.creationDate = product.getCreationDate();
     }
-
 }
