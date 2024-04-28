@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface Product {
     id: number;
@@ -15,34 +15,50 @@ interface ProductDetailsProps {
     isDetailsOpen: boolean;
 }
 
+function ProductDetails({ product, toggleDetails, isDetailsOpen }: ProductDetailsProps) {
+    const detailsRef = useRef<HTMLDivElement>(null);
 
-function ProductDetails({product, toggleDetails, isDetailsOpen}: ProductDetailsProps){
-    const [zIndex, setZIndex] = useState<number>(1);
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (detailsRef.current && !detailsRef.current.contains(event.target as Node)) {
+                toggleDetails(); 
+            }
+        };
 
-    const handleDetailsOpen = () => {
-        setZIndex(2); 
-        toggleDetails(); 
-    }
+        if (isDetailsOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
 
-    const handleDetailsClose = () => {
-        setZIndex(1); 
-        toggleDetails(); 
-    }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+  }, [toggleDetails, isDetailsOpen]);
 
-    return <div className='flex' style={{ zIndex: isDetailsOpen ? 2 : 1 }}>
-        <div className={`sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-white ${isDetailsOpen ? '' : 'left-[-500px]'}`}>
-            <div className="absolute inset-0 flex flex-col Products-center  text-center translate-y-[85%] group-hover:translate-y-[50%] transition-all rounded-lg">
-                <h1 className="mt-3  text-xl font-bold text-white">
-                    {product.name}
-                </h1>
-                <p className="mt-3 text-lg font-medium text-white">
-                    {product.price}
-                </p>
-                <p className="p-2 text-xs font-medium text-white">
-                    {product.details}
-                </p>
-            </div>
+
+  const handleCloseDetails = () => {
+    toggleDetails();
+  };
+
+
+  return (
+    <div className='flex'>
+      <div ref={detailsRef} className={`details fixed top-0 bottom-0 right-0 p-2 w-[500px] overflow-y-auto text-center bg-white ${isDetailsOpen ? '' : 'right-[-1000px]'}`}>
+        <div className='flex p-2 justify-between items-center'>
+            <button className="p-1.5" onClick={handleCloseDetails}>
+                <i className='bi bi-arrow-left lg:hidden cursor-pointer'/>
+            </button>
+            <h1 className='mx-auto'>
+                {product.name}
+            </h1>
         </div>
+        <div>
+            
+        </div>
+      </div>
     </div>
+  );
 }
+
 export default ProductDetails;

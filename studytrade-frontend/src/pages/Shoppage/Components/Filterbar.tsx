@@ -27,7 +27,7 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
 
     return (
         <div className="flex">
-            <div className={`lg:w-72`} style={{ zIndex: isMenuOpen ? 2 : 1 }}>
+            <div className="lg:w-72" style={{ zIndex: isMenuOpen ? 2 : 1 }}>
                 <span className="text-black text-4x1 cursor-pointer" onClick={handleMenuOpen}>
                     Categories
                 </span>
@@ -46,7 +46,7 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
                         <span className="text-[15px] ml-4 text-black">Other</span>
                     </div>
                     <hr className="my-2 text-black" />
-                    <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300" onClick={dropdown}>
+                    <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300" onClick={dropdown}>
                         <div className="flex justify-between w-full items-center">
                             <span className="text-[15px] ml-4 text-black">Stuff</span>
                             <span className="text-sm rotate-180" id="arrow">

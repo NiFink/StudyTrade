@@ -57,14 +57,14 @@ function Shoppage({ homepageClick }: ShoppageProps) {
     setMenuOpen(!isMenuOpen);
   };
 
-  
+
   return (
     <div>
       <div className="md:flex">
         <div>
           <FilterMenu toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
         </div>
-        <div className="">
+        <div>
           <ProductList products={products} />
         </div>
       </div>
