@@ -6,6 +6,12 @@ import java.util.Optional;
 
 public interface ProductInterface {
     List<Product> allProducts();
+
     Optional<Product> singleProduct(int productId);
+
     void newProduct(Product product);
+
+    Optional<Product> updateProduct(Product productRequest);
+
+    void deleteProduct(int productId);
 }
