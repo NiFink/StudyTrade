@@ -10,7 +10,7 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
 
   const dropdown = () => {
     document.querySelector("#submenu")?.classList.toggle("hidden");
-    document.querySelector("#arrow")?.classList.toggle("rotate-0");
+    document.querySelector("#arrow")?.classList.toggle("rotate-180");
   };
 
   const handleMenuOpen = () => {
@@ -58,7 +58,7 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
           >
             <div className="flex justify-between w-full items-center">
               <span className="text-[15px] ml-4 text-black">Stuff</span>
-              <span className="text-sm rotate-180" id="arrow">
+              <span className="text-sm" id="arrow">
                 <i className="bi bi-chevron-down"></i>
               </span>
             </div>
