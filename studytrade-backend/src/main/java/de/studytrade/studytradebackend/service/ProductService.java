@@ -48,13 +48,20 @@ public class ProductService implements ProductInterface {
     @Override
     public Optional<Product> updateProduct(Product productRequest) {
         Product existingProduct = productRepository.findProductByProductId(productRequest.getProductId()).get();
-        existingProduct.setName(productRequest.getName());
-        existingProduct.setDescription(productRequest.getDescription());
-        existingProduct.setCategory(productRequest.getCategory());
-        existingProduct.setCondition(productRequest.getCondition());
-        existingProduct.setPrice(productRequest.getPrice());
-        existingProduct.setImg(productRequest.getImg());
-        existingProduct.setCreationDate(productRequest.getCreationDate());
+
+        // Change data only if it exists in productRequest
+        existingProduct
+                .setName(productRequest.getName() != null ? productRequest.getName() : existingProduct.getName());
+        existingProduct.setDescription(productRequest.getDescription() != null ? productRequest.getDescription()
+                : existingProduct.getDescription());
+        existingProduct.setCategory(
+                productRequest.getCategory() != null ? productRequest.getCategory() : existingProduct.getCategory());
+        existingProduct.setCondition(
+                productRequest.getCondition() != null ? productRequest.getCondition() : existingProduct.getCondition());
+        existingProduct
+                .setPrice(productRequest.getPrice() != null ? productRequest.getPrice() : existingProduct.getPrice());
+        existingProduct.setImg(productRequest.getImg() != null ? productRequest.getImg() : existingProduct.getImg());
+
         return Optional.of(productRepository.save(existingProduct));
     }
 
