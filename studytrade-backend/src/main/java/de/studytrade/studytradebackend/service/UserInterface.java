@@ -1,6 +1,5 @@
 package de.studytrade.studytradebackend.service;
 
-import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.model.User;
 import java.util.List;
 import java.util.Optional;

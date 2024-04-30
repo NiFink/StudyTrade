@@ -2,7 +2,6 @@ package de.studytrade.studytradebackend.controller;
 
 import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.service.ProductInterface;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +24,18 @@ public class ProductController {
     @GetMapping("/{productId}")
     public ResponseEntity<Optional<Product>> getSingleProduct(@PathVariable int productId) {
         return new ResponseEntity<Optional<Product>>(productService.singleProduct(productId), HttpStatus.OK);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<Product>> filterProducts(@RequestParam(required = false) Float minPrice,
+            @RequestParam(required = false) Float maxPrice, @RequestParam(required = false) String condition,
+            @RequestParam(required = false) List<String> category) {
+        try {
+            return new ResponseEntity<>(productService.filterProducts(minPrice, maxPrice, condition, category),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping

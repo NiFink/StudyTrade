@@ -9,6 +9,8 @@ public interface ProductInterface {
 
     Optional<Product> singleProduct(int productId);
 
+    List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category);
+
     void newProduct(Product product);
 
     Optional<Product> updateProduct(Product productRequest);

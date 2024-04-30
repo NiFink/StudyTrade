@@ -22,7 +22,7 @@ public class Product {
     private String description;
     private List<String> category;
     private String condition;
-    private float price;
+    private Float price;
     private String img;
     private int productId;
     private Date creationDate;

@@ -1,6 +1,5 @@
 package de.studytrade.studytradebackend.controller;
 
-import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.model.User;
 import de.studytrade.studytradebackend.service.UserInterface;
 import org.springframework.http.HttpStatus;

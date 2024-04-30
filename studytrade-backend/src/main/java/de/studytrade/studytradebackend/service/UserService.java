@@ -1,6 +1,5 @@
 package de.studytrade.studytradebackend.service;
 
-import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.model.User;
 import de.studytrade.studytradebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +31,18 @@ public class UserService implements UserInterface {
     @Override
     public Optional<User> updateUser(User userRequest) {
         User existingUser = userRepository.findUserByUserId(userRequest.getUserId()).get();
-        existingUser.setUserName(userRequest.getUserName());
-        existingUser.setPassword(userRequest.getPassword());
-        existingUser.setMail(userRequest.getMail());
-        existingUser.setCreationDate(userRequest.getCreationDate());
-        existingUser.setProfileImage(userRequest.getProfileImage());
-        existingUser.setFavorites(userRequest.getFavorites());
+
+        // Change data only if it exists in userRequest
+        existingUser.setUserName(
+                userRequest.getUserName() != null ? userRequest.getUserName() : existingUser.getUserName());
+        existingUser.setPassword(
+                userRequest.getPassword() != null ? userRequest.getPassword() : existingUser.getPassword());
+        existingUser.setMail(userRequest.getMail() != null ? userRequest.getMail() : existingUser.getMail());
+        existingUser.setProfileImage(
+                userRequest.getProfileImage() != null ? userRequest.getProfileImage() : existingUser.getProfileImage());
+        existingUser.setFavorites(
+                userRequest.getFavorites() != null ? userRequest.getFavorites() : existingUser.getFavorites());
+
         return Optional.of(userRepository.save(existingUser));
     }
 
