@@ -12,8 +12,11 @@ function Shoppage({ homepageClick }: ShoppageProps) {
       id: 1,
       name: "Earthen Bottle",
       price: "$48",
+      category: ["Electro", "Books"],
+      condition: "new",
+      creationDate: "20.05.2024",
       details:
-        "Eine elegante Wasserkanne aus strapazierfähigem Kunststoff mit schlankem Griff und Ausgießer, ideal für den Garten oder den Haushalt.",
+              "Eine elegante Wasserkanne aus strapazierfähigem Kunststoff mit schlankem Griff und Ausgießer, ideal für den Garten oder den Haushalt.",
       imageSrc:
         "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
       imageAlt:
@@ -23,6 +26,9 @@ function Shoppage({ homepageClick }: ShoppageProps) {
       id: 2,
       name: "Nomad Tumbler",
       price: "$35",
+      category: ["Electro", "Books"],
+      condition: "used",
+      creationDate: "20.05.2024",
       details:
         "Eine elegante Wasserkanne aus strapazierfähigem Kunststoff mit schlankem Griff und Ausgießer, ideal für den Garten oder den Haushalt.",
       imageSrc:
@@ -55,9 +61,21 @@ function Shoppage({ homepageClick }: ShoppageProps) {
   ];
 
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isDetailsOpen, setDetailsOpen] = useState(false);
+
 
   const toggleMenu = () => {
+    console.log(isMenuOpen)
     setMenuOpen(!isMenuOpen);
+    setDetailsOpen(false);
+  };
+
+
+  const toggleDetails = () => {
+    console.log(isMenuOpen)
+    setDetailsOpen(!isDetailsOpen);
+    setMenuOpen(false);
+    console.log(isMenuOpen)
   };
 
   return (
@@ -67,7 +85,7 @@ function Shoppage({ homepageClick }: ShoppageProps) {
           <FilterMenu toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
         </div>
         <div>
-          <ProductList products={products} />
+          <ProductList products={products} toggleDetails={toggleDetails} isDetailsOpen={isDetailsOpen}/>
         </div>
       </div>
     </div>

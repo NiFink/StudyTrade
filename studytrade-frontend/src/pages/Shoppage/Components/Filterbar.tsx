@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface FilterBarProps {
   toggleMenu: () => void;
@@ -7,6 +8,31 @@ interface FilterBarProps {
 
 function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
   const [zIndex, setZIndex] = useState<number>(1);
+
+  const menuRef = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        handleMenuClose();
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [toggleMenu, isMenuOpen]);
+
 
   const dropdown = () => {
     document.querySelector("#submenu")?.classList.toggle("hidden");
@@ -25,12 +51,16 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
 
   return (
     <div className="flex">
-      <div className="lg:w-72" style={{ zIndex: isMenuOpen ? 2 : 0 }}>
+       {isMenuOpen && (
+          <div className="fixed top-0 left-0 w-full h-full  bg-gray-800 bg-opacity-40 z-10"></div>
+          
+        )}
+      <div ref={menuRef} className="lg:w-72 " style={{ zIndex: isMenuOpen ? 20 : 1 }}>
         <span
           className="text-black text-4x1 cursor-pointer"
           onClick={handleMenuOpen}
         >
-          Categories
+          <i className="bi bi-funnel"></i>
         </span>
         <div
           className={`sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-white ${isMenuOpen ? "" : "left-[-300px]"}`}
@@ -45,11 +75,11 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
           </div>
           <hr className="my-2 text-black" />
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Tech</span>
+            <span className="text-[15px] ml-4 text-black">New</span>
           </div>
           <hr className="my-2 text-black" />
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Other</span>
+            <span className="text-[15px] ml-4 text-black">Used</span>
           </div>
           <hr className="my-2 text-black" />
           <div
@@ -57,7 +87,7 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
             onClick={dropdown}
           >
             <div className="flex justify-between w-full items-center">
-              <span className="text-[15px] ml-4 text-black">Stuff</span>
+              <span className="text-[15px] ml-4 text-black">Electro</span>
               <span className="text-sm" id="arrow">
                 <i className="bi bi-chevron-down"></i>
               </span>
@@ -68,10 +98,10 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
             id="submenu"
           >
             <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
-              Other Stuff
+              Laptop
             </h1>
             <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
-              Other Stuff
+              Smartphone
             </h1>
             <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
               Other Stuff

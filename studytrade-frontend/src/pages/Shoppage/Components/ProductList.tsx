@@ -12,19 +12,19 @@ interface Product {
 
 interface ProductProps {
   products: Product[];
+  toggleDetails: () => void;
+  isDetailsOpen: boolean;
 }
 
-function ProductList({ products }: ProductProps) {
+function ProductList({ products,  toggleDetails, isDetailsOpen}: ProductProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [isDetailsOpen, setDetailsOpen] = useState(false);
 
-  const toggleDetails = () => {
-    setDetailsOpen(!isDetailsOpen);
-  };
+
 
   const handleProductClick = (product: Product) => {
+    
     setSelectedProduct(product);
-    setDetailsOpen(!isDetailsOpen);
+    toggleDetails();
   };
 
   return (
