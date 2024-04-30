@@ -2,7 +2,6 @@ package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.repository.ProductRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +21,22 @@ public class ProductService implements ProductInterface {
     @Override
     public Optional<Product> singleProduct(int productId) {
         return productRepository.findProductByProductId(productId);
+    }
+
+    @Override
+    public List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category) {
+        // Standardwerte festlegen, falls erforderlich
+        minPrice = (minPrice != null) ? minPrice : 0f;
+        maxPrice = (maxPrice != null) ? maxPrice : Float.MAX_VALUE;
+        condition = (condition != null) ? condition : "";
+
+        // Überprüfen, ob die Kategorie leer ist
+        if (category == null || category.isEmpty()) {
+            return productRepository.findByPriceBetweenAndConditionLike(minPrice, maxPrice, condition);
+        } else {
+            return productRepository.findByPriceBetweenAndConditionLikeAndCategoryIn(minPrice, maxPrice, condition,
+                    category);
+        }
     }
 
     @Override

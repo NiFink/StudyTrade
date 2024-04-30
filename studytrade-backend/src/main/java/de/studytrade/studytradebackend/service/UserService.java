@@ -1,6 +1,5 @@
 package de.studytrade.studytradebackend.service;
 
-import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.model.User;
 import de.studytrade.studytradebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
