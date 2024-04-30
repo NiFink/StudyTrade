@@ -45,7 +45,7 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
   };
 
   const handleMenuClose = () => {
-    setZIndex(1);
+    setZIndex(0);
     toggleMenu();
   };
 
@@ -55,7 +55,7 @@ function FilterBar({ toggleMenu, isMenuOpen }: FilterBarProps) {
           <div className="fixed top-0 left-0 w-full h-full  bg-gray-800 bg-opacity-40 z-10"></div>
           
         )}
-      <div ref={menuRef} className="lg:w-72 " style={{ zIndex: isMenuOpen ? 20 : 1 }}>
+      <div ref={menuRef} className="lg:w-72 " style={{ zIndex: isMenuOpen ? 20 : 0 }}>
         <span
           className="text-black text-4x1 cursor-pointer"
           onClick={handleMenuOpen}
