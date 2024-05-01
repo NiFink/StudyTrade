@@ -40,6 +40,11 @@ public class ProductService implements ProductInterface {
     }
 
     @Override
+    public List<Product> searchProducts(String search) {
+        return productRepository.findByNameContainingIgnoreCase(search);
+    }
+
+    @Override
     public void newProduct(Product product) {
         Product newProduct = new Product(product);
         productRepository.insert(newProduct);

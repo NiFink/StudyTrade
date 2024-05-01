@@ -38,6 +38,16 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> filterProducts(@RequestParam(required = true) String search) {
+        try {
+            return new ResponseEntity<>(productService.searchProducts(search),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<String> addNewProduct(@RequestBody Product product) {
         try {
