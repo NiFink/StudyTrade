@@ -11,6 +11,8 @@ public interface ProductInterface {
 
     List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category);
 
+    List<Product> searchProducts(String search);
+
     void newProduct(Product product);
 
     Optional<Product> updateProduct(Product productRequest);

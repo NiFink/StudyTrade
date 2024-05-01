@@ -10,14 +10,16 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends MongoRepository<Product, ObjectId> {
-    Optional<Product> findProductByProductId(int productId);
+        Optional<Product> findProductByProductId(int productId);
 
-    List<Product> findByPriceBetweenAndConditionLike(Float minPrice, Float maxPrice,
-            String condition);
+        List<Product> findByPriceBetweenAndConditionLike(Float minPrice, Float maxPrice,
+                        String condition);
 
-    List<Product> findByPriceBetweenAndConditionLikeAndCategoryIn(Float minPrice, Float maxPrice,
-            String condition,
-            List<String> category);
+        List<Product> findByPriceBetweenAndConditionLikeAndCategoryIn(Float minPrice, Float maxPrice,
+                        String condition,
+                        List<String> category);
 
-    void deleteByProductId(int productId);
+        List<Product> findByNameContainingIgnoreCase(String search);
+
+        void deleteByProductId(int productId);
 }
