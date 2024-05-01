@@ -5,6 +5,10 @@ interface Product {
   id: number;
   name: string;
   price: string;
+  category: string[];
+  condition: string;
+  creationDate: string;
+  seller: string;
   details: string;
   imageSrc: string;
   imageAlt: string;
@@ -16,21 +20,18 @@ interface ProductProps {
   isDetailsOpen: boolean;
 }
 
-function ProductList({ products,  toggleDetails, isDetailsOpen}: ProductProps) {
+function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-
-
   const handleProductClick = (product: Product) => {
-    
     setSelectedProduct(product);
     toggleDetails();
   };
 
   return (
     <div>
-      <div className="max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  4xl:grid-cols-5 xl:gap-x-8">
+      <div className="max-w-xl px-4 py-16 sm:px-6 sm:py-24 md:max-w-full lg:px-8">
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
           {products.map((product) => (
             <button
               key={product.id}
@@ -49,7 +50,7 @@ function ProductList({ products,  toggleDetails, isDetailsOpen}: ProductProps) {
                       {product.name}
                     </h1>
                     <p className="mt-3 text-lg font-medium text-white">
-                      {product.price}
+                      {product.price} {product.condition}
                     </p>
                     <p className="p-2 text-xs font-medium text-white">
                       {product.details}

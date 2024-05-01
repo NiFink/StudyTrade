@@ -4,6 +4,10 @@ interface Product {
   id: number;
   name: string;
   price: string;
+  category: string[];
+  condition: string;
+  creationDate: string;
+  seller: string;
   details: string;
   imageSrc: string;
   imageAlt: string;
@@ -29,6 +33,7 @@ function ProductDetails({
         !detailsRef.current.contains(event.target as Node)
       ) {
         toggleDetails();
+        console.log(isDetailsOpen)
       }
     };
 
@@ -45,6 +50,7 @@ function ProductDetails({
 
   const handleCloseDetails = () => {
     toggleDetails();
+    
   };
 
   return (
@@ -59,7 +65,7 @@ function ProductDetails({
         >
           <div
             ref={detailsRef}
-            className={`fixed top-0 bottom-0 right-0 p-2 w-[500px]  text-center bg-white ${isDetailsOpen ? "" : "right-[-1000px]"}`}
+            className={`fixed top-0 bottom-0 right-0 p-2 lg:w-[500px] md:w-full text-center bg-white ${isDetailsOpen ? "" : "hidden"}`}
           >
             <div className="flex p-2 justify-between items-center">
               <button className="p-1.5" onClick={handleCloseDetails}>
@@ -69,19 +75,42 @@ function ProductDetails({
             </div>
             <div className="max-h-[84vh] overflow-y-scroll">
               <img src={product.imageSrc} alt={product.imageAlt} />
-              <div className="flex justify-between mt-2 font-bold">
-                <h1 className=" mx-auto text-xl ">{product.name}</h1>
-                <h1 className="text-l">
-                    {product.price}
-                </h1>
+              <div className="flex mt-2  p-2 justify-center">
+              <i className="bi bi-person-fill "></i>
+                <h1 className="text-l ">{product.seller}</h1>
               </div>
-              
-              <p className="p-4">{product.details}</p>
+              <hr />
+              <h1 className="text-xl font-bold  p-2">{product.name}</h1>
+
+              <div className="p-2">
+                <h1 className="border-2 border-green-500 rounded-lg text-green-600 ">{product.condition}</h1>
+              </div>
+              <hr />
+              <div className="flex text-left p-2 ">
+                <h1 className="font-bold">Price:</h1>
+                <p className="pl-2">{product.price}</p>
+              </div> 
+              <hr />
+              <div className="flex text-left p-2">
+                <h1 className="font-bold">Offer created:</h1>
+                <p className="pl-2">{product.creationDate}</p>
+              </div>
+              <hr />           
+              <div className="flex text-left p-2 outline-1">
+                <h1 className="font-bold">Category:</h1>
+                <p className="pl-2">{product.category}</p>
+              </div>
+              <hr />
+              <div className="text-left p-2 ">
+                <h1 className="font-bold">Details:</h1>
+                <p>{product.details}</p>
+              </div>
+
             </div>
             <div className="absolute bottom-0 right-0 left-0 p-4">
               <div className="flex justify-evenly text-center text-white font-bold">
                 <button className="bg-red-400 w-2/5 p-2 rounded-lg ">
-                    {product.price}
+                  make an offer
                 </button>
                 <button className="bg-red-400 w-2/5 p-2 rounded-lg">
                   <i className="bi bi-heart cursor-pointer"></i>
