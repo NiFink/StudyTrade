@@ -7,10 +7,6 @@ interface FilterBarProps {
 function FilterBar({ toggleCategories }: FilterBarProps) {
   const [selectedCondition, setSelectedCondition] = useState('all');
 
-  const MIN = 0;
-  const MAX = 10000;
-  const [currentValues, setValues] = useState([MIN, MAX]);
-
   const handleConditionChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedCondition(event.target.value);
   };
@@ -21,16 +17,13 @@ function FilterBar({ toggleCategories }: FilterBarProps) {
   return (<div>
     <div className=" w-full ">
       <div className="flex p-2 justify-center">
-        <button className="md:hidden " onClick={toggleCategories}>
+        <button className="lg:hidden " onClick={toggleCategories}>
           <i className="bi bi-filter"></i>
           Categories
         </button>
-        <button className="pl-3" onClick={filter}>
-          <i className="bi bi-funnel-fill"></i>
+        <button className="pl-3 lg:hidden" onClick={filter}>
+          <i className="bi bi-funnel hover:bi-funnel-fill"></i>
         </button>
-        <div className=" pl-3 ">
-          <input type="search" className="border rounded-lg" placeholder="Search" ></input>
-        </div>
       </div>
       <div className="hidden" id="filter">
         <div className='flex justify-center'>

@@ -34,9 +34,21 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
   }, [toggleCategories, isCategoriesOpen]);
 
 
-  const dropdown = () => {
-    document.querySelector("#subcategories")?.classList.toggle("hidden");
-    document.querySelector("#arrow")?.classList.toggle("rotate-180");
+  const dropdownElectronics = () => {
+    document.querySelector("#subElectronics")?.classList.toggle("hidden");
+    document.querySelector("#arrowElectronics")?.classList.toggle("rotate-180");
+  };
+  const dropdownClothing = () => {
+    document.querySelector("#subClothing")?.classList.toggle("hidden");
+    document.querySelector("#arrowClothing")?.classList.toggle("rotate-180");
+  };
+  const dropdownLeisure = () => {
+    document.querySelector("#subLeisure")?.classList.toggle("hidden");
+    document.querySelector("#arrowLeisure")?.classList.toggle("rotate-180");
+  };
+  const dropdownHome = () => {
+    document.querySelector("#subHome")?.classList.toggle("hidden");
+    document.querySelector("#arrowHome")?.classList.toggle("rotate-180");
   };
 
   const handleCategoriesOpen = () => {
@@ -48,7 +60,9 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
     setZIndex(0);
     toggleCategories();
   };
-
+  const filter = () =>{
+    document.querySelector("#filter")?.classList.toggle("hidden");
+  }
   return (
     <div className="flex">
        {isCategoriesOpen && (
@@ -66,108 +80,39 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
               className="bi bi-arrow-right lg:hidden cursor-pointer"
               onClick={handleCategoriesClose}
             ></i>
+                    <button className="pl-3" onClick={filter}>
+          <i className="bi bi-funnel hover:bi-funnel-fill"></i>
+        </button>
           </div>
+
           <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Books</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Sports</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Music</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Arts</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Decor</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Pet</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Games</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Office</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Appliances</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Outdoor</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Study</span>
-          </div>
-          <hr className="my-2 text-black" />
+
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
             <span className="text-[15px] ml-4 text-black">Beauty</span>
           </div>
+
           <hr className="my-2 text-black" />
+
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Events</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Accesories</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Other</span>
-          </div>
-          <hr className="my-2 text-black" />
-          <div
-            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
-            onClick={dropdown}
-          >
-            <div className="flex justify-between w-full items-center">
-              <span className="text-[15px] ml-4 text-black">Electronics</span>
-              <span className="text-sm" id="arrow">
-                <i className="bi bi-chevron-down"></i>
-              </span>
-            </div>
+            <span className="text-[15px] ml-4 text-black">Books</span>
           </div>
 
-          <div
-            className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
-            id="subcategories"
-          >
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
-              Laptop
-            </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
-              Smartphone
-            </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
-              Other Stuff
-            </h1>
-          </div>
+          <hr className="my-2 text-black" />
+
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
-            onClick={dropdown}
+            onClick={dropdownClothing}
           >
             <div className="flex justify-between w-full items-center">
               <span className="text-[15px] ml-4 text-black">Clothing</span>
-              <span className="text-sm" id="arrow">
+              <span className="text-sm" id="arrowClothing">
                 <i className="bi bi-chevron-down"></i>
               </span>
             </div>
           </div>
           <div
             className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
-            id="subcategories"
+            id="subClothing"
           >
             <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
               Shirts
@@ -179,6 +124,133 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
               Shoes
             </h1>
           </div>
+
+          <hr className="my-2 text-black" />
+
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
+            onClick={dropdownElectronics}
+          >
+            <div className="flex justify-between w-full items-center">
+              <span className="text-[15px] ml-4 text-black">Electronics</span>
+              <span className="text-sm" id="arrowElectronics">
+                <i className="bi bi-chevron-down"></i>
+              </span>
+            </div>
+          </div>
+          <div
+            className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
+            id="subElectronics"
+          >
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Laptop
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Smartphone
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Accesories
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Other Stuff
+            </h1>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
+            <span className="text-[15px] ml-4 text-black">Events</span>
+          </div>
+
+          
+          <hr className="my-2 text-black" />
+
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
+            onClick={dropdownHome}
+          >
+            <div className="flex justify-between w-full items-center">
+              <span className="text-[15px] ml-4 text-black">Home</span>
+              <span className="text-sm" id="arrowHome">
+                <i className="bi bi-chevron-down"></i>
+              </span>
+            </div>
+          </div>
+          <div
+            className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
+            id="subHome"
+          >
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Decor
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Appliances
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Shoes
+            </h1>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
+            onClick={dropdownLeisure}
+          >
+            <div className="flex justify-between w-full items-center">
+              <span className="text-[15px] ml-4 text-black">Leisure & Hobbies</span>
+              <span className="text-sm" id="arrowLeisure">
+                <i className="bi bi-chevron-down"></i>
+              </span>
+            </div>
+          </div>
+          <div
+            className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
+            id="subLeisure"
+          >
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Sports
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Music
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Arts
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Games
+            </h1>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
+            <span className="text-[15px] ml-4 text-black">Outdoor</span>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
+            <span className="text-[15px] ml-4 text-black">Pet</span>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
+            <span className="text-[15px] ml-4 text-black">Study</span>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
+            <span className="text-[15px] ml-4 text-black">Other</span>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+
+
+
         </div>
       </div>
     </div>
