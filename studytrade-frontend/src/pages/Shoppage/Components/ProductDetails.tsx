@@ -103,7 +103,7 @@ function ProductDetails({
               <hr />
               <div className="text-left p-2 ">
                 <h1 className="font-bold">Details:</h1>
-                <p>{product.details}</p>
+                <p >{product.details}</p>
               </div>
 
             </div>

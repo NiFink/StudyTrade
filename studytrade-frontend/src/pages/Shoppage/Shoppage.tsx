@@ -131,6 +131,7 @@ function Shoppage({ homepageClick }: ShoppageProps) {
 
   return (
     <div>
+      <Filterbar toggleCategories={toggleCategories}></Filterbar>
       <div className="md:flex">
         <div>
           <Categoriesbar toggleCategories={toggleCategories} isCategoriesOpen={isCategoriesOpen} />
