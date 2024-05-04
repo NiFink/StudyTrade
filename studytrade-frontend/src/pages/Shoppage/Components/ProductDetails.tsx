@@ -1,16 +1,14 @@
 import React, { useEffect, useRef } from "react";
 
 interface Product {
-  id: number;
   name: string;
-  price: string;
+  description: string;
   category: string[];
   condition: string;
+  price: number;
+  img: string;
+  productId: number;
   creationDate: string;
-  seller: string;
-  details: string;
-  imageSrc: string;
-  imageAlt: string;
 }
 
 interface ProductDetailsProps {
@@ -33,7 +31,6 @@ function ProductDetails({
         !detailsRef.current.contains(event.target as Node)
       ) {
         toggleDetails();
-        console.log(isDetailsOpen)
       }
     };
 
@@ -74,10 +71,10 @@ function ProductDetails({
               <h1 className="mx-auto">{product.name}</h1>
             </div>
             <div className="max-h-[84vh] overflow-y-scroll">
-              <img src={product.imageSrc} alt={product.imageAlt} />
+              <img src={product.img} alt={product.name} className="w-full"/>
               <div className="flex mt-2  p-2 justify-center">
               <i className="bi bi-person-fill "></i>
-                <h1 className="text-l ">{product.seller}</h1>
+                <h1 className="text-l ">{product.name}</h1>
               </div>
               <hr />
 
@@ -118,7 +115,7 @@ function ProductDetails({
               <hr />
               <div className="text-left p-2 ">
                 <h1 className="font-bold">Details:</h1>
-                <p >{product.details}</p>
+                <p >{product.description}</p>
               </div>
 
             </div>
