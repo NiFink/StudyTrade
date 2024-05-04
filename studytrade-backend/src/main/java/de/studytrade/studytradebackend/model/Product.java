@@ -26,6 +26,7 @@ public class Product {
     private String img;
     private int productId;
     private Date creationDate;
+    private int userId;
 
     public Product(Product product) {
         this.name = product.getName();
@@ -36,5 +37,6 @@ public class Product {
         this.img = product.getImg();
         this.productId = product.getProductId();
         this.creationDate = product.getCreationDate();
+        this.userId = product.getUserId();
     }
 }
