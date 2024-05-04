@@ -29,7 +29,7 @@ function Shoppage({ homepageClick }: ShoppageProps) {
       name: "Nomad Tumbler",
       price: "$35",
       category: ["Electro", "Books"],
-      condition: "used",
+      condition: "nearly new",
       creationDate: "20.05.2024",
       seller: "",
       details:

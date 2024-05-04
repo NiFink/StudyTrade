@@ -80,11 +80,26 @@ function ProductDetails({
                 <h1 className="text-l ">{product.seller}</h1>
               </div>
               <hr />
-              <h1 className="text-xl font-bold  p-2">{product.name}</h1>
 
-              <div className="p-2">
-                <h1 className="border-2 border-green-500 rounded-lg text-green-600 ">{product.condition}</h1>
-              </div>
+
+              <h1 className="text-xl font-bold p-2">{product.name}</h1>
+              {product.condition === "new" ? (
+                <div className="p-2">
+                  <h1 className="border-2 border-green-500 rounded-lg text-green-600">{product.condition}</h1>
+                </div>
+              ) : null}
+              {product.condition === "nearly new" ? (
+                <div className="p-2">
+                  <h1 className="border-2 border-yellow-500 rounded-lg text-yellow-600">{product.condition}</h1>
+                </div>
+              ) : null}
+              {product.condition === "used" ? (
+                <div className="p-2">
+                  <h1 className="border-2 border-orange-500 rounded-lg text-orange-600">{product.condition}</h1>
+                </div>
+              ) : null}
+
+
               <hr />
               <div className="flex text-left p-2 ">
                 <h1 className="font-bold">Price:</h1>

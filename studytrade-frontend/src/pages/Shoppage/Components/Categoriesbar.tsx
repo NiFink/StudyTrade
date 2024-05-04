@@ -11,7 +11,6 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
 
   const categoriesRef = useRef<HTMLDivElement>(null);
 
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -33,7 +32,6 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
     };
   }, [toggleCategories, isCategoriesOpen]);
 
-
   const dropdownElectronics = () => {
     document.querySelector("#subElectronics")?.classList.toggle("hidden");
     document.querySelector("#arrowElectronics")?.classList.toggle("rotate-180");
@@ -51,25 +49,24 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
     document.querySelector("#arrowHome")?.classList.toggle("rotate-180");
   };
 
-  const handleCategoriesOpen = () => {
-    setZIndex(2);
-    toggleCategories();
-  };
 
   const handleCategoriesClose = () => {
     setZIndex(0);
     toggleCategories();
   };
-  const filter = () =>{
+  const filter = () => {
     document.querySelector("#filter")?.classList.toggle("hidden");
-  }
+  };
   return (
     <div className="flex">
-       {isCategoriesOpen && (
-          <div className="fixed top-0 left-0 w-full h-full  bg-gray-800 bg-opacity-40 z-10"></div>
-          
-        )}
-      <div ref={categoriesRef} className="lg:w-72 " style={{ zIndex: isCategoriesOpen ? 20 : 0 }}>
+      {isCategoriesOpen && (
+        <div className="fixed top-0 left-0 w-full h-full  bg-gray-800 bg-opacity-40 z-10"></div>
+      )}
+      <div
+        ref={categoriesRef}
+        className="lg:w-72 "
+        style={{ zIndex: isCategoriesOpen ? 20 : 0 }}
+      >
         <div
           className={`sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-white ${isCategoriesOpen ? "" : "left-[-300px]"}`}
         >
@@ -80,9 +77,9 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
               className="bi bi-arrow-right lg:hidden cursor-pointer"
               onClick={handleCategoriesClose}
             ></i>
-                    <button className="pl-3" onClick={filter}>
-          <i className="bi bi-funnel hover:bi-funnel-fill"></i>
-        </button>
+            <button className="pl-3 hidden md:inline-block" onClick={filter}>
+              <i className="bi bi-funnel "></i>
+            </button>
           </div>
 
           <hr className="my-2 text-black" />
@@ -98,7 +95,7 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
           </div>
 
           <hr className="my-2 text-black" />
-
+          {/*Clothing */}
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
             onClick={dropdownClothing}
@@ -121,12 +118,25 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
               Hoddies
             </h1>
             <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Outerwear
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Dresses
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Pants
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
               Shoes
+            </h1>
+            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+              Accessories
             </h1>
           </div>
 
           <hr className="my-2 text-black" />
 
+          {/*Electronics */}
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
             onClick={dropdownElectronics}
@@ -162,9 +172,9 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
             <span className="text-[15px] ml-4 text-black">Events</span>
           </div>
 
-          
           <hr className="my-2 text-black" />
 
+          {/*Home */}
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
             onClick={dropdownHome}
@@ -186,19 +196,19 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
             <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
               Appliances
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
-              Shoes
-            </h1>
           </div>
 
           <hr className="my-2 text-black" />
 
+          {/*Leisure and Hobbies */}
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
             onClick={dropdownLeisure}
           >
             <div className="flex justify-between w-full items-center">
-              <span className="text-[15px] ml-4 text-black">Leisure & Hobbies</span>
+              <span className="text-[15px] ml-4 text-black">
+                Leisure & Hobbies
+              </span>
               <span className="text-sm" id="arrowLeisure">
                 <i className="bi bi-chevron-down"></i>
               </span>
@@ -247,10 +257,6 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
           </div>
 
           <hr className="my-2 text-black" />
-
-
-
-
         </div>
       </div>
     </div>
