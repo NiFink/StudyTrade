@@ -29,9 +29,10 @@ public class ProductController {
     @GetMapping("/filter")
     public ResponseEntity<List<Product>> filterProducts(@RequestParam(required = false) Float minPrice,
             @RequestParam(required = false) Float maxPrice, @RequestParam(required = false) String condition,
-            @RequestParam(required = false) List<String> category) {
+            @RequestParam(required = false) List<String> category, @RequestParam(required = false) String sort) {
         try {
-            return new ResponseEntity<>(productService.filterProducts(minPrice, maxPrice, condition, category),
+            return new ResponseEntity<>(
+                    productService.filterProducts(minPrice, maxPrice, condition, category, sort),
                     HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

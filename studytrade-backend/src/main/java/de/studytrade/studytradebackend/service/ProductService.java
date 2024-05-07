@@ -3,6 +3,8 @@ package de.studytrade.studytradebackend.service;
 import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,18 +26,33 @@ public class ProductService implements ProductInterface {
     }
 
     @Override
-    public List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category) {
+    public List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category,
+            String sort) {
         // Standardwerte festlegen, falls erforderlich
         minPrice = (minPrice != null) ? minPrice : 0f;
         maxPrice = (maxPrice != null) ? maxPrice : Float.MAX_VALUE;
         condition = (condition != null) ? condition : "";
 
+        // Sorting based on sort
+        Sort sortOpt = Sort.unsorted();
+        if (sort != null) {
+            if (sort.equals("priceASC")) {
+                sortOpt = Sort.by(Direction.ASC, "price");
+            } else if (sort.equals("priceDESC")) {
+                sortOpt = Sort.by(Direction.DESC, "price");
+            } else if (sort.equals("creationDateASC")) {
+                sortOpt = Sort.by(Direction.ASC, "creationDate");
+            } else if (sort.equals("creationDateDESC")) {
+                sortOpt = Sort.by(Direction.DESC, "creationDate");
+            }
+        }
+
         // Überprüfen, ob die Kategorie leer ist
         if (category == null || category.isEmpty()) {
-            return productRepository.findByPriceBetweenAndConditionLike(minPrice, maxPrice, condition);
+            return productRepository.findByPriceBetweenAndConditionLike(minPrice, maxPrice, condition, sortOpt);
         } else {
             return productRepository.findByPriceBetweenAndConditionLikeAndCategoryIn(minPrice, maxPrice, condition,
-                    category);
+                    category, sortOpt);
         }
     }
 
