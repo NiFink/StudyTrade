@@ -1,12 +1,22 @@
 import { useState } from "react";
 import React, { useEffect, useRef } from "react";
 
-interface FilterBarProps {
+interface CategoriesbarProps {
   toggleCategories: () => void;
+  fetchProducts: (
+    category?: string,
+    minPrice?: number,
+    maxPrice?: number,
+    condition?: string
+  ) => void;
   isCategoriesOpen: boolean;
 }
 
-function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
+function Categoriesbar({
+  toggleCategories,
+  isCategoriesOpen,
+  fetchProducts,
+}: CategoriesbarProps) {
   const [zIndex, setZIndex] = useState<number>(1);
 
   const categoriesRef = useRef<HTMLDivElement>(null);
@@ -33,13 +43,22 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
   }, [toggleCategories, isCategoriesOpen]);
 
   const dropdownElectronics = () => {
-    document.querySelector("#subElectronics")?.classList.toggle("hidden");
+    const subElectronic = document.querySelector("#subElectronics");
+    subElectronic?.classList.toggle("hidden");
+    if (!subElectronic?.classList.contains("hidden")) {
+      fetchProducts("Electronics");
+    }
     document.querySelector("#arrowElectronics")?.classList.toggle("rotate-180");
   };
   const dropdownClothing = () => {
-    document.querySelector("#subClothing")?.classList.toggle("hidden");
+    const subClothing = document.querySelector("#subClothing");
+    subClothing?.classList.toggle("hidden");
+    if (!subClothing?.classList.contains("hidden")) {
+      fetchProducts("Clothing");
+    }
     document.querySelector("#arrowClothing")?.classList.toggle("rotate-180");
   };
+
   const dropdownLeisure = () => {
     document.querySelector("#subLeisure")?.classList.toggle("hidden");
     document.querySelector("#arrowLeisure")?.classList.toggle("rotate-180");
@@ -48,7 +67,6 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
     document.querySelector("#subHome")?.classList.toggle("hidden");
     document.querySelector("#arrowHome")?.classList.toggle("rotate-180");
   };
-
 
   const handleCategoriesClose = () => {
     setZIndex(0);
@@ -85,20 +103,43 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
           <hr className="my-2 text-black" />
 
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Beauty</span>
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("")}
+            >
+              All products
+            </span>
           </div>
 
           <hr className="my-2 text-black" />
 
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Books</span>
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("Beauty")}
+            >
+              Beauty
+            </span>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("Books")}
+            >
+              Books
+            </span>
           </div>
 
           <hr className="my-2 text-black" />
           {/*Clothing */}
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
-            onClick={dropdownClothing}
+            onClick={() => {
+              dropdownClothing();
+            }}
           >
             <div className="flex justify-between w-full items-center">
               <span className="text-[15px] ml-4 text-black">Clothing</span>
@@ -111,25 +152,46 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
             className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
             id="subClothing"
           >
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1 "
+              onClick={() => fetchProducts("Shirts")}
+            >
               Shirts
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Hoddies")}
+            >
               Hoddies
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Outerwear")}
+            >
               Outerwear
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Dresses")}
+            >
               Dresses
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Pants")}
+            >
               Pants
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Shoes")}
+            >
               Shoes
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("ClothingAccessories")}
+            >
               Accessories
             </h1>
           </div>
@@ -139,7 +201,9 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
           {/*Electronics */}
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
-            onClick={dropdownElectronics}
+            onClick={() => {
+              dropdownElectronics();
+            }}
           >
             <div className="flex justify-between w-full items-center">
               <span className="text-[15px] ml-4 text-black">Electronics</span>
@@ -152,24 +216,41 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
             className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
             id="subElectronics"
           >
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Laptop")}
+            >
               Laptop
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Smartphone")}
+            >
               Smartphone
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("TechAccesories")}
+            >
               Accesories
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
-              Other Stuff
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Other Tech")}
+            >
+              Other Tech
             </h1>
           </div>
 
           <hr className="my-2 text-black" />
 
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Events</span>
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("Events")}
+            >
+              Events
+            </span>
           </div>
 
           <hr className="my-2 text-black" />
@@ -177,7 +258,10 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
           {/*Home */}
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
-            onClick={dropdownHome}
+            onClick={() => {
+              fetchProducts("Home");
+              dropdownHome();
+            }}
           >
             <div className="flex justify-between w-full items-center">
               <span className="text-[15px] ml-4 text-black">Home</span>
@@ -190,10 +274,16 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
             className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
             id="subHome"
           >
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Decor")}
+            >
               Decor
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Appliances")}
+            >
               Appliances
             </h1>
           </div>
@@ -203,7 +293,10 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
           {/*Leisure and Hobbies */}
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
-            onClick={dropdownLeisure}
+            onClick={() => {
+              fetchProducts("LeisureHobbies");
+              dropdownLeisure();
+            }}
           >
             <div className="flex justify-between w-full items-center">
               <span className="text-[15px] ml-4 text-black">
@@ -218,16 +311,28 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
             className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-black hidden"
             id="subLeisure"
           >
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Sports")}
+            >
               Sports
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Music")}
+            >
               Music
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Arts")}
+            >
               Arts
             </h1>
-            <h1 className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1">
+            <h1
+              className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
+              onClick={() => fetchProducts("Games")}
+            >
               Games
             </h1>
           </div>
@@ -235,25 +340,45 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
           <hr className="my-2 text-black" />
 
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Outdoor</span>
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("Outdoor")}
+            >
+              Outdoor
+            </span>
           </div>
 
           <hr className="my-2 text-black" />
 
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Pet</span>
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("Pet")}
+            >
+              Pet
+            </span>
           </div>
 
           <hr className="my-2 text-black" />
 
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Study</span>
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("Study")}
+            >
+              Study
+            </span>
           </div>
 
           <hr className="my-2 text-black" />
 
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span className="text-[15px] ml-4 text-black">Other</span>
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("Other")}
+            >
+              Other
+            </span>
           </div>
 
           <hr className="my-2 text-black" />
@@ -263,4 +388,4 @@ function FilterBar({ toggleCategories, isCategoriesOpen }: FilterBarProps) {
   );
 }
 
-export default FilterBar;
+export default Categoriesbar;

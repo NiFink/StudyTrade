@@ -32,6 +32,8 @@ public class ProductService implements ProductInterface {
         minPrice = (minPrice != null) ? minPrice : 0f;
         maxPrice = (maxPrice != null) ? maxPrice : Float.MAX_VALUE;
         condition = (condition != null) ? condition : "";
+        if (condition.equals("all"))
+            condition = "";
 
         // Sorting based on sort
         Sort sortOpt = Sort.unsorted();
@@ -49,10 +51,11 @@ public class ProductService implements ProductInterface {
 
         // Überprüfen, ob die Kategorie leer ist
         if (category == null || category.isEmpty()) {
-            return productRepository.findByPriceBetweenAndConditionLike(minPrice, maxPrice, condition, sortOpt);
+            return productRepository.findByPriceBetweenAndConditionStartingWith(minPrice, maxPrice, condition);
         } else {
-            return productRepository.findByPriceBetweenAndConditionLikeAndCategoryIn(minPrice, maxPrice, condition,
-                    category, sortOpt);
+            return productRepository.findByPriceBetweenAndConditionStartingWithAndCategoryIn(minPrice, maxPrice,
+                    condition,
+                    category);
         }
     }
 
