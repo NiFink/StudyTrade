@@ -24,6 +24,9 @@ function ProductDetails({
   isDetailsOpen,
 }: ProductDetailsProps) {
   const detailsRef = useRef<HTMLDivElement>(null);
+  const date = new Date(product.creationDate);
+  const dateConverted =
+    date.toLocaleDateString() + " " + date.getHours() + ":" + date.getMinutes();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -104,17 +107,17 @@ function ProductDetails({
               <hr />
               <div className="flex text-left p-2 ">
                 <h1 className="font-bold">Price:</h1>
-                <p className="pl-2">{product.price}</p>
+                <p className="pl-2">{product.price}€</p>
               </div>
               <hr />
               <div className="flex text-left p-2">
                 <h1 className="font-bold">Offer created:</h1>
-                <p className="pl-2">{product.creationDate}</p>
+                <p className="pl-2">{dateConverted}</p>
               </div>
               <hr />
               <div className="flex text-left p-2 outline-1">
                 <h1 className="font-bold">Category:</h1>
-                <p className="pl-2">{product.category}</p>
+                <p className="pl-2">{product.category.join(", ")}</p>
               </div>
               <hr />
               <div className="text-left p-2 ">
