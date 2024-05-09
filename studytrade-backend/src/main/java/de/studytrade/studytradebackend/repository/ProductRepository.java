@@ -12,14 +12,15 @@ import java.util.Optional;
 public interface ProductRepository extends MongoRepository<Product, ObjectId> {
         Optional<Product> findProductByProductId(int productId);
 
-        List<Product> findByPriceBetweenAndConditionLike(Float minPrice, Float maxPrice,
+        List<Product> findByPriceBetweenAndConditionStartingWith(Float minPrice, Float maxPrice,
                         String condition);
 
-        List<Product> findByPriceBetweenAndConditionLikeAndCategoryIn(Float minPrice, Float maxPrice,
+        List<Product> findByPriceBetweenAndConditionStartingWithAndCategoryIn(Float minPrice, Float maxPrice,
                         String condition,
                         List<String> category);
 
         List<Product> findByNameContainingIgnoreCase(String search);
 
         void deleteByProductId(int productId);
+
 }

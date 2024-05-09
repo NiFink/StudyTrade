@@ -20,8 +20,9 @@ interface Product {
 }
 
 function Shoppage({ homepageClick }: ShoppageProps) {
-
   const [products, setProducts] = useState<Product[]>();
+  const [categoryState, setCategoryState] = useState("");
+
   const fetchProducts = async () => {
     try {
       const response = await fetch("http://localhost:8080/api/v1/products");
@@ -29,7 +30,7 @@ function Shoppage({ homepageClick }: ShoppageProps) {
       setProducts(data);
     } catch (error) {
       console.error("Error fetching products:", error);
-    } 
+    }
   };
   useEffect(() => {
     fetchProducts();
@@ -37,12 +38,33 @@ function Shoppage({ homepageClick }: ShoppageProps) {
 
   const fetchCategoryProducts = async (category: string) => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/products/filter?category="  + category);
+      const response = await fetch(
+        "http://localhost:8080/api/v1/products/filter?category=" + category
+      );
+      const data = await response.json();
+      setCategoryState(category);
+      console.log(categoryState);
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const fetchFilterProducts = async (
+    minPrice: number,
+    maxPrice: number,
+    condition: string
+  ) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/products/filter?category=${categoryState}&minPrice=${minPrice}&maxPrice=${maxPrice}&condition=${condition}`
+      );
+      console.log(categoryState, minPrice, maxPrice, condition);
       const data = await response.json();
       setProducts(data);
     } catch (error) {
       console.error("Error fetching products:", error);
-    } 
+    }
   };
 
   const [isCategoriesOpen, setCategoriesOpen] = useState(false);
@@ -60,7 +82,10 @@ function Shoppage({ homepageClick }: ShoppageProps) {
 
   return (
     <div>
-      <Filterbar toggleCategories={toggleCategories}></Filterbar>
+      <Filterbar
+        toggleCategories={toggleCategories}
+        fetchFilterProducts={fetchFilterProducts}
+      ></Filterbar>
       <div className="md:flex">
         <div>
           <Categoriesbar
@@ -74,10 +99,10 @@ function Shoppage({ homepageClick }: ShoppageProps) {
           {!products && <div className="flex justify-center">Loading...</div>}
           {products && (
             <ProductList
-            products={products!}
-            toggleDetails={toggleDetails}
-            isDetailsOpen={isDetailsOpen}
-          />
+              products={products!}
+              toggleDetails={toggleDetails}
+              isDetailsOpen={isDetailsOpen}
+            />
           )}
         </div>
       </div>

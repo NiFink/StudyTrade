@@ -2,9 +2,14 @@ import React, { useState, ChangeEvent } from "react";
 
 interface FilterBarProps {
   toggleCategories: () => void;
+  fetchFilterProducts: (
+    minPrice: number,
+    maxPrice: number,
+    condition: string
+  ) => void;
 }
 
-function FilterBar({ toggleCategories }: FilterBarProps) {
+function FilterBar({ toggleCategories, fetchFilterProducts }: FilterBarProps) {
   const [selectedCondition, setSelectedCondition] = useState("all");
 
   const [minPrice, setMinPrice] = useState("");
@@ -24,6 +29,14 @@ function FilterBar({ toggleCategories }: FilterBarProps) {
   const filter = () => {
     document.querySelector("#filter")?.classList.toggle("hidden");
   };
+  const filterButton = () => {
+    fetchFilterProducts(
+      minPrice == "" ? 0 : Number(minPrice),
+      maxPrice == "" ? 100000 : Number(maxPrice),
+      selectedCondition
+    );
+  };
+
   return (
     <div>
       <div className=" w-full ">
@@ -68,6 +81,12 @@ function FilterBar({ toggleCategories }: FilterBarProps) {
                 value={maxPrice}
                 onChange={handleMaxPriceChange}
               />
+              <div
+                className="text-[15px] ml-4 text-black hover:cursor-pointer"
+                onClick={filterButton}
+              >
+                Filter
+              </div>
             </div>
           </div>
           <hr className="my-2 text-black" />

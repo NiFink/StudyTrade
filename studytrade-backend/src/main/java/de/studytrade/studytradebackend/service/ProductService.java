@@ -29,12 +29,15 @@ public class ProductService implements ProductInterface {
         minPrice = (minPrice != null) ? minPrice : 0f;
         maxPrice = (maxPrice != null) ? maxPrice : Float.MAX_VALUE;
         condition = (condition != null) ? condition : "";
+        if (condition.equals("all"))
+            condition = "";
 
         // Überprüfen, ob die Kategorie leer ist
         if (category == null || category.isEmpty()) {
-            return productRepository.findByPriceBetweenAndConditionLike(minPrice, maxPrice, condition);
+            return productRepository.findByPriceBetweenAndConditionStartingWith(minPrice, maxPrice, condition);
         } else {
-            return productRepository.findByPriceBetweenAndConditionLikeAndCategoryIn(minPrice, maxPrice, condition,
+            return productRepository.findByPriceBetweenAndConditionStartingWithAndCategoryIn(minPrice, maxPrice,
+                    condition,
                     category);
         }
     }
