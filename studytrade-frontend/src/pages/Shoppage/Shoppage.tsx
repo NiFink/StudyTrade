@@ -22,19 +22,28 @@ interface Product {
 function Shoppage({ homepageClick }: ShoppageProps) {
 
   const [products, setProducts] = useState<Product[]>();
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/products");
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } 
+  };
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/api/v1/products");
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } 
-    };
-
     fetchProducts();
   }, []);
+
+  const fetchCategoryProducts = async (category: string) => {
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/products/filter?category="  + category);
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } 
+  };
 
   const [isCategoriesOpen, setCategoriesOpen] = useState(false);
   const [isDetailsOpen, setDetailsOpen] = useState(false);
@@ -57,6 +66,8 @@ function Shoppage({ homepageClick }: ShoppageProps) {
           <Categoriesbar
             toggleCategories={toggleCategories}
             isCategoriesOpen={isCategoriesOpen}
+            fetchCategoryProducts={fetchCategoryProducts}
+            fetchProducts={fetchProducts}
           />
         </div>
         <div className="w-full ">
