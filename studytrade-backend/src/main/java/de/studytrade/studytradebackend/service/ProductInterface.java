@@ -9,7 +9,7 @@ public interface ProductInterface {
 
     Optional<Product> singleProduct(int productId);
 
-    List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category);
+    List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category, String sort);
 
     List<Product> searchProducts(String search);
 
