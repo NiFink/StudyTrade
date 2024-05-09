@@ -21,51 +21,37 @@ interface Product {
 
 function Shoppage({ homepageClick }: ShoppageProps) {
   const [products, setProducts] = useState<Product[]>();
+
   const [categoryState, setCategoryState] = useState("");
+  const [minPriceState, setMinPriceState] = useState(0);
+  const [maxPriceState, setMaxPriceState] = useState(100000);
+  const [conditionState, setConditionState] = useState("all");
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/v1/products");
-      const data = await response.json();
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchCategoryProducts = async (category: string) => {
-    try {
-      const response = await fetch(
-        "http://localhost:8080/api/v1/products/filter?category=" + category
-      );
-      const data = await response.json();
-      setCategoryState(category);
-      console.log(categoryState);
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
-
-  const fetchFilterProducts = async (
-    minPrice: number,
-    maxPrice: number,
-    condition: string
+  const fetchProducts = async (
+    category: string = categoryState,
+    minPrice: number = minPriceState,
+    maxPrice: number = maxPriceState,
+    condition: string = conditionState
   ) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/products/filter?category=${categoryState}&minPrice=${minPrice}&maxPrice=${maxPrice}&condition=${condition}`
+        `http://localhost:8080/api/v1/products/filter?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&condition=${condition}`
       );
-      console.log(categoryState, minPrice, maxPrice, condition);
       const data = await response.json();
       setProducts(data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
+
+    setConditionState(condition!);
+    setMinPriceState(minPrice!);
+    setMaxPriceState(maxPrice!);
+    setCategoryState(category!);
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const [isCategoriesOpen, setCategoriesOpen] = useState(false);
   const [isDetailsOpen, setDetailsOpen] = useState(false);
@@ -84,14 +70,13 @@ function Shoppage({ homepageClick }: ShoppageProps) {
     <div>
       <Filterbar
         toggleCategories={toggleCategories}
-        fetchFilterProducts={fetchFilterProducts}
+        fetchProducts={fetchProducts}
       ></Filterbar>
       <div className="md:flex">
         <div>
           <Categoriesbar
             toggleCategories={toggleCategories}
             isCategoriesOpen={isCategoriesOpen}
-            fetchCategoryProducts={fetchCategoryProducts}
             fetchProducts={fetchProducts}
           />
         </div>

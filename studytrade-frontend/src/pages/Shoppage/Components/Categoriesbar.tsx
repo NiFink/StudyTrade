@@ -3,16 +3,19 @@ import React, { useEffect, useRef } from "react";
 
 interface CategoriesbarProps {
   toggleCategories: () => void;
-  fetchProducts: () => void;
+  fetchProducts: (
+    category?: string,
+    minPrice?: number,
+    maxPrice?: number,
+    condition?: string
+  ) => void;
   isCategoriesOpen: boolean;
-  fetchCategoryProducts: (category: string) => void;
 }
 
 function Categoriesbar({
   toggleCategories,
   isCategoriesOpen,
   fetchProducts,
-  fetchCategoryProducts,
 }: CategoriesbarProps) {
   const [zIndex, setZIndex] = useState<number>(1);
 
@@ -43,7 +46,7 @@ function Categoriesbar({
     const subElectronic = document.querySelector("#subElectronics");
     subElectronic?.classList.toggle("hidden");
     if (!subElectronic?.classList.contains("hidden")) {
-      fetchCategoryProducts("Electronics");
+      fetchProducts("Electronics");
     }
     document.querySelector("#arrowElectronics")?.classList.toggle("rotate-180");
   };
@@ -51,7 +54,7 @@ function Categoriesbar({
     const subClothing = document.querySelector("#subClothing");
     subClothing?.classList.toggle("hidden");
     if (!subClothing?.classList.contains("hidden")) {
-      fetchCategoryProducts("Clothing");
+      fetchProducts("Clothing");
     }
     document.querySelector("#arrowClothing")?.classList.toggle("rotate-180");
   };
@@ -87,12 +90,7 @@ function Categoriesbar({
         >
           <div className="text-sm font-medium text-black"></div>
           <div className="p-2.5 mt-1 flex justify-between">
-            <h1
-              className="font-bold text-[15px] ml-3 hover:cursor-pointer"
-              onClick={() => fetchProducts()}
-            >
-              Categories
-            </h1>
+            <h1 className="font-bold text-[15px] ml-3">Categories</h1>
             <i
               className="bi bi-arrow-right lg:hidden cursor-pointer"
               onClick={handleCategoriesClose}
@@ -107,7 +105,18 @@ function Categoriesbar({
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
             <span
               className="text-[15px] ml-4 text-black"
-              onClick={() => fetchCategoryProducts("Beauty")}
+              onClick={() => fetchProducts("")}
+            >
+              All products
+            </span>
+          </div>
+
+          <hr className="my-2 text-black" />
+
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
+            <span
+              className="text-[15px] ml-4 text-black"
+              onClick={() => fetchProducts("Beauty")}
             >
               Beauty
             </span>
@@ -118,7 +127,7 @@ function Categoriesbar({
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
             <span
               className="text-[15px] ml-4 text-black"
-              onClick={() => fetchCategoryProducts("Books")}
+              onClick={() => fetchProducts("Books")}
             >
               Books
             </span>
@@ -145,43 +154,43 @@ function Categoriesbar({
           >
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1 "
-              onClick={() => fetchCategoryProducts("Shirts")}
+              onClick={() => fetchProducts("Shirts")}
             >
               Shirts
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Hoddies")}
+              onClick={() => fetchProducts("Hoddies")}
             >
               Hoddies
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Outerwear")}
+              onClick={() => fetchProducts("Outerwear")}
             >
               Outerwear
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Dresses")}
+              onClick={() => fetchProducts("Dresses")}
             >
               Dresses
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Pants")}
+              onClick={() => fetchProducts("Pants")}
             >
               Pants
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Shoes")}
+              onClick={() => fetchProducts("Shoes")}
             >
               Shoes
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("ClothingAccessories")}
+              onClick={() => fetchProducts("ClothingAccessories")}
             >
               Accessories
             </h1>
@@ -209,25 +218,25 @@ function Categoriesbar({
           >
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Laptop")}
+              onClick={() => fetchProducts("Laptop")}
             >
               Laptop
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Smartphone")}
+              onClick={() => fetchProducts("Smartphone")}
             >
               Smartphone
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("TechAccesories")}
+              onClick={() => fetchProducts("TechAccesories")}
             >
               Accesories
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Other Tech")}
+              onClick={() => fetchProducts("Other Tech")}
             >
               Other Tech
             </h1>
@@ -238,7 +247,7 @@ function Categoriesbar({
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
             <span
               className="text-[15px] ml-4 text-black"
-              onClick={() => fetchCategoryProducts("Events")}
+              onClick={() => fetchProducts("Events")}
             >
               Events
             </span>
@@ -250,7 +259,7 @@ function Categoriesbar({
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
             onClick={() => {
-              fetchCategoryProducts("Home");
+              fetchProducts("Home");
               dropdownHome();
             }}
           >
@@ -267,13 +276,13 @@ function Categoriesbar({
           >
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Decor")}
+              onClick={() => fetchProducts("Decor")}
             >
               Decor
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Appliances")}
+              onClick={() => fetchProducts("Appliances")}
             >
               Appliances
             </h1>
@@ -285,7 +294,7 @@ function Categoriesbar({
           <div
             className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-500 cursor-pointer hover:bg-red-300"
             onClick={() => {
-              fetchCategoryProducts("LeisureHobbies");
+              fetchProducts("LeisureHobbies");
               dropdownLeisure();
             }}
           >
@@ -304,25 +313,25 @@ function Categoriesbar({
           >
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Sports")}
+              onClick={() => fetchProducts("Sports")}
             >
               Sports
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Music")}
+              onClick={() => fetchProducts("Music")}
             >
               Music
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Arts")}
+              onClick={() => fetchProducts("Arts")}
             >
               Arts
             </h1>
             <h1
               className="cursor-pointer p-2 hover:bg-red-300 rounded-md mt-1"
-              onClick={() => fetchCategoryProducts("Games")}
+              onClick={() => fetchProducts("Games")}
             >
               Games
             </h1>
@@ -333,7 +342,7 @@ function Categoriesbar({
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
             <span
               className="text-[15px] ml-4 text-black"
-              onClick={() => fetchCategoryProducts("Outdoor")}
+              onClick={() => fetchProducts("Outdoor")}
             >
               Outdoor
             </span>
@@ -344,7 +353,7 @@ function Categoriesbar({
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
             <span
               className="text-[15px] ml-4 text-black"
-              onClick={() => fetchCategoryProducts("Pet")}
+              onClick={() => fetchProducts("Pet")}
             >
               Pet
             </span>
@@ -355,7 +364,7 @@ function Categoriesbar({
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
             <span
               className="text-[15px] ml-4 text-black"
-              onClick={() => fetchCategoryProducts("Study")}
+              onClick={() => fetchProducts("Study")}
             >
               Study
             </span>
@@ -366,7 +375,7 @@ function Categoriesbar({
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
             <span
               className="text-[15px] ml-4 text-black"
-              onClick={() => fetchCategoryProducts("Other")}
+              onClick={() => fetchProducts("Other")}
             >
               Other
             </span>
