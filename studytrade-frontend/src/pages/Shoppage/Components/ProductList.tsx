@@ -10,7 +10,7 @@ interface Product {
   img: string;
   productId: number;
   creationDate: string;
-  userId: number;
+  userId: { userName: string };
 }
 
 interface ProductProps {

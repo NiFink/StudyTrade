@@ -9,7 +9,7 @@ interface Product {
   img: string;
   productId: number;
   creationDate: string;
-  userId: number;
+  userId: { userName: string };
 }
 
 interface ProductDetailsProps {
@@ -77,7 +77,7 @@ function ProductDetails({
               <img src={product.img} alt={product.name} className="w-full" />
               <div className="flex mt-2  p-2 justify-center">
                 <i className="bi bi-person-fill "></i>
-                <h1 className="text-l ">{product.userId}</h1>
+                <h1 className="text-l ">{product.userId.userName}</h1>
               </div>
               <hr />
 

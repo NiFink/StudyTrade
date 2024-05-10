@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 import java.util.Date;
@@ -26,7 +27,8 @@ public class Product {
     private String img;
     private int productId;
     private Date creationDate;
-    private int userId;
+    @DocumentReference
+    private User userId;
 
     public Product(Product product) {
         this.name = product.getName();

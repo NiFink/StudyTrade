@@ -34,7 +34,7 @@ class ProductControllerTest {
         product1.setImg("product1.jpg");
         product1.setProductId(1);
         product1.setCreationDate(new Date());
-        product1.setUserId(123);
+        // product1.setUserId(123);
 
         Product product2 = new Product();
         product2.setName("Product2");
@@ -45,7 +45,7 @@ class ProductControllerTest {
         product2.setImg("product2.jpg");
         product2.setProductId(2);
         product2.setCreationDate(new Date());
-        product2.setUserId(456);
+        // product2.setUserId(456);
 
         products.add(new Product(product1));
         products.add(new Product(product2));
@@ -56,6 +56,5 @@ class ProductControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(products, response.getBody());
     }
-
 
 }
