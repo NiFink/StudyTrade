@@ -55,7 +55,7 @@ public class ProductService implements ProductInterface {
         } else {
             return productRepository.findByPriceBetweenAndConditionStartingWithAndCategoryIn(minPrice, maxPrice,
                     condition,
-                    category);
+                    category, sortOpt);
         }
     }
 
