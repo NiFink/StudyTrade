@@ -39,6 +39,7 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
     );
   };
 
+
   return (
     <div>
       <div className=" w-full ">
@@ -84,7 +85,7 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
                 onChange={handleMaxPriceChange}
               />
               <div
-                className="text-[15px] ml-4 text-black hover:cursor-pointer"
+                className="text-[15px] ml-4 text-black hover:cursor-pointer border border-spacing-3 p-0.5 hover:border-gray-500 rounded-lg"
                 onClick={filterButton}
               >
                 Filter
@@ -95,7 +96,7 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
         </div>
       </div>
     </div>
-  );
+  );  
 }
 
 export default FilterBar;

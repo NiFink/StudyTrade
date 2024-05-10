@@ -27,6 +27,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
     toggleDetails();
   };
 
+  const truncatedText = (text: string) => text.length > 20 ? text.slice(0, 20) + '...' : text;
   return (
     <div>
       <div className="max-w-xl px-4 py-16 sm:px-6 sm:py-24 md:max-w-full lg:px-8">
@@ -44,15 +45,12 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
                   className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
                 />
                 <div className="absolute bottom-0 left-0 inset-0 bg-gradient-to-b from-transparent to-black/30 group-hover:to-black/50 rounded-lg">
-                  <div className="absolute inset-0 flex flex-col Products-center  text-center translate-y-[85%] group-hover:translate-y-[50%] transition-all rounded-lg">
+                  <div className="absolute inset-0 flex flex-col   text-center translate-y-[80%] group-hover:translate-y-[60%] transition-all rounded-lg">
                     <h1 className="mt-3  text-xl font-bold text-white">
-                      {product.name}
+                      {truncatedText(product.name)}
                     </h1>
                     <p className="mt-3 text-lg font-medium text-white">
-                      {product.price} {product.condition}
-                    </p>
-                    <p className="p-2 text-xs font-medium text-white">
-                      {product.description}
+                      {product.price} ({product.condition}) 
                     </p>
                   </div>
                 </div>
