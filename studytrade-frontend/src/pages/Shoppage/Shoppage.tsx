@@ -16,7 +16,7 @@ interface Product {
   img: string;
   productId: number;
   creationDate: string;
-  userId: number;
+  userId: { userName: string };
 }
 
 function Shoppage({ homepageClick }: ShoppageProps) {
@@ -84,7 +84,7 @@ function Shoppage({ homepageClick }: ShoppageProps) {
           {!products && <div className="flex justify-center">Loading...</div>}
           {products && (
             <ProductList
-              products={products!}
+              products={products as Product[]}
               toggleDetails={toggleDetails}
               isDetailsOpen={isDetailsOpen}
             />

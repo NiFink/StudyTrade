@@ -1,5 +1,6 @@
 package de.studytrade.studytradebackend.controller;
 
+import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.model.User;
 import de.studytrade.studytradebackend.service.UserInterface;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,11 @@ public class UserController {
         return new ResponseEntity<Optional<User>>(userService.singleUser(userId), HttpStatus.OK);
     }
 
+    @GetMapping("/{userId}/favorites")
+    public ResponseEntity<List<Product>> getFavorites(@PathVariable int userId) {
+        return new ResponseEntity<List<Product>>(userService.favorites(userId), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<String> addUser(@RequestBody User user) {
         try {
@@ -47,6 +53,18 @@ public class UserController {
         }
     }
 
+    @PutMapping("/{userId}/favorites/{productId}")
+    public ResponseEntity<String> updateFavorites(@PathVariable int userId,
+            @PathVariable int productId) {
+        try {
+            userService.updateFavorites(userId, productId);
+            return new ResponseEntity<>("Favorites updated successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to update favorites: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteProduct(@PathVariable int userId) {
         try {
@@ -54,6 +72,17 @@ public class UserController {
             return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to delete user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{userId}/favorites/{productId}")
+    public ResponseEntity<String> deleteFavorite(@PathVariable int userId, @PathVariable int productId) {
+        try {
+            userService.deleteFavorite(userId, productId);
+            return new ResponseEntity<>("Favorite deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to delete favorite: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
