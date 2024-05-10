@@ -95,42 +95,36 @@ function Categoriesbar({
               className="bi bi-arrow-right lg:hidden cursor-pointer"
               onClick={handleCategoriesClose}
             ></i>
-            <button className="pl-3 hidden md:inline-block" onClick={filter}>
+            <button className="pl-3 hidden lg:inline-block" onClick={filter}>
               <i className="bi bi-funnel "></i>
             </button>
           </div>
 
           <hr className="my-2 text-black" />
 
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span
-              className="text-[15px] ml-4 text-black"
-              onClick={() => fetchProducts("")}
-            >
-              All products
-            </span>
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300"
+            onClick={() => fetchProducts("")}
+          >
+            <span className="text-[15px] ml-4 text-black">All products</span>
           </div>
 
           <hr className="my-2 text-black" />
 
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span
-              className="text-[15px] ml-4 text-black"
-              onClick={() => fetchProducts("Beauty")}
-            >
-              Beauty
-            </span>
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300"
+            onClick={() => fetchProducts("Beauty")}
+          >
+            <span className="text-[15px] ml-4 text-black">Beauty</span>
           </div>
 
           <hr className="my-2 text-black" />
 
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span
-              className="text-[15px] ml-4 text-black"
-              onClick={() => fetchProducts("Books")}
-            >
-              Books
-            </span>
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300"
+            onClick={() => fetchProducts("Books")}
+          >
+            <span className="text-[15px] ml-4 text-black">Books</span>
           </div>
 
           <hr className="my-2 text-black" />
@@ -244,13 +238,11 @@ function Categoriesbar({
 
           <hr className="my-2 text-black" />
 
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span
-              className="text-[15px] ml-4 text-black"
-              onClick={() => fetchProducts("Events")}
-            >
-              Events
-            </span>
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300"
+            onClick={() => fetchProducts("Events")}
+          >
+            <span className="text-[15px] ml-4 text-black">Events</span>
           </div>
 
           <hr className="my-2 text-black" />
@@ -339,46 +331,38 @@ function Categoriesbar({
 
           <hr className="my-2 text-black" />
 
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span
-              className="text-[15px] ml-4 text-black"
-              onClick={() => fetchProducts("Outdoor")}
-            >
-              Outdoor
-            </span>
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300"
+            onClick={() => fetchProducts("Outdoor")}
+          >
+            <span className="text-[15px] ml-4 text-black">Outdoor</span>
           </div>
 
           <hr className="my-2 text-black" />
 
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span
-              className="text-[15px] ml-4 text-black"
-              onClick={() => fetchProducts("Pet")}
-            >
-              Pet
-            </span>
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300"
+            onClick={() => fetchProducts("Pet")}
+          >
+            <span className="text-[15px] ml-4 text-black">Pet</span>
           </div>
 
           <hr className="my-2 text-black" />
 
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span
-              className="text-[15px] ml-4 text-black"
-              onClick={() => fetchProducts("Study")}
-            >
-              Study
-            </span>
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300"
+            onClick={() => fetchProducts("Study")}
+          >
+            <span className="text-[15px] ml-4 text-black">Study</span>
           </div>
 
           <hr className="my-2 text-black" />
 
-          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300">
-            <span
-              className="text-[15px] ml-4 text-black"
-              onClick={() => fetchProducts("Other")}
-            >
-              Other
-            </span>
+          <div
+            className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-red-300"
+            onClick={() => fetchProducts("Other")}
+          >
+            <span className="text-[15px] ml-4 text-black">Other</span>
           </div>
 
           <hr className="my-2 text-black" />
