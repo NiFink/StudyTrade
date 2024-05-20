@@ -4,6 +4,8 @@ import de.studytrade.studytradebackend.model.User;
 import de.studytrade.studytradebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,15 @@ public class UserService implements UserInterface {
     @Override
     public void addUser(User user) {
         User newUser = new User(user);
+        if (newUser.getUserId() == 0) {
+            newUser.setUserId(userRepository.findAll().get(userRepository.findAll().size() - 1).getUserId() + 1);
+        }
+        if (newUser.getCreationDate() == null) {
+            newUser.setCreationDate(new Date(System.currentTimeMillis() + 3600000 * 2));
+        }
+        if (newUser.getProfileImage() == null) {
+            newUser.setProfileImage(newUser.getUserId() + ".jpg");
+        }
         userRepository.insert(newUser);
     }
 
