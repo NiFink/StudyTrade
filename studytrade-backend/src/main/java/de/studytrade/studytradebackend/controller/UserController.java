@@ -28,8 +28,8 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/favorites")
-    public ResponseEntity<List<Product>> getFavorites(@PathVariable int userId) {
-        return new ResponseEntity<List<Product>>(userService.favorites(userId), HttpStatus.OK);
+    public ResponseEntity<List<Integer>> getFavorites(@PathVariable int userId) {
+        return new ResponseEntity<List<Integer>>(userService.favorites(userId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteProduct(@PathVariable int userId) {
+    public ResponseEntity<String> deleteUser(@PathVariable int userId) {
         try {
             userService.deleteUser(userId);
             return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);

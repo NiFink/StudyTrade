@@ -1,8 +1,6 @@
 package de.studytrade.studytradebackend.service;
 
-import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.model.User;
-import de.studytrade.studytradebackend.repository.ProductRepository;
 import de.studytrade.studytradebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +11,6 @@ import java.util.Optional;
 public class UserService implements UserInterface {
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
 
     @Override
     public List<User> allUsers() {
@@ -34,7 +29,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public List<Product> favorites(int userId) {
+    public List<Integer> favorites(int userId) {
         return userRepository.findUserByUserId(userId).get().getFavorites();
     }
 
@@ -59,8 +54,7 @@ public class UserService implements UserInterface {
     @Override
     public void updateFavorites(int userId, int productId) {
         User user = userRepository.findUserByUserId(userId).get();
-        Product newFavorite = productRepository.findProductByProductId(productId).orElse(null);
-        user.getFavorites().add(newFavorite);
+        user.getFavorites().add(productId);
         userRepository.save(user);
     }
 
@@ -72,8 +66,7 @@ public class UserService implements UserInterface {
     @Override
     public void deleteFavorite(int userId, int productId) {
         User user = userRepository.findUserByUserId(userId).get();
-        Product favorite = productRepository.findProductByProductId(productId).get();
-        user.getFavorites().remove(favorite);
+        user.getFavorites().remove(user.getFavorites().indexOf(productId));
         userRepository.save(user);
     }
 }
