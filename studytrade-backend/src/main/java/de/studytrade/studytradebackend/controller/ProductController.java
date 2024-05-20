@@ -40,7 +40,7 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Product>> filterProducts(@RequestParam(required = true) String search) {
+    public ResponseEntity<List<Product>> searchProducts(@RequestParam(required = true) String search) {
         try {
             return new ResponseEntity<>(productService.searchProducts(search),
                     HttpStatus.OK);
