@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface Product {
   name: string;
@@ -20,14 +20,21 @@ interface SearchListProps {
 const truncatedText = (text: string) =>
   text.length > 20 ? text.slice(0, 20) + "..." : text;
 
-function SearchList ({ products, onProductClick }: SearchListProps){
+function SearchList({ products, onProductClick }: SearchListProps) {
+
+  const [showSearchList, setShowSearchList] = useState(true);
+
+  const handleProductClick = (product: Product) => {
+    onProductClick(product);
+    setShowSearchList(false);
+  };
   return (
     <ul className="absolute bg-white shadow-lg rounded-lg mt-2 w-full max-w-md z-10">
       {products.map((product) => (
         <li
           key={product.productId}
-          className="p-2 border-b border-gray-200 flex cursor-pointer"
-          onClick={() => onProductClick(product)}
+          className="p-2  border-gray-200 flex cursor-pointer"
+          onClick={() => handleProductClick(product)}
         >
           <img
             src={product.img}
@@ -45,6 +52,6 @@ function SearchList ({ products, onProductClick }: SearchListProps){
       ))}
     </ul>
   );
-};
+}
 
 export default SearchList;

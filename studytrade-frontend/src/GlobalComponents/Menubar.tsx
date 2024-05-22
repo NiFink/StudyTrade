@@ -26,19 +26,19 @@ function Menubar({
   homepageClick,
 }: MenubarProps) {
   const [products, setProducts] = useState<Product[]>([]);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isSearchListExp, setIsSearchListExp] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleMouseEnter = () => {
-    setIsExpanded(true);
+    setIsSearchListExp(true);
   };
 
   const handleMouseLeave = () => {
     if (inputValue === "" && document.activeElement !== inputRef.current) {
-      setIsExpanded(false);
+      setIsSearchListExp(false);
     }
   };
 
@@ -48,25 +48,36 @@ function Menubar({
   };
 
   const handleFocus = () => {
-    setIsExpanded(true);
+    setIsSearchListExp(true);
   };
 
   const handleBlur = () => {
     if (inputValue === "") {
-      setIsExpanded(false);
+      setIsSearchListExp(false);
     }
   };
-
+useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
     if (
       containerRef.current &&
       !containerRef.current.contains(event.target as Node)
     ) {
       if (inputValue === "") {
-        setIsExpanded(false);
+        setIsSearchListExp(false);
       }
     }
   };
+  if (isSearchListExp) {
+    document.addEventListener("mousedown", handleClickOutside);
+  } else {
+    document.removeEventListener("mousedown", handleClickOutside);
+  }
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+})
+
 
   const fetchSearchedProducts = async (searchTerm: string) => {
     try {
@@ -80,11 +91,9 @@ function Menubar({
     }
   };
 
-
-
   const toggleDetails = (product: Product) => {
     setSelectedProduct(product);
-    
+    setIsSearchListExp(false);
   };
 
   return (
@@ -109,7 +118,7 @@ function Menubar({
                   type="search"
                   placeholder="Search..."
                   id="searchInput"
-                  className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${isExpanded ? "w-64 opacity-100" : "w-0 opacity-0"}`}
+                  className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${isSearchListExp ? "w-64 opacity-100" : "w-0 opacity-0"}`}
                   value={inputValue}
                   onChange={handleChange}
                   onFocus={handleFocus}
@@ -119,8 +128,11 @@ function Menubar({
                   <i className="bi bi-search"></i>{" "}
                 </button>
               </div>
-              {isExpanded && inputValue && (
-                <SearchList products={products} onProductClick={toggleDetails} />
+              {isSearchListExp && inputValue && (
+                <SearchList
+                  products={products}
+                  onProductClick={toggleDetails}
+                />
               )}
             </div>
           </div>
@@ -142,7 +154,8 @@ function Menubar({
         <ProductDetails
           product={selectedProduct}
           toggleDetails={() => setSelectedProduct(null)}
-          isDetailsOpen={!!selectedProduct}
+          isDetailsOpen={true}
+          
         />
       )}
     </div>
