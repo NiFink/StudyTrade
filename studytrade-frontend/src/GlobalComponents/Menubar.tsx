@@ -1,4 +1,6 @@
-import React, { ChangeEvent, useState, useRef, useEffect} from 'react';
+import React, { ChangeEvent, useState, useRef, useEffect } from "react";
+import SearchList from "./SearchList";
+import ProductDetails from "../pages/Shoppage/Components/ProductDetails";
 
 interface MenubarProps {
   shoppageClick?: () => void;
@@ -6,9 +8,27 @@ interface MenubarProps {
   homepageClick: () => void;
 }
 
-function Menubar({ shoppageClick, profilepageClick, homepageClick }: MenubarProps) {
+interface Product {
+  name: string;
+  description: string;
+  category: string[];
+  condition: string;
+  price: number;
+  img: string;
+  productId: number;
+  creationDate: string;
+  userId: { userName: string };
+}
+
+function Menubar({
+  shoppageClick,
+  profilepageClick,
+  homepageClick,
+}: MenubarProps) {
+  const [products, setProducts] = useState<Product[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -17,13 +37,14 @@ function Menubar({ shoppageClick, profilepageClick, homepageClick }: MenubarProp
   };
 
   const handleMouseLeave = () => {
-    if (inputValue === '' && document.activeElement !== inputRef.current) {
+    if (inputValue === "" && document.activeElement !== inputRef.current) {
       setIsExpanded(false);
     }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+    fetchSearchedProducts(e.target.value);
   };
 
   const handleFocus = () => {
@@ -31,7 +52,7 @@ function Menubar({ shoppageClick, profilepageClick, homepageClick }: MenubarProp
   };
 
   const handleBlur = () => {
-    if (inputValue === '') {
+    if (inputValue === "") {
       setIsExpanded(false);
     }
   };
@@ -41,31 +62,44 @@ function Menubar({ shoppageClick, profilepageClick, homepageClick }: MenubarProp
       containerRef.current &&
       !containerRef.current.contains(event.target as Node)
     ) {
-      if (inputValue === '') {
+      if (inputValue === "") {
         setIsExpanded(false);
       }
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [inputValue]);
+  const fetchSearchedProducts = async (searchTerm: string) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/products/search?search=${searchTerm}`
+      );
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+
+
+  const toggleDetails = (product: Product) => {
+    setSelectedProduct(product);
+    
+  };
 
   return (
-    <div className="mx-5 my-3 ">
+    <div className="mx-5 my-3">
       <div className="flex justify-between border-b border-gray-300 py-2">
-        <button onClick={homepageClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow">
-          <i className="bi bi-shop"></i>{" "}
-          StudyTrade
+        <button
+          onClick={homepageClick}
+          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow"
+        >
+          <i className="bi bi-shop"></i> StudyTrade
         </button>
         <div className="flex space-x-7">
           <div className="flex justify-center items-center">
-            <div className="relative">
+            <div className="relative" ref={containerRef}>
               <div
-                ref={containerRef}
                 className="bg-gray-100 text-gray-800 font-semibold px-3 py-2 rounded-full flex shadow overflow-hidden"
                 onMouseLeave={handleMouseLeave}
                 onMouseEnter={handleMouseEnter}
@@ -73,9 +107,9 @@ function Menubar({ shoppageClick, profilepageClick, homepageClick }: MenubarProp
                 <input
                   ref={inputRef}
                   type="search"
-                  placeholder='Search...'
-                  id='searchInput'
-                  className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${isExpanded ? 'w-64 opacity-100' : 'w-0 opacity-0'}`}
+                  placeholder="Search..."
+                  id="searchInput"
+                  className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${isExpanded ? "w-64 opacity-100" : "w-0 opacity-0"}`}
                   value={inputValue}
                   onChange={handleChange}
                   onFocus={handleFocus}
@@ -85,18 +119,32 @@ function Menubar({ shoppageClick, profilepageClick, homepageClick }: MenubarProp
                   <i className="bi bi-search"></i>{" "}
                 </button>
               </div>
+              {isExpanded && inputValue && (
+                <SearchList products={products} onProductClick={toggleDetails} />
+              )}
             </div>
           </div>
-          <button onClick={shoppageClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow">
-            <i className="bi bi-heart"></i>{" "}
-            Favorites
+          <button
+            onClick={shoppageClick}
+            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow"
+          >
+            <i className="bi bi-heart"></i> Favorites
           </button>
-          <button onClick={profilepageClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow">
-            <i className="bi bi-person-circle"></i>{" "}
-            Profil
+          <button
+            onClick={profilepageClick}
+            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow"
+          >
+            <i className="bi bi-person-circle"></i> Profil
           </button>
         </div>
       </div>
+      {selectedProduct && (
+        <ProductDetails
+          product={selectedProduct}
+          toggleDetails={() => setSelectedProduct(null)}
+          isDetailsOpen={!!selectedProduct}
+        />
+      )}
     </div>
   );
 }

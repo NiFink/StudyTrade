@@ -49,6 +49,8 @@ function Shoppage({ homepageClick }: ShoppageProps) {
     setCategoryState(category!);
   };
 
+
+
   useEffect(() => {
     fetchProducts();
   }, []);
