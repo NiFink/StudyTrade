@@ -65,7 +65,7 @@ function ProductDetails({
         <div className="flex relative justify-center items-center z-20">
           <div
             ref={detailsRef}
-            className={`fixed top-1 bottom-1 right-2 p-2 lg:w-[500px] md:w-full text-center bg-white ${isDetailsOpen ? "" : "hidden"} rounded-lg`}
+            className={`fixed  top-0 bottom-0 right-0 md:top-2 md:bottom-2 md:right-2 p-2 lg:w-[500px] md:w-full text-center bg-white ${isDetailsOpen ? "" : "hidden"} rounded-lg`}
           >
             <div className="flex p-2 justify-between items-center">
               <button className="p-1.5" onClick={handleCloseDetails}>
