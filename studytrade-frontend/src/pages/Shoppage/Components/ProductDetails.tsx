@@ -53,25 +53,25 @@ function ProductDetails({
     toggleDetails();
   };
 
+  const truncatedText = (text: string) =>
+    text.length > 20 ? text.slice(0, 40) + "..." : text;
+
   return (
     <>
       <div className="relative">
         {isDetailsOpen && (
-          <div className="fixed top-0 left-0 w-full h-full  bg-gray-800 bg-opacity-40 z-1"></div>
+          <div className="fixed top-0 left-0 w-full h-full  bg-gray-800 bg-opacity-40 z-10"></div>
         )}
-        <div
-          className="flex justify-center items-center"
-          style={{ zIndex: isDetailsOpen ? 21 : 1 }}
-        >
+        <div className="flex relative justify-center items-center z-20">
           <div
             ref={detailsRef}
-            className={`fixed top-0 bottom-0 right-0 p-2 lg:w-[500px] md:w-full text-center bg-white ${isDetailsOpen ? "" : "hidden"}`}
+            className={`fixed  top-0 bottom-0 right-0 md:top-2 md:bottom-2 md:right-2 p-2 lg:w-[500px] md:w-full text-center bg-white ${isDetailsOpen ? "" : "hidden"} rounded-lg`}
           >
             <div className="flex p-2 justify-between items-center">
               <button className="p-1.5" onClick={handleCloseDetails}>
                 <i className="bi bi-x-lg cursor-pointer" />
               </button>
-              <h1 className="mx-auto">{product.name}</h1>
+              <h1 className="mx-auto">{truncatedText(product.name)}</h1>
             </div>
             <div className="max-h-[84vh] overflow-y-scroll">
               <img src={product.img} alt={product.name} className="w-full" />

@@ -52,24 +52,24 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
             <i className="bi bi-funnel hover:bi-funnel-fill"></i>
           </button>
         </div>
-        <div className="hidden" id="filter">
+        <div className="hidden  font-semibold" id="filter">
           <div className="flex justify-center items-center flex-wrap">
             <h1 className="p-2">Condition:</h1>
             <select
               value={selectedCondition}
               onChange={handleConditionChange}
-              className="p-1 rounded-lg text-center bg-white text-black border-2 hover:border-gray-500 "
+              className="p-1 rounded-full text-center bg-white text-black border-[0.5px]"
             >
               <option value="all">All</option>
               <option value="new">New</option>
               <option value="nearly new">Nearly new</option>
               <option value="used">Used</option>
             </select>
-            <div className="p-2 flex justify-center items-center flex-wrap">
+            <div className="p-2 flex justify-center items-center flex-wrap py-1 px-2  ">
               <h1 className="pr-2">Price:</h1>
               <input
                 type="text"
-                className="rounded border-2"
+                className="rounded-full appearance-none shadow py-1 px-2 "
                 placeholder="Min"
                 id="Min"
                 value={minPrice}
@@ -78,14 +78,14 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
               <h1 className="px-2">to</h1>
               <input
                 type="text"
-                className="rounded border-2"
+                className="rounded-full appearance-none  shadow py-1 px-2 "
                 placeholder="Max"
                 id="Max"
                 value={maxPrice}
                 onChange={handleMaxPriceChange}
               />
               <div
-                className="text-[15px] ml-4 text-black hover:cursor-pointer border border-spacing-3 p-0.5 hover:border-gray-500 rounded-lg"
+                className="text-[16px] ml-4  hover:cursor-pointer shadow py-1 px-2  rounded-full hover:bg-gray-200"
                 onClick={filterButton}
               >
                 Filter
