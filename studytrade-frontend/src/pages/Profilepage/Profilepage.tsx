@@ -5,7 +5,7 @@ interface ProfilepageProps {
 function Profilepage({ homepageClick }: ProfilepageProps) {
     return (
         <div>
-            <p>Profilepage</p>
+            <p>Profilepag</p>
             <button onClick={homepageClick}>Homepage</button>
         </div>
     );
