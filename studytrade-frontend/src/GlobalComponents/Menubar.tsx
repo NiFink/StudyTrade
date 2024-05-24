@@ -44,8 +44,15 @@ function Menubar({
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    fetchSearchedProducts(e.target.value);
+    const inputValue = e.target.value;
+
+    // Regex to disallow specific characters
+    const regex = /^[^{}\[\]$`;]*$/;
+    if (inputValue === '' || regex.test(inputValue)) {
+      setInputValue(inputValue);
+    }
+
+    fetchSearchedProducts(inputValue);
   };
 
   const handleFocus = () => {
