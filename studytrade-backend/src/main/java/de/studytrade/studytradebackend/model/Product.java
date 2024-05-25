@@ -28,7 +28,7 @@ public class Product {
     private int productId;
     private Date creationDate;
     @DocumentReference
-    private User userId;
+    private AuthUser userId;
 
     public Product(Product product) {
         this.name = product.getName();
