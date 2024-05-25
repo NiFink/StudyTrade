@@ -24,5 +24,5 @@ public interface UserInterface {
 
     void deleteFavorite(int userId, int productId);
 
-    //UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+
 }

@@ -2,6 +2,7 @@ package de.studytrade.studytradebackend.controller;
 
 import de.studytrade.studytradebackend.model.AuthUser;
 import de.studytrade.studytradebackend.repository.AuthUserRepository;
+import de.studytrade.studytradebackend.service.EmailValidatorInterface;
 import de.studytrade.studytradebackend.service.UserInterface;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,12 @@ public class UserController {
     @Autowired
     private UserInterface userService;
 
+    @Autowired
+    private EmailValidatorInterface emailValidatorService;
+
     @GetMapping
     public ResponseEntity<List<AuthUser>> getAllUsers() {
-        return new ResponseEntity<List<AuthUser>>(userService.allUsers(), HttpStatus.OK);
+        return new ResponseEntity<>(userService.allUsers(), HttpStatus.OK);
     }
 
     @PostMapping("/register")
@@ -28,6 +32,8 @@ public class UserController {
         try {
             if(!userService.addUser(user)){
                 throw new RuntimeException("User already exists");
+            }else if(!emailValidatorService.isHdmMail(user.getMail())){
+                throw new RuntimeException("Please register with valid HdM email");
             }
             return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
         } catch (Exception e) {
@@ -37,12 +43,12 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<Optional<AuthUser>> getSingleUser(@PathVariable int userId) {
-        return new ResponseEntity<Optional<AuthUser>>(userService.singleUser(userId), HttpStatus.OK);
+        return new ResponseEntity<>(userService.singleUser(userId), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/favorites")
     public ResponseEntity<List<Integer>> getFavorites(@PathVariable int userId) {
-        return new ResponseEntity<List<Integer>>(userService.favorites(userId), HttpStatus.OK);
+        return new ResponseEntity<>(userService.favorites(userId), HttpStatus.OK);
     }
 
     @PostMapping
