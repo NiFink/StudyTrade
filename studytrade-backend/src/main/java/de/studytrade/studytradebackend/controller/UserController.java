@@ -1,7 +1,7 @@
 package de.studytrade.studytradebackend.controller;
 
-import de.studytrade.studytradebackend.model.Product;
-import de.studytrade.studytradebackend.model.User;
+import de.studytrade.studytradebackend.model.AuthUser;
+import de.studytrade.studytradebackend.repository.AuthUserRepository;
 import de.studytrade.studytradebackend.service.UserInterface;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,17 +14,30 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
+
     @Autowired
     private UserInterface userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<List<User>>(userService.allUsers(), HttpStatus.OK);
+    public ResponseEntity<List<AuthUser>> getAllUsers() {
+        return new ResponseEntity<List<AuthUser>>(userService.allUsers(), HttpStatus.OK);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity registerUser(@RequestBody AuthUser user){
+        try {
+            if(!userService.addUser(user)){
+                throw new RuntimeException("User already exists");
+            }
+            return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to add user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<Optional<User>> getSingleUser(@PathVariable int userId) {
-        return new ResponseEntity<Optional<User>>(userService.singleUser(userId), HttpStatus.OK);
+    public ResponseEntity<Optional<AuthUser>> getSingleUser(@PathVariable int userId) {
+        return new ResponseEntity<Optional<AuthUser>>(userService.singleUser(userId), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/favorites")
@@ -33,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addUser(@RequestBody User user) {
+    public ResponseEntity<String> addUser(@RequestBody AuthUser user) {
         try {
             userService.addUser(user);
             return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
@@ -43,7 +56,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<String> updateUser(@RequestBody User userRequest) {
+    public ResponseEntity<String> updateUser(@RequestBody AuthUser userRequest) {
         try {
             userService.updateUser(userRequest);
             return new ResponseEntity<>("User updated successfully", HttpStatus.OK);

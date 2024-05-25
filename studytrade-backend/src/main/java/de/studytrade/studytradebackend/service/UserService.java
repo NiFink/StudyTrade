@@ -1,8 +1,10 @@
 package de.studytrade.studytradebackend.service;
 
-import de.studytrade.studytradebackend.model.User;
-import de.studytrade.studytradebackend.repository.UserRepository;
+import de.studytrade.studytradebackend.model.AuthUser;
+import de.studytrade.studytradebackend.repository.AuthUserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -10,32 +12,42 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class UserService implements UserInterface {
     @Autowired
-    private UserRepository userRepository;
+    private AuthUserRepository userRepository;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> allUsers() {
+    public List<AuthUser> allUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public void addUser(User user) {
-        User newUser = new User(user);
-        if (newUser.getUserId() == 0) {
-            newUser.setUserId(userRepository.findAll().get(userRepository.findAll().size() - 1).getUserId() + 1);
+    public boolean addUser(AuthUser user) {
+        if(userRepository.existsUserByUsername(user.getUsername())){
+            return false;
         }
-        if (newUser.getCreationDate() == null) {
-            newUser.setCreationDate(new Date(System.currentTimeMillis() + 3600000 * 2));
+
+        if (user.getCreationDate() == null) {
+            user.setCreationDate(new Date(System.currentTimeMillis() + 3600000 * 2));
         }
-        if (newUser.getProfileImage() == null) {
-            newUser.setProfileImage(newUser.getUserId() + ".jpg");
+        if (user.getProfileImage() == null) {
+            user.setProfileImage(user.getUserId() + ".jpg");
         }
-        userRepository.insert(newUser);
+
+        user.setUserId(userRepository.findAll().get(userRepository.findAll().size() - 1).getUserId() + 1);
+        user.setUsername(user.getUsername().toLowerCase());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+
+        return true;
     }
 
     @Override
-    public Optional<User> singleUser(int userId) {
+    public Optional<AuthUser> singleUser(int userId) {
         return userRepository.findUserByUserId(userId);
     }
 
@@ -45,12 +57,12 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public Optional<User> updateUser(User userRequest) {
-        User existingUser = userRepository.findUserByUserId(userRequest.getUserId()).get();
+    public Optional<AuthUser> updateUser(AuthUser userRequest) {
+        AuthUser existingUser = userRepository.findUserByUserId(userRequest.getUserId()).get();
 
         // Change data only if it exists in userRequest
-        existingUser.setUserName(
-                userRequest.getUserName() != null ? userRequest.getUserName() : existingUser.getUserName());
+        existingUser.setUsername(
+                userRequest.getUsername() != null ? userRequest.getUsername() : existingUser.getUsername());
         existingUser.setPassword(
                 userRequest.getPassword() != null ? userRequest.getPassword() : existingUser.getPassword());
         existingUser.setMail(userRequest.getMail() != null ? userRequest.getMail() : existingUser.getMail());
@@ -64,7 +76,7 @@ public class UserService implements UserInterface {
 
     @Override
     public void updateFavorites(int userId, int productId) {
-        User user = userRepository.findUserByUserId(userId).get();
+        AuthUser user = userRepository.findUserByUserId(userId).get();
         user.getFavorites().add(productId);
         userRepository.save(user);
     }
@@ -76,7 +88,7 @@ public class UserService implements UserInterface {
 
     @Override
     public void deleteFavorite(int userId, int productId) {
-        User user = userRepository.findUserByUserId(userId).get();
+        AuthUser user = userRepository.findUserByUserId(userId).get();
         user.getFavorites().remove(user.getFavorites().indexOf(productId));
         userRepository.save(user);
     }
