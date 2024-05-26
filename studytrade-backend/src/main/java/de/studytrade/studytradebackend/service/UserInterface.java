@@ -1,16 +1,16 @@
 package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.AuthUser;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import jakarta.mail.MessagingException;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
 public interface UserInterface {
     List<AuthUser> allUsers();
 
-    boolean addUser(AuthUser user);
+    void addUser(AuthUser user, String siteURL) throws UnsupportedEncodingException, MessagingException;
 
     Optional<AuthUser> singleUser(int userId);
 
@@ -24,5 +24,7 @@ public interface UserInterface {
 
     void deleteFavorite(int userId, int productId);
 
+    boolean userExists(AuthUser user);
 
+    boolean verify(String verificationCode);
 }

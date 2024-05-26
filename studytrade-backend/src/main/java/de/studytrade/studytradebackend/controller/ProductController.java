@@ -18,12 +18,12 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
-        return new ResponseEntity<List<Product>>(productService.allProducts(), HttpStatus.OK);
+        return new ResponseEntity<>(productService.allProducts(), HttpStatus.OK);
     }
 
     @GetMapping("/{productId}")
     public ResponseEntity<Optional<Product>> getSingleProduct(@PathVariable int productId) {
-        return new ResponseEntity<Optional<Product>>(productService.singleProduct(productId), HttpStatus.OK);
+        return new ResponseEntity<>(productService.singleProduct(productId), HttpStatus.OK);
     }
 
     @GetMapping("/filter")

@@ -4,6 +4,8 @@ import de.studytrade.studytradebackend.model.AuthUser;
 import de.studytrade.studytradebackend.repository.AuthUserRepository;
 import de.studytrade.studytradebackend.service.EmailValidatorInterface;
 import de.studytrade.studytradebackend.service.UserInterface;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +30,27 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity registerUser(@RequestBody AuthUser user){
+    public ResponseEntity registerUser(@RequestBody AuthUser user, HttpServletRequest request){
         try {
-            if(!userService.addUser(user)){
+            if(userService.userExists(user)){
                 throw new RuntimeException("User already exists");
-            }else if(!emailValidatorService.isHdmMail(user.getMail())){
+            }
+            else if(!emailValidatorService.isHdmMail(user.getMail())){
                 throw new RuntimeException("Please register with valid HdM email");
             }
+            userService.addUser(user, getSiteURL(request));
             return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to add user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/verify")
+    public String verifyUser(@Param("code") String code) {
+        if (userService.verify(code)) {
+            return "verify_success";
+        } else {
+            return "verify_fail";
         }
     }
 
@@ -51,14 +64,9 @@ public class UserController {
         return new ResponseEntity<>(userService.favorites(userId), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<String> addUser(@RequestBody AuthUser user) {
-        try {
-            userService.addUser(user);
-            return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Failed to add user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
     }
 
     @PutMapping
