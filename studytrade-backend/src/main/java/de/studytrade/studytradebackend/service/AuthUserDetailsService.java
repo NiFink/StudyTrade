@@ -17,6 +17,10 @@ public class AuthUserDetailsService implements UserDetailsService {
     @Autowired
     private AuthUserRepository userRepository;
 
+
+
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<AuthUser> authUser = userRepository.findByUsername(username.toLowerCase());
@@ -26,7 +30,7 @@ public class AuthUserDetailsService implements UserDetailsService {
             return User.builder()
                     .username(authUser.get().getUsername())
                     .password(authUser.get().getPassword())
-                    .disabled(!authUser.get().isActive())
+                    .disabled(!authUser.get().isEnabled())
                     .roles("USER")
                     .build();
         }

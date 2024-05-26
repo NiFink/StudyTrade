@@ -28,7 +28,8 @@ public class AuthUser {
     private Date creationDate;
     private String profileImage;
     private List<Integer> favorites;
-    private boolean active;
+    private String verificationCode;
+    private boolean isEnabled;
 
     public AuthUser(AuthUser user) {
         this.userId = user.getUserId();
@@ -38,6 +39,7 @@ public class AuthUser {
         this.creationDate = user.getCreationDate();
         this.profileImage = user.getProfileImage();
         this.favorites = user.getFavorites();
-        this.active = user.isActive();
+        this.verificationCode = user.getVerificationCode();
+        this.isEnabled = user.isEnabled();
     }
 }
