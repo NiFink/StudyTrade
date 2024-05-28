@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: StudyTrade_c_f
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - backend
     stdin_open: true
