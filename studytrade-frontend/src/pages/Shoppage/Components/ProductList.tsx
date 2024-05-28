@@ -40,7 +40,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg via-transparent xl:aspect-h-8 xl:aspect-w-7">
                 <img
-                  src={product.img}
+                  src={`/images/${product.productId}.jpg`} 
                   alt={product.name}
                   className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
                 />

@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./studytrade-frontend
+      dockerfile: Dockerfile
+    container_name: StudyTrade_c_f
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+
+  backend:
+    build:
+      context: ./studytrade-backend
+      dockerfile: Dockerfile
+    container_name: StudyTrade_c_b
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_CLUSTER}
