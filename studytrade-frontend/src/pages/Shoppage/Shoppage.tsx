@@ -49,8 +49,6 @@ function Shoppage({ homepageClick }: ShoppageProps) {
     setCategoryState(category!);
   };
 
-
-
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -83,10 +81,12 @@ function Shoppage({ homepageClick }: ShoppageProps) {
           />
         </div>
         <div className="w-full ">
-          {!products && <div className="flex text-2xl justify-center animate-bounce">
-            Loading...
-            <i className="bi bi-arrow-repeat text-2xl ml-2 animate-spin"></i>
-          </div>}
+          {!products && (
+            <div className="flex text-2xl justify-center animate-bounce">
+              Loading...
+              <i className="bi bi-arrow-repeat text-2xl ml-2 animate-spin"></i>
+            </div>
+          )}
           {products && (
             <ProductList
               products={products as Product[]}
