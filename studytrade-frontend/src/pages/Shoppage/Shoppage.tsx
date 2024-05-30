@@ -16,7 +16,7 @@ interface Product {
   img: string;
   productId: number;
   creationDate: string;
-  userId: { userName: string };
+  userId: { username: string };
 }
 
 function Shoppage({ homepageClick }: ShoppageProps) {

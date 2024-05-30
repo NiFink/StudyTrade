@@ -18,14 +18,14 @@ interface Product {
   img: string;
   productId: number;
   creationDate: string;
-  userId: { userName: string };
+  userId: { username: string };
 }
 
-function Menubar ({
+function Menubar({
   shoppageClick,
   profilepageClick,
   homepageClick,
-}: MenubarProps){
+}: MenubarProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isSearchListExp, setIsSearchListExp] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -57,7 +57,9 @@ function Menubar ({
       setIsSearchListExp(false);
     }
   };
-  {/*Fetch all products from backend, which has the searched letters in their names */}
+  {
+    /*Fetch all products from backend, which has the searched letters in their names */
+  }
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -81,8 +83,9 @@ function Menubar ({
     };
   }, [isSearchListExp, inputValue]);
 
-
-  {/*Fetch all products from backend, which has the searched letters in their names */}
+  {
+    /*Fetch all products from backend, which has the searched letters in their names */
+  }
   const fetchSearchedProducts = async (searchTerm: string) => {
     try {
       const response = await fetch(
@@ -95,7 +98,9 @@ function Menubar ({
     }
   };
 
-  {/*Handle Productclick and set the selected/clicked one */}
+  {
+    /*Handle Productclick and set the selected/clicked one */
+  }
   const toggleDetails = (product: Product) => {
     setSelectedProduct(product);
     setIsSearchListExp(false);
@@ -136,7 +141,10 @@ function Menubar ({
                 </button>
               </div>
               {isSearchListExp && inputValue && (
-                <SearchList products={products} onProductClick={toggleDetails} />
+                <SearchList
+                  products={products}
+                  onProductClick={toggleDetails}
+                />
               )}
             </div>
           </div>
@@ -163,6 +171,6 @@ function Menubar ({
       )}
     </div>
   );
-};
+}
 
 export default Menubar;

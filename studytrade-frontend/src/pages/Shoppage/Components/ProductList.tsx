@@ -10,7 +10,7 @@ interface Product {
   img: string;
   productId: number;
   creationDate: string;
-  userId: { userName: string };
+  userId: { username: string };
 }
 
 interface ProductProps {
@@ -27,7 +27,8 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
     toggleDetails();
   };
 
-  const truncatedText = (text: string) => text.length > 20 ? text.slice(0, 20) + '...' : text;
+  const truncatedText = (text: string) =>
+    text.length > 20 ? text.slice(0, 20) + "..." : text;
   return (
     <div>
       <div className="max-w-xl px-4 py-16 sm:px-6 sm:py-24 md:max-w-full lg:px-8">
@@ -40,7 +41,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg via-transparent xl:aspect-h-8 xl:aspect-w-7">
                 <img
-                  src={`/images/${product.productId}.jpg`} 
+                  src={`/images/${product.productId}.jpg`}
                   alt={product.name}
                   className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
                 />
@@ -50,7 +51,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
                       {truncatedText(product.name)}
                     </h1>
                     <p className="mt-3 text-lg font-medium text-white">
-                      {product.price} ({product.condition}) 
+                      {product.price} ({product.condition})
                     </p>
                   </div>
                 </div>

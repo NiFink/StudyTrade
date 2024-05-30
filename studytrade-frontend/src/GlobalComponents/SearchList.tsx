@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // Define the Product interface to specify the shape of the product object
 interface Product {
@@ -10,7 +10,7 @@ interface Product {
   img: string;
   productId: number;
   creationDate: string;
-  userId: { userName: string };
+  userId: { username: string };
 }
 
 // Define the SearchListProps interface to specify the props that the SearchList component will receive
@@ -20,15 +20,14 @@ interface SearchListProps {
 }
 
 function SearchList({ products, onProductClick }: SearchListProps) {
-  
-   // State to control the visibility of the search list
+  // State to control the visibility of the search list
   const [showSearchList, setShowSearchList] = useState(false);
 
   // Function to truncate text after 20 characters and add "..." at the end
   const truncatedText = (text: string) =>
     text.length > 20 ? text.slice(0, 20) + "..." : text;
 
-   // Handle the product click event: execute onProductClick callback and hide the search list
+  // Handle the product click event: execute onProductClick callback and hide the search list
   const handleProductClick = (product: Product) => {
     onProductClick(product);
     setShowSearchList(false);

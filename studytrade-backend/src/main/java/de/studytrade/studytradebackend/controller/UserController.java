@@ -1,7 +1,6 @@
 package de.studytrade.studytradebackend.controller;
 
 import de.studytrade.studytradebackend.model.AuthUser;
-import de.studytrade.studytradebackend.repository.AuthUserRepository;
 import de.studytrade.studytradebackend.service.EmailValidatorInterface;
 import de.studytrade.studytradebackend.service.UserInterface;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,12 +29,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity registerUser(@RequestBody AuthUser user, HttpServletRequest request){
+    public ResponseEntity registerUser(@RequestBody AuthUser user, HttpServletRequest request) {
         try {
-            if(userService.userExists(user)){
+            if (userService.userExists(user)) {
                 throw new RuntimeException("User already exists");
-            }
-            else if(!emailValidatorService.isHdmMail(user.getMail())){
+            } else if (!emailValidatorService.isHdmMail(user.getMail())) {
                 throw new RuntimeException("Please register with valid HdM email");
             }
             userService.addUser(user, getSiteURL(request));
