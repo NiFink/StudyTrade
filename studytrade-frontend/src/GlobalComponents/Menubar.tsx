@@ -3,11 +3,12 @@ import SearchList from "./SearchList";
 import ProductDetails from "../pages/Shoppage/Components/ProductDetails";
 
 interface MenubarProps {
-  shoppageClick?: () => void;
+  shoppageClick: () => void;
   profilepageClick: () => void;
   homepageClick: () => void;
 }
 
+// Define the Product interface to specify the shape of the product object
 interface Product {
   name: string;
   description: string;
@@ -20,11 +21,11 @@ interface Product {
   userId: { userName: string };
 }
 
-function Menubar({
+function Menubar ({
   shoppageClick,
   profilepageClick,
   homepageClick,
-}: MenubarProps) {
+}: MenubarProps){
   const [products, setProducts] = useState<Product[]>([]);
   const [isSearchListExp, setIsSearchListExp] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -56,29 +57,32 @@ function Menubar({
       setIsSearchListExp(false);
     }
   };
-useEffect(() => {
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      containerRef.current &&
-      !containerRef.current.contains(event.target as Node)
-    ) {
-      if (inputValue === "") {
-        setIsSearchListExp(false);
+  {/*Fetch all products from backend, which has the searched letters in their names */}
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        if (inputValue === "") {
+          setIsSearchListExp(false);
+        }
       }
+    };
+
+    if (isSearchListExp) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
-  };
-  if (isSearchListExp) {
-    document.addEventListener("mousedown", handleClickOutside);
-  } else {
-    document.removeEventListener("mousedown", handleClickOutside);
-  }
 
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-})
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSearchListExp, inputValue]);
 
 
+  {/*Fetch all products from backend, which has the searched letters in their names */}
   const fetchSearchedProducts = async (searchTerm: string) => {
     try {
       const response = await fetch(
@@ -91,6 +95,7 @@ useEffect(() => {
     }
   };
 
+  {/*Handle Productclick and set the selected/clicked one */}
   const toggleDetails = (product: Product) => {
     setSelectedProduct(product);
     setIsSearchListExp(false);
@@ -118,21 +123,20 @@ useEffect(() => {
                   type="search"
                   placeholder="Search..."
                   id="searchInput"
-                  className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${isSearchListExp ? "w-64 opacity-100" : "w-0 opacity-0"}`}
+                  className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${
+                    isSearchListExp ? "w-64 opacity-100" : "w-0 opacity-0"
+                  }`}
                   value={inputValue}
                   onChange={handleChange}
                   onFocus={handleFocus}
                   onBlur={handleBlur}
                 />
                 <button className="bg-white hover:bg-gray-300 font-semibold py-1 px-2 rounded-full shadow">
-                  <i className="bi bi-search"></i>{" "}
+                  <i className="bi bi-search"></i>
                 </button>
               </div>
               {isSearchListExp && inputValue && (
-                <SearchList
-                  products={products}
-                  onProductClick={toggleDetails}
-                />
+                <SearchList products={products} onProductClick={toggleDetails} />
               )}
             </div>
           </div>
@@ -146,7 +150,7 @@ useEffect(() => {
             onClick={profilepageClick}
             className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow"
           >
-            <i className="bi bi-person-circle"></i> Profil
+            <i className="bi bi-person-circle"></i> Profile
           </button>
         </div>
       </div>
@@ -155,11 +159,10 @@ useEffect(() => {
           product={selectedProduct}
           toggleDetails={() => setSelectedProduct(null)}
           isDetailsOpen={true}
-          
         />
       )}
     </div>
   );
-}
+};
 
 export default Menubar;

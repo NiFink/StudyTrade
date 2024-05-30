@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 
+// Define the Product interface to specify the shape of the product object
 interface Product {
   name: string;
   description: string;
@@ -12,22 +13,28 @@ interface Product {
   userId: { userName: string };
 }
 
+// Define the SearchListProps interface to specify the props that the SearchList component will receive
 interface SearchListProps {
   products: Product[];
   onProductClick: (product: Product) => void;
 }
 
-const truncatedText = (text: string) =>
-  text.length > 20 ? text.slice(0, 20) + "..." : text;
-
 function SearchList({ products, onProductClick }: SearchListProps) {
+  
+   // State to control the visibility of the search list
+  const [showSearchList, setShowSearchList] = useState(false);
 
-  const [showSearchList, setShowSearchList] = useState(true);
+  // Function to truncate text after 20 characters and add "..." at the end
+  const truncatedText = (text: string) =>
+    text.length > 20 ? text.slice(0, 20) + "..." : text;
 
+   // Handle the product click event: execute onProductClick callback and hide the search list
   const handleProductClick = (product: Product) => {
     onProductClick(product);
     setShowSearchList(false);
   };
+
+  // Return the JSX to render the search list
   return (
     <ul className="absolute bg-white shadow-lg rounded-lg mt-2 w-full max-w-md z-10">
       {products.map((product) => (
@@ -37,7 +44,7 @@ function SearchList({ products, onProductClick }: SearchListProps) {
           onClick={() => handleProductClick(product)}
         >
           <img
-            src={product.img}
+            src={`/images/${product.productId}.jpg`}
             alt={product.name}
             className="w-16 h-16 mr-2 inline-block"
           />
