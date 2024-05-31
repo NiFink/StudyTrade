@@ -30,9 +30,8 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
   const truncatedText = (text: string) =>
     text.length > 20 ? text.slice(0, 20) + "..." : text;
   return (
-    <div>
-      <div className="max-w-xl px-4 py-16 sm:px-6 sm:py-24 md:max-w-full lg:px-8">
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
+      <div className="px-4 py-16 sm:px-6 sm:py-24 max-w-full justify-center lg:px-8">
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
           {products.map((product) => (
             <button
               key={product.productId}
@@ -50,7 +49,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
                     <h1 className="mt-3  text-xl font-bold text-white">
                       {truncatedText(product.name)}
                     </h1>
-                    <p className="mt-3 text-lg font-medium text-white">
+                    <p className="md:mt-3 text-lg font-medium text-white md:hidden group-hover:block">
                       {product.price} ({product.condition})
                     </p>
                   </div>
@@ -59,7 +58,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
             </button>
           ))}
         </div>
-      </div>
+
 
       {selectedProduct && (
         <ProductDetails
