@@ -3,6 +3,7 @@ import Shoppage from "./pages/Shoppage/Shoppage";
 import Homepage from "./pages/Homepage/Homepage";
 import Profilepage from "./pages/Profilepage/Profilepage";
 import Menubar from "./GlobalComponents/Menubar";
+import Loginpage from "./pages/Loginpage/Loginpage";
 
 function App() {
   const [currentSite, setSite] = useState("Homepage");
@@ -28,6 +29,9 @@ function App() {
       )}
       {currentSite === "Profilepage" && (
         <Profilepage homepageClick={() => setSite("Homepage")}></Profilepage>
+      )}
+      {currentSite === "Loginpage" && (
+        <Loginpage homepageClick={() => setSite("Homepage")}></Loginpage>
       )}
     </div>
   );
