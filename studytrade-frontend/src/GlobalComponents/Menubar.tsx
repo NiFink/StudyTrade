@@ -115,7 +115,7 @@ function Menubar({
         >
           <i className="bi bi-shop"></i> StudyTrade
         </button>
-        <div className="flex space-x-7 mx-1">
+        <div className="flex space-x-7">
           <div className="flex justify-center items-center">
             <div className="relative" ref={containerRef}>
               <div
@@ -129,7 +129,7 @@ function Menubar({
                   placeholder="Search..."
                   id="searchInput"
                   className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${
-                    isSearchListExp ? "smw-64 w-[73vw]  opacity-100" : "w-0 opacity-0"
+                    isSearchListExp ? "sm:w-64 w-[73vw]  opacity-100" : "w-0 opacity-0"
                   }`}
                   value={inputValue}
                   onChange={handleChange}
