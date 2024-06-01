@@ -108,14 +108,14 @@ function Menubar({
 
   return (
     <div className="mx-5 my-3">
-      <div className="flex justify-between border-b border-gray-300 py-2">
+      <div className="flex flex-col sm:flex-row sm:space-y-0 space-y-2  justify-between border-b border-gray-300 py-2">
         <button
           onClick={homepageClick}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow"
+          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block"
         >
           <i className="bi bi-shop"></i> StudyTrade
         </button>
-        <div className="flex space-x-7">
+        <div className="flex space-x-7 mx-1">
           <div className="flex justify-center items-center">
             <div className="relative" ref={containerRef}>
               <div
@@ -129,7 +129,7 @@ function Menubar({
                   placeholder="Search..."
                   id="searchInput"
                   className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${
-                    isSearchListExp ? "w-64 opacity-100" : "w-0 opacity-0"
+                    isSearchListExp ? "smw-64 w-[73vw]  opacity-100" : "w-0 opacity-0"
                   }`}
                   value={inputValue}
                   onChange={handleChange}
