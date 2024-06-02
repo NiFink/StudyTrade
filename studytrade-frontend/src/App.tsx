@@ -15,7 +15,7 @@ function App() {
         <Menubar
           shoppageClick={() => setSite("Shoppage")}
           homepageClick={() => setSite("Homepage")}
-          profilepageClick={() => setSite("Homepage")}
+          profilepageClick={() => setSite("Profilepage")}
         ></Menubar>
       }
       {currentSite === "Homepage" && (
