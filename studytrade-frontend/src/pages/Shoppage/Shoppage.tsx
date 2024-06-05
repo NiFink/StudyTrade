@@ -67,7 +67,7 @@ function Shoppage({ homepageClick }: ShoppageProps) {
   };
 
   return (
-    <div>
+    <div >
       <Filterbar
         toggleCategories={toggleCategories}
         fetchProducts={fetchProducts}

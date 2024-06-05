@@ -20,7 +20,7 @@ function Homepage({ shoppageClick, profilepageClick }: HomepageProps) {
     <div className="flex flex-col">
       <div className="hidden lg:block">
         <Arrow arrowClick={arrowClick} scrollToShopbar={arrowClick} />
-        <div className="flex space-x-3 text-white text-4xl h-[400px]"></div>
+        <div className="flex space-x-3 text-white text-4xl h-[25vh]"></div>
       </div>
       <div className="bottom-0 z-0" ref={shopbarRef}>
         <Shopbar

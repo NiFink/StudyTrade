@@ -11,13 +11,14 @@ function App() {
   
   return (
     <div>
-      {
+        {
         <Menubar
           shoppageClick={() => setSite("Shoppage")}
           homepageClick={() => setSite("Homepage")}
           profilepageClick={() => setSite("Profilepage")}
         ></Menubar>
       }
+      
       {currentSite === "Homepage" && (
         <Homepage
           shoppageClick={() => setSite("Shoppage")}

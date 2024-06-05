@@ -107,11 +107,11 @@ function Menubar({
   };
 
   return (
-    <div className="mx-5 my-3">
-      <div className="flex flex-col sm:flex-row sm:space-y-0 space-y-2  justify-between border-b border-gray-300 py-2 overflow-hidden sm:overflow-visible">
+    <div className="fixed z-10 bg-white w-full">
+      <div className="mx-5 my-3 flex flex-col sm:flex-row sm:space-y-0 space-y-2  justify-between border-b border-gray-300 py-2 overflow-hidden sm:overflow-visible">
         <button
           onClick={homepageClick}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block"
+          className=" hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block"
         >
           <i className="bi bi-shop"></i> StudyTrade
         </button>
