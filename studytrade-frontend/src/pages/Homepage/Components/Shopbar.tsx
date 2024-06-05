@@ -5,9 +5,8 @@ interface ShopbarProps {
 
 function Shopbar({ shoppageClick, profilepageClick }: ShopbarProps) {
     return (
-        <div className="mx-5 lg:my-40 my-4">
-            
-            <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-3 text-black text-4xl lg:h-[75vh] h-[70vh] overflow-hidden justify-center items-center">
+        <div className="mx-8 lg:mx-6 lg:my-[5vh] mt-[21vh] lg:mt-0">
+            <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-7 text-black text-4xl lg:h-[80vh] h-[70vh] overflow-hidden justify-center items-center">
                 <button onClick={shoppageClick} className="w-full lg:w-1/4 h-1/4 lg:h-full rounded-lg relative overflow-hidden flex justify-center items-center">
                     <img className="absolute inset-0 w-full h-full object-cover rounded-lg hover:rotate-3 hover:scale-125 transition-transform duration-500" src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg" alt="" />
                     <div className="my-8 z-10 relative mt-3 font-bold">Recommended</div>
