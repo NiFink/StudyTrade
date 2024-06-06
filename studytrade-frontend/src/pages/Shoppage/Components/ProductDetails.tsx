@@ -9,7 +9,7 @@ interface Product {
   img: string;
   productId: number;
   creationDate: string;
-  userId: { userName: string };
+  userId: { username: string };
 }
 
 interface ProductDetailsProps {
@@ -74,10 +74,14 @@ function ProductDetails({
               <h1 className="mx-auto">{truncatedText(product.name)}</h1>
             </div>
             <div className="max-h-[84vh] overflow-y-scroll">
-              <img src={product.img} alt={product.name} className="w-full" />
+              <img
+                src={`/images/${product.productId}.jpg`}
+                alt={product.name}
+                className="w-full"
+              />
               <div className="flex mt-2  p-2 justify-center">
                 <i className="bi bi-person-fill "></i>
-                <h1 className="text-l ">{product.userId.userName}</h1>
+                <h1 className="text-l ">{product.userId.username}</h1>
               </div>
               <hr />
 
