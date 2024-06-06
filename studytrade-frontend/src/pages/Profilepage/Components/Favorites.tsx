@@ -35,7 +35,7 @@ function Favorites({favorites}: FavoritesProps) {
         setDetailsOpen(!isDetailsOpen);
       };
     return (
-    <>{/* favorite-grids 
+    <>
       <div className="mt-36 px-4 lg:px-32 flex flex-wrap gap-4 relative">
       <div className="absolute -mt-20 left-56 transform -translate-x-1/2 flex items-center">
         <i className="bi bi-bag-heart text-black text-[55px]"></i>
@@ -44,14 +44,10 @@ function Favorites({favorites}: FavoritesProps) {
         </span>
       </div>
       {favorites.map((favorite) => (
-            <button
-              key={favorite.favoriteId}
-              onClick={() => handlefavoriteClick(favorite)}
-              className="group relative items-center justify-center overflow-hidden cursor-pointer"
-            >
+            
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg via-transparent xl:aspect-h-8 xl:aspect-w-7">
                 <img
-                  src={/images/${favorite.favoriteId}.jpg}
+                  src={`/images/${favorite.productId}.jpg`}
                   alt={favorite.name}
                   className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
                 />
@@ -66,7 +62,6 @@ function Favorites({favorites}: FavoritesProps) {
                   </div>
                 </div>
               </div>
-            </button>
           ))}
 
         {selectedProduct && (
@@ -76,7 +71,7 @@ function Favorites({favorites}: FavoritesProps) {
           isDetailsOpen={isDetailsOpen}
         />
       )}
-    </div>*/}
+    </div>
     </>
     );
 }

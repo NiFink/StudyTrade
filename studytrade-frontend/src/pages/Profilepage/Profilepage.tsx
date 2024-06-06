@@ -26,7 +26,7 @@ interface AuthUser{
     creationDate: string;
     profileImage: string;
     createdProducts: number;
-    favorites: number
+    favorites: number;
     verificationCode: string;
     isEnabled: boolean;
 }
@@ -53,7 +53,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
   const fetchFavorites = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/users/2/favorites`
+        `http://localhost:8080/api/v1/products/multiple?productId=${authUser?.favorites}`
       );
       const data = await response.json();
       setFavorites(data);
@@ -73,6 +73,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
     }
   }
     useEffect(() => {
+      fetchAuthUser();
       fetchFavorites();
     }, []);
 
