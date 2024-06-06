@@ -18,10 +18,37 @@ interface Product {
   userId: { username: string };
 }
 
+interface AuthUser{
+    userId: number;
+    username: string;
+    password: string;
+    mail: string;
+    creationDate: string;
+    profileImage: string;
+    createdProducts: number;
+    favorites: number
+    verificationCode: string;
+    isEnabled: boolean;
+}
+
 function Profilepage({ homepageClick }: ProfilepageProps) {
   const [activeButton, setActiveButton] = useState<string>("activity");
   
   const [favorites, setFavorites] = useState<Product[]>();
+
+  const [authUser, setAuthUser] = useState<AuthUser>();
+
+  const fetchAuthUser = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/users/4`
+      );
+      const data = await response.json();
+      setAuthUser(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  }
 
   const fetchFavorites = async () => {
     try {
@@ -76,9 +103,9 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
       <div className="ml-96 pt-3">
         <div className="flex flex-col">
           <span className="text-black font-bold text-[23px] leading-6">
-            Hans Müller
+            {authUser?.username}
           </span>
-          <span className="text-gray-400 text-[19px]">@hansi</span>
+          {/*<span className="text-gray-400 text-[19px]">@hansi</span>*/}
         </div>
       </div>
 
