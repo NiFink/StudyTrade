@@ -32,6 +32,13 @@ public class ProductController {
         return new ResponseEntity<>(productService.singleProduct(productId), HttpStatus.OK);
     }
 
+    @GetMapping("/multiple")
+    @Operation(summary = "Get multiple products", description = "Get list of products")
+    public ResponseEntity<List<Product>> getMultipleProducts(
+            @RequestParam(required = true) @Schema(description = "List of the IDs of the products", type = "array") int[] productId) {
+        return new ResponseEntity<>(productService.getMultipleProducts(productId), HttpStatus.OK);
+    }
+
     @GetMapping("/filter")
     @Operation(summary = "Get filtered products", description = "Get all products filtered by price, condition, category and sorted by price or date")
     public ResponseEntity<List<Product>> filterProducts(
@@ -39,7 +46,7 @@ public class ProductController {
             @RequestParam(required = false) @Schema(description = "Maximum price") Float maxPrice,
             @RequestParam(required = false) @Schema(description = "Condition of the product", allowableValues = { "new",
                     "nearly new", "used" }) String condition,
-            @RequestParam(required = false) @Schema(description = "List of categories") List<String> category,
+            @RequestParam(required = false) @Schema(description = "List of categories", type = "array") List<String> category,
             @RequestParam(required = false) @Schema(description = "Sort parameters", allowableValues = { "priceASC",
                     "priceDESC", "creationDateASC", "creationDateDESC" }) String sort) {
         try {

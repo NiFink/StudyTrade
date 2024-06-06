@@ -27,6 +27,7 @@ public class AuthUser {
     private String mail;
     private Date creationDate;
     private String profileImage;
+    private List<Integer> createdProducts;
     private List<Integer> favorites;
     private String verificationCode;
     private boolean isEnabled;
@@ -38,6 +39,7 @@ public class AuthUser {
         this.mail = user.getMail();
         this.creationDate = user.getCreationDate();
         this.profileImage = user.getProfileImage();
+        this.createdProducts = user.getCreatedProducts();
         this.favorites = user.getFavorites();
         this.verificationCode = user.getVerificationCode();
         this.isEnabled = user.isEnabled();
