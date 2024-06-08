@@ -95,9 +95,9 @@ This project is reserved for use by the development team and the instructor only
 - Ryan Röhrich(rr062@hdm-stuttgart.de), 
 - Jessi Schmidt(js496@hdm-stuttgart.de) 
 
-## Versionshinweise
+## Version History
 ### v1.0.0
 - Initial release
 
-## Weitere Informationen
+## Additional Information
 - Wiki
