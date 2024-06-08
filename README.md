@@ -56,14 +56,23 @@ cd ../studytrade-backend
 
 ## Configuration
 ### Configuration Options
+- server.port: The port on which the application runs (default: 8080).
+- spring.datasource.url: The URL of the database connection.
+- spring.mail.host: The SMTP server host for sending emails.
+- spring.mail.port: The SMTP server port for sending emails.
 
 
 ## Testing
 ### Test Guide
 ```bash 
 # Tests ausführen
+# Run backend tests
+cd studytrade-backend
+mvn test
 
-
+# Run frontend tests
+cd ../studytrade-frontend
+npm test
 ```
 
 ## Contributing
