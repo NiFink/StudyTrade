@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage/Homepage";
 import Profilepage from "./pages/Profilepage/Profilepage";
 import Menubar from "./GlobalComponents/Menubar";
 import Loginpage from "./pages/Loginpage/Loginpage";
+import RegisterPage from "./pages/Registerpage/Registerpage";
 
 function App() {
     const [currentSite, setSite] = useState("Loginpage");
