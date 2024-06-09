@@ -25,7 +25,10 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")  // Ensure your frontend sends login requests to /login
+                        .defaultSuccessUrl("/", true) // Redirect to /shoppage after successful login
+                )
                 .build();
     }
 
