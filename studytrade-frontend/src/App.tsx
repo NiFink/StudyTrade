@@ -6,7 +6,7 @@ import Menubar from "./GlobalComponents/Menubar";
 import Loginpage from "./pages/Loginpage/Loginpage";
 
 function App() {
-  const [currentSite, setSite] = useState("Homepage");
+  const [currentSite, setSite] = useState("Loginpage");
 
   
   return (
