@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Favorites from "./Components/Favorites";
 import YourProduct from "./Components/YourProduct";
+import ProductDetails from "../Shoppage/Components/ProductDetails";
 
 interface ProfilepageProps {
   homepageClick?: () => void;
@@ -18,79 +19,99 @@ interface Product {
   userId: { username: string };
 }
 
-interface AuthUser{
-    userId: number;
-    username: string;
-    password: string;
-    mail: string;
-    creationDate: string;
-    profileImage: string;
-    createdProducts: number;
-    favorites: number;
-    verificationCode: string;
-    isEnabled: boolean;
+interface AuthUser {
+  userId: number;
+  username: string;
+  password: string;
+  mail: string;
+  creationDate: string;
+  profileImage: string;
+  createdProducts: number[];
+  favorites: number[];
+  verificationCode: string;
+  isEnabled: boolean;
 }
 
 function Profilepage({ homepageClick }: ProfilepageProps) {
   const [activeButton, setActiveButton] = useState<string>("activity");
-  
-  const [favorites, setFavorites] = useState<Product[]>();
-
+  const [favorites, setFavorites] = useState<Product[]>([]);
+  const [created, setCreated] = useState<Product[]>([]);
   const [authUser, setAuthUser] = useState<AuthUser>();
 
   const fetchAuthUser = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/users/4`
-      );
+      const response = await fetch(`http://localhost:8080/api/v1/users/3`);
       const data = await response.json();
       setAuthUser(data);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching user:", error);
     }
-  }
+  };
 
   const fetchFavorites = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/products/multiple?productId=${authUser?.favorites}`
-      );
-      const data = await response.json();
-      setFavorites(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
+    if (authUser && authUser.favorites && authUser.favorites.length > 0) {
+      try {
+        const queryString = createQueryString(authUser.favorites);
+        const response = await fetch(
+          `http://localhost:8080/api/v1/products/multiple?${queryString}`
+        );
+        const data = await response.json();
+        setFavorites(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    } else {
+      setFavorites([]); // Ensure favorites is an empty array if no favorites
     }
-  }
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/products/${favorites}`
-      );
-      const data = await response.json();
-      setFavorites(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
+  };
+
+  const fetchCreated = async () => {
+    if (
+      authUser &&
+      authUser.createdProducts &&
+      authUser.createdProducts.length > 0
+    ) {
+      try {
+        const queryString = createQueryString(authUser.createdProducts);
+        console.log(createQueryString);
+        const response = await fetch(
+          `http://localhost:8080/api/v1/products/multiple?${queryString}`
+        );
+        const data = await response.json();
+        setCreated(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    } else {
+      setCreated([]); // Ensure favorites is an empty array if no favorites
     }
-  }
-    useEffect(() => {
-      fetchAuthUser();
-      fetchFavorites();
-    }, []);
+  };
+
+  const createQueryString = (productIds: number[] = []) => {
+    return productIds.map((id) => `productId=${id}`).join("&");
+  };
+
+  useEffect(() => {
+    fetchAuthUser();
+  }, []);
+
+  useEffect(() => {
+    fetchFavorites();
+    fetchCreated();
+  }, [authUser]);
 
   return (
     <div className="min-h-screen bg-white">
-
-
       {/* Large image above */}
       <div className="relative w-full h-80">
         <div
           className="absolute inset-0 bg-fixed bg-cover bg-center"
-          style={{ backgroundImage: 'url(./images/hdm_picture2.jpg)' }}
+          style={{ backgroundImage: "url(./images/hdm_picture2.jpg)" }}
         >
           <div className="absolute inset-0 bg-black opacity-20"></div>
         </div>
 
-      {/* Profile picture */}
+        {/* Profile picture */}
         <div className="absolute top-80 left-72 transform -translate-x-1/2 -translate-y-1/2">
           <img
             src="./images/wireless_headphones.jpg"
@@ -153,9 +174,8 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         <div className="absolute inset-0 bg-gray-200 shadow-inner"></div>
       </div>
 
-      <Favorites favorites={favorites as Product[]}></Favorites>
-      <YourProduct></YourProduct>
-
+      <Favorites favorites={favorites}></Favorites>
+      <YourProduct created={created}></YourProduct>
     </div>
   );
 }
