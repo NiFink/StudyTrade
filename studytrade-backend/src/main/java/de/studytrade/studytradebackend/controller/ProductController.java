@@ -35,7 +35,7 @@ public class ProductController {
     @GetMapping("/multiple")
     @Operation(summary = "Get multiple products", description = "Get list of products")
     public ResponseEntity<List<Product>> getMultipleProducts(
-            @RequestParam(required = true) @Schema(description = "List of the IDs of the products", type = "array") int[] productId) {
+            @RequestParam(required = true) @Schema(description = "List of the IDs of the products", type = "array") List<Integer> productId) {
         return new ResponseEntity<>(productService.getMultipleProducts(productId), HttpStatus.OK);
     }
 
