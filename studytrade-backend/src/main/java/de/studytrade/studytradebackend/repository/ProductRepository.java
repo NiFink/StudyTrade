@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ProductRepository extends MongoRepository<Product, ObjectId> {
         Optional<Product> findProductByProductId(int productId);
 
-        List<Product> findByProductIdIn(int[] productId);
+        List<Product> findByProductIdIn(List<Integer> productId);
 
         List<Product> findByPriceBetweenAndConditionStartingWith(Float minPrice, Float maxPrice,
                         String condition);

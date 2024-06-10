@@ -26,7 +26,7 @@ public class ProductService implements ProductInterface {
     }
 
     @Override
-    public List<Product> getMultipleProducts(int[] productId) {
+    public List<Product> getMultipleProducts(List<Integer> productId) {
         return productRepository.findByProductIdIn(productId);
     }
 
