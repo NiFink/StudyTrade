@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Favorites from "./Components/Favorites";
 import YourProduct from "./Components/YourProduct";
 import ProductDetails from "../Shoppage/Components/ProductDetails";
+import Info from "./Components/Info";
 
 interface ProfilepageProps {
   homepageClick?: () => void;
@@ -178,8 +179,15 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         <div className="absolute inset-0 bg-gray-200 shadow-inner"></div>
       </div>
 
-      <Favorites favorites={favorites}></Favorites>
-      <YourProduct created={created}></YourProduct>
+      {activeButton === "info" ? (
+        <Info />
+      ) : (
+        <>
+          <Favorites favorites={favorites}></Favorites>
+          <YourProduct created={created}></YourProduct>
+        </>
+      )}
+    
     </div>
   );
 }
