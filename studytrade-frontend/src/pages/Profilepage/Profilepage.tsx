@@ -102,6 +102,8 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
   return (
     <div className="min-h-screen bg-white">
+
+
       {/* Large image above */}
       <div className="relative w-full h-80">
         <div
@@ -110,6 +112,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         >
           <div className="absolute inset-0 bg-black opacity-20"></div>
         </div>
+
 
         {/* Profile picture */}
         <div className="absolute top-80 left-72 transform -translate-x-1/2 -translate-y-1/2">
@@ -121,8 +124,9 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         </div>
       </div>
 
+
       {/* Profile names */}
-      <div className="ml-96 pt-3">
+      <div className="ml-96 pt-2">
         <div className="flex flex-col">
           <span className="text-black font-bold text-[23px] leading-6">
             {authUser?.username}
@@ -133,7 +137,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
       {/* info button */}
       <div className="relative">
-        <div className="absolute top-2 right-0 bottom-20 flex justify-end items-center">
+        <div className="absolute top-10 right-0 bottom-20 flex justify-end items-center">
           <button
             className={`text-black w-64 h-36 hover:bg-gray-200 active:bg-gray-300 ${
               activeButton === "info" ? "border-b-2 border-black" : ""
@@ -152,7 +156,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
       {/* activity button */}
       <div className="relative">
-        <div className="absolute top-2 right-64 bottom-20 flex justify-end items-center">
+        <div className="absolute top-10 right-64 bottom-20 flex justify-end items-center">
           <button
             className={`text-black w-64 h-36 hover:bg-gray-200 active:bg-gray-300 ${
               activeButton === "activity" ? "border-b-2 border-black" : ""
@@ -170,7 +174,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
       </div>
 
       {/* Indented gray strip */}
-      <div className="relative w-full h-6 mt-20 bg-gray-200">
+      <div className="relative w-full h-6 mt-28 bg-gray-200">
         <div className="absolute inset-0 bg-gray-200 shadow-inner"></div>
       </div>
 
