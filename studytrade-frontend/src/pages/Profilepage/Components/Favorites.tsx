@@ -42,6 +42,7 @@ function Favorites({ favorites }: FavoritesProps) {
           </span>
         </div>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
+
           {/* Lists all fetch Products*/}
           {favorites.map((product) => (
             <button
@@ -56,7 +57,13 @@ function Favorites({ favorites }: FavoritesProps) {
                   className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
                 />
                 <div className="absolute bottom-0 left-0 inset-0 bg-gradient-to-b from-transparent to-black/30 group-hover:to-black/50 rounded-lg">
+                                    
+                    <button className="hidden group-hover:block bg-gray-300 absolute top-2 right-2 w-9 h-9 rounded-lg">
+                      <i className="bi bi-trash-fill text-black text-[25px]"></i>
+                    </button>
+                
                   <div className="absolute inset-0 flex flex-col   text-center translate-y-[80%] group-hover:translate-y-[60%] transition-all rounded-lg">
+                    
                     <h1 className="mt-3  text-xl font-bold text-white">
                       {truncatedText(product.name)}
                     </h1>
