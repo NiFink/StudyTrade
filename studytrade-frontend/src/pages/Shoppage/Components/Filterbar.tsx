@@ -39,16 +39,15 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
     );
   };
 
-
   return (
     <div>
       <div className=" w-full ">
-        <div className="flex p-2 justify-center">
+        <div className="flex pt-[140px] md:pt-[90px] justify-center">
           <button className="lg:hidden " onClick={toggleCategories}>
             <i className="bi bi-filter"></i>
             Categories
           </button>
-          <button className="pl-3 lg:hidden" onClick={filter}>
+          <button className="pl-3  lg:hidden" onClick={filter}>
             <i className="bi bi-funnel hover:bi-funnel-fill"></i>
           </button>
         </div>
@@ -69,7 +68,7 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
               <h1 className="pr-2">Price:</h1>
               <input
                 type="text"
-                className="rounded-full appearance-none shadow py-1 px-2 "
+                className="rounded-full appearance-none shadow py-1 px-2 m-2 "
                 placeholder="Min"
                 id="Min"
                 value={minPrice}
@@ -78,7 +77,7 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
               <h1 className="px-2">to</h1>
               <input
                 type="text"
-                className="rounded-full appearance-none  shadow py-1 px-2 "
+                className="rounded-full appearance-none py-1 shadow px-2 m-2 "
                 placeholder="Max"
                 id="Max"
                 value={maxPrice}
@@ -96,7 +95,7 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
         </div>
       </div>
     </div>
-  );  
+  );
 }
 
 export default FilterBar;
