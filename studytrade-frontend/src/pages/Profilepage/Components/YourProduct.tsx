@@ -46,8 +46,8 @@ function YourProduct({ created }: CreatedProps) {
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
           {/* Lists all fetch Products*/}
           <button className="group relative items-center justify-center overflow-hidden cursor-pointer ">
-            <div className="absolute bottom-0 left-0 inset-0 bg-gradient-to-b from-transparent to-black/30 group-hover:to-black/50 rounded-lg">
-              <div className="absolute inset-0 flex flex-col text-center group-hover:scale-125 transition-all rounded-lg">
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-transparent to-black/30 group-hover:to-black/50 rounded-lg">
+              <div className="group-hover:scale-110 transition-all">
                 <i className="bi bi-plus text-black text-[100px]"></i>
               </div>
             </div>
