@@ -41,7 +41,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
   const fetchAuthUser = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/users/3`);
+      const response = await fetch(`http://localhost:8080/api/v1/users/14`);
       const data = await response.json();
       setAuthUser(data);
     } catch (error) {
@@ -92,6 +92,32 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
     return productIds.map((id) => `productId=${id}`).join("&");
   };
 
+  const deleteProduct = async (productId: number) => {
+    if (
+      authUser &&
+      authUser.createdProducts &&
+      authUser.createdProducts.length > 0
+    ) {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/v1/products/${productId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        if (response.ok) {
+          fetchCreated();
+        } else {
+          console.error("Error deleting product:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error deleting products:", error);
+      }
+    } else {
+      console.error("Error deleting products: No created products found.");
+    }
+  };
+
   useEffect(() => {
     fetchAuthUser();
   }, []);
@@ -103,8 +129,6 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-
-
       {/* Large image above */}
       <div className="relative w-full h-80">
         <div
@@ -113,7 +137,6 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         >
           <div className="absolute inset-0 bg-black opacity-20"></div>
         </div>
-
 
         {/* Profile picture */}
         <div className="absolute top-80 left-72 transform -translate-x-1/2 -translate-y-1/2">
@@ -124,7 +147,6 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
           />
         </div>
       </div>
-
 
       {/* Profile names */}
       <div className="ml-96 pt-2">
@@ -184,10 +206,12 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
       ) : (
         <>
           <Favorites favorites={favorites}></Favorites>
-          <YourProduct created={created}></YourProduct>
+          <YourProduct
+            deleteProduct={deleteProduct}
+            created={created}
+          ></YourProduct>
         </>
       )}
-    
     </div>
   );
 }
