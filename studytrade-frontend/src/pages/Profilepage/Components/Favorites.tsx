@@ -3,6 +3,7 @@ import ProductDetails from "../../Shoppage/Components/ProductDetails";
 
 interface FavoritesProps {
   favorites: Product[];
+  deleteProduct: (productId: number) => void;
 }
 
 interface Product {
@@ -17,7 +18,7 @@ interface Product {
   userId: { username: string };
 }
 
-function Favorites({ favorites }: FavoritesProps) {
+function Favorites({ favorites, deleteProduct }: FavoritesProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isDetailsOpen, setDetailsOpen] = useState(false);
 
@@ -32,23 +33,29 @@ function Favorites({ favorites }: FavoritesProps) {
   const toggleDetails = () => {
     setDetailsOpen(!isDetailsOpen);
   };
-  return (
-    <>
-      <div className="mt-36 px-4 lg:px-32 flex flex-wrap gap-4 relative">
-        <div className="absolute -mt-20 left-56 transform -translate-x-1/2 flex items-center">
-          <i className="bi bi-bag-heart text-black text-[55px]"></i>
-          <span className="text-black font-bold text-[23px] ml-2 mt-3">
-            Your favorites:
-          </span>
-        </div>
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
 
-          {/* Lists all fetch Products*/}
-          {favorites.map((product) => (
+  const deleteClick = (productId: number) => {
+    deleteProduct(productId);
+  };
+
+  return (
+    <div className="mt-36 px-4 lg:px-32 flex flex-wrap gap-4 relative">
+      <div className="absolute -mt-20 left-56 transform -translate-x-1/2 flex items-center">
+        <i className="bi bi-bag-heart text-black text-[55px]"></i>
+        <span className="text-black font-bold text-[23px] ml-2 mt-3">
+          Your favorites:
+        </span>
+      </div>
+      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
+        {/* Lists all fetch Products*/}
+        {favorites.map((product) => (
+          <div
+            key={product.productId}
+            className="group relative items-center justify-center overflow-hidden"
+          >
             <button
-              key={product.productId}
               onClick={() => handleProductClick(product)}
-              className="group relative items-center justify-center overflow-hidden cursor-pointer"
+              className="cursor-pointer"
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg via-transparent xl:aspect-h-8 xl:aspect-w-7">
                 <img
@@ -57,13 +64,11 @@ function Favorites({ favorites }: FavoritesProps) {
                   className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
                 />
                 <div className="absolute bottom-0 left-0 inset-0 bg-gradient-to-b from-transparent to-black/30 group-hover:to-black/50 rounded-lg">
-                                    
-                    <button className="hidden group-hover:block bg-gray-300 absolute top-2 right-2 w-9 h-9 rounded-lg">
-                      <i className="bi bi-trash-fill text-black text-[25px]"></i>
-                    </button>
-                
+                  <button className="hidden group-hover:block bg-gray-300 absolute top-2 right-2 w-9 h-9 rounded-lg">
+                    <i className="bi bi-trash-fill text-black text-[25px]"></i>
+                  </button>
+
                   <div className="absolute inset-0 flex flex-col   text-center translate-y-[80%] group-hover:translate-y-[60%] transition-all rounded-lg">
-                    
                     <h1 className="mt-3  text-xl font-bold text-white">
                       {truncatedText(product.name)}
                     </h1>
@@ -74,18 +79,24 @@ function Favorites({ favorites }: FavoritesProps) {
                 </div>
               </div>
             </button>
-          ))}
-        </div>
-
-        {selectedProduct && (
-          <ProductDetails
-            product={selectedProduct}
-            toggleDetails={toggleDetails}
-            isDetailsOpen={isDetailsOpen}
-          />
-        )}
+            <button
+              onClick={() => deleteClick(product.productId)}
+              className="hidden group-hover:block bg-gray-300 absolute top-2 right-2 w-9 h-9 rounded-lg z-50"
+            >
+              <i className="bi bi-trash-fill text-black text-[25px]"></i>
+            </button>
+          </div>
+        ))}
       </div>
-    </>
+
+      {selectedProduct && (
+        <ProductDetails
+          product={selectedProduct}
+          toggleDetails={toggleDetails}
+          isDetailsOpen={isDetailsOpen}
+        />
+      )}
+    </div>
   );
 }
 export default Favorites;

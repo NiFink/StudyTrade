@@ -107,6 +107,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         );
         if (response.ok) {
           fetchCreated();
+          fetchFavorites();
         } else {
           console.error("Error deleting product:", response.statusText);
         }
@@ -205,7 +206,10 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         <Info />
       ) : (
         <>
-          <Favorites favorites={favorites}></Favorites>
+          <Favorites
+            deleteProduct={deleteProduct}
+            favorites={favorites}
+          ></Favorites>
           <YourProduct
             deleteProduct={deleteProduct}
             created={created}
