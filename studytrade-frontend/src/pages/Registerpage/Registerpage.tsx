@@ -41,22 +41,25 @@ function RegisterPage({
   };
 
   return (
-    <div className="h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center p-5 border border-gray-300 rounded-lg w-72">
-        <h2 className="text-2xl mb-4">Register</h2>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="p-2 mb-3 w-full box-border"
-        />
+    <div className="h-screen flex items-center justify-center bg-light-red"
+    style={{
+      backgroundImage: `url(${process.env.PUBLIC_URL}/logo512.png)`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >
+    {/* background shine through */}
+    <div className="flex flex-col items-center p-8 border border-white-500 bg-white rounded-lg shadow-lg" style={{ maxWidth: "60rem", width: "90%", height: "38rem", backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
+    <img src="/hdm-logo.png" alt="HdM Logo" className="mb-8 w-64 h-auto " />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="p-2 mb-3 w-full box-border"
+          style={{ padding: "0.5rem", marginBottom: "1rem", width: "100%", border: "1px solid #ccc", borderRadius: "0.7rem", outline: "none", transition: "border-color 0.5s ease" }}
+          onFocus={(e) => { e.target.style.borderColor = "#f00"; e.target.style.borderWidth = "4px"; }}
+          onBlur={(e) => { e.target.style.borderColor = "#ccc"; e.target.style.borderWidth = "1px"; }}
+
         />
         <input
           type="email"
