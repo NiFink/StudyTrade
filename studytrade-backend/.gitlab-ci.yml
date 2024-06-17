@@ -1,0 +1,75 @@
+include:
+  - template: Jobs/SAST.gitlab-ci.yml
+
+cache:
+  paths:
+    - .m2/repository
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+stages:
+  - build
+  - test
+  - package
+  - release
+
+build-musicmanager:
+  stage: build
+  image: maven:3.9-eclipse-temurin-20
+  script:
+    - "echo 'Starting Build Stage'"
+    - "mvn compile"
+
+test-musicmanager:
+  stage: test
+  image: maven:3.9-eclipse-temurin-20
+  script:
+    - "echo 'Starting Test Stage'"
+    - "mvn test -Dtest='!NoSqlManagerTest,!SqlDbManagerTest, !AudioTrackApiControllerTest'"
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
+
+package-musicmanager:
+  stage: package
+  image: maven:3.9-eclipse-temurin-20
+  script:
+    - "echo 'Starting Package Stage'"
+    - "mvn package -Dtest='!NoSqlManagerTest,!SqlDbManagerTest, !AudioTrackApiControllerTest'"
+  only:
+    refs:
+      - main
+  artifacts:
+    paths:
+      - target/*.jar
+    expire_in: 2 days
+
+release-musicmanger-container-latest:
+  stage: release
+  image:
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:latest"
+  only:
+    refs:
+      - main
+
+release-musicmanger-container-tag:
+  stage: release
+  image:
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
+  rules:
+    - if: $CI_COMMIT_TAG
