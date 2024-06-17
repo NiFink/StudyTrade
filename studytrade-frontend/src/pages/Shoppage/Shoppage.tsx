@@ -80,7 +80,7 @@ function Shoppage({ homepageClick }: ShoppageProps) {
             fetchProducts={fetchProducts}
           />
         </div>
-        <div className="w-full ">
+        <div className="w-full my-10">
           {!products && (
             <div className="flex text-2xl justify-center animate-bounce">
               Loading...

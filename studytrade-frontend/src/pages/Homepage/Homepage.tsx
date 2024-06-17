@@ -7,9 +7,11 @@ interface HomepageProps {
   profilepageClick: () => void;
 }
 
+{/* mainpage of StudyTrade from where the user starts */}
 function Homepage({ shoppageClick, profilepageClick }: HomepageProps) {
   const shopbarRef = useRef<HTMLDivElement>(null);
 
+  {/* function, which is beeing used when clicking the arrow to slide down to the shopbar */}
   const arrowClick = () => {
     if (shopbarRef && shopbarRef.current) {
       shopbarRef.current.scrollIntoView({ behavior: "smooth" });

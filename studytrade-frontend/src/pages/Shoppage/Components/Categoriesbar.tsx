@@ -86,7 +86,7 @@ function Categoriesbar({
         style={{ zIndex: isCategoriesOpen ? 20 : 0 }}
       >
         <div
-          className={`sidebar fixed top-0 lg:top-[80px] bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-white ${isCategoriesOpen ? "" : "left-[-300px]"}`}
+          className={`sidebar fixed top-0 lg:top-[90px] bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-white ${isCategoriesOpen ? "" : "left-[-300px]"}`}
         >
           <div className="text-sm font-medium text-black"></div>
           <div className="p-2.5 mt-1 flex justify-between">
