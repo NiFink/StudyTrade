@@ -13,13 +13,14 @@ function Arrow({ arrowClick }: ArrowProps) {
         alt="Background"
         className="absolute inset-0 w-full h-full"
       />
-      <div className="text-9xl mb-14 -ml-8 font-semibold relative z-10 text-white [text-shadow:2px_2px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,1px_1px_0_#000]">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30"></div>
+      <div className="text-9xl mb-14 -ml-8 font-semibold relative z-10 text-white">
         StudyTrade
       </div>
       <button
         type="button"
         onClick={arrowClick}
-        className="text-black bg-transparent focus:ring-1 focus:outline-none focus:ring-gray-500 rounded-full text-xl p-6 text-center  inline-flex items-center border-4 border-white w-32 h-32 relative z-10 [box-shadow:2px_2px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,1px_1px_0_#000]"
+        className="text-black bg-transparent focus:ring-1 focus:outline-none focus:ring-gray-500 rounded-full text-xl p-6 text-center  inline-flex items-center border-4 border-white w-32 h-32 relative z-10"
       >
         <svg
           className="w-24 h-24 bi bi-arrow-down"
