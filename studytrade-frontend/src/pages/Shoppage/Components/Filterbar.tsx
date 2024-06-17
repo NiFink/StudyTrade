@@ -42,7 +42,7 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
   return (
     <div>
       <div className=" w-full ">
-        <div className="flex pt-[140px] md:pt-[90px] justify-center">
+        <div className="flex md:pt-[90px] justify-center">
           <button className="lg:hidden " onClick={toggleCategories}>
             <i className="bi bi-filter"></i>
             Categories
@@ -51,7 +51,7 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
             <i className="bi bi-funnel hover:bi-funnel-fill"></i>
           </button>
         </div>
-        <div className="hidden  font-semibold" id="filter">
+        <div className="hidden font-semibold" id="filter">
           <div className="flex justify-center items-center flex-wrap">
             <h1 className="p-2">Condition:</h1>
             <select
