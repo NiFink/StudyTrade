@@ -8,7 +8,6 @@ interface MenubarProps {
   homepageClick: () => void;
 }
 
-// Define the Product interface to specify the shape of the product object
 interface Product {
   name: string;
   description: string;
@@ -57,9 +56,7 @@ function Menubar({
       setIsSearchListExp(false);
     }
   };
-  {
-    /*Fetch all products from backend, which has the searched letters in their names */
-  }
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -83,9 +80,6 @@ function Menubar({
     };
   }, [isSearchListExp, inputValue]);
 
-  {
-    /*Fetch all products from backend, which has the searched letters in their names */
-  }
   const fetchSearchedProducts = async (searchTerm: string) => {
     try {
       const response = await fetch(
@@ -98,24 +92,24 @@ function Menubar({
     }
   };
 
-  {
-    /*Handle Productclick and set the selected/clicked one */
-  }
   const toggleDetails = (product: Product) => {
     setSelectedProduct(product);
     setIsSearchListExp(false);
   };
 
   return (
-    <div className="fixed z-10 bg-white w-full">
-      <div className="mx-5 my-3 flex flex-col sm:flex-row sm:space-y-0 space-y-2  justify-between border-b border-gray-300 py-2 overflow-hidden sm:overflow-visible">
+    <div className="sm:fixed z-10 bg-white w-full">
+      <div className="items-center mx-5 my-3 flex flex-col sm:flex-row sm:space-y-0 space-y-2  justify-between border-b border-gray-300 py-2 overflow-hidden sm:overflow-visible">
+
         <button
           onClick={homepageClick}
-          className=" hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block"
+          className="w-full h-12 lg:w-auto lg:h-auto hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block"
         >
           <i className="bi bi-shop"></i> StudyTrade
         </button>
         <div className="flex space-x-7">
+
+          {/*search element to find products with loupe icon*/}
           <div className="flex justify-center items-center">
             <div className="relative" ref={containerRef}>
               <div
@@ -148,20 +142,23 @@ function Menubar({
               )}
             </div>
           </div>
+
           <button
             onClick={shoppageClick}
-            className={`bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block
+            className={`bg-white h-12 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block
             ${isSearchListExp ? "hidden" : "block"}`}
           >
             <i className="bi bi-heart"></i> Favorites
           </button>
+
           <button
             onClick={profilepageClick}
-            className={`bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block
+            className={`bg-white h-12 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block
             ${isSearchListExp ? "hidden" : "block"}`}
           >
             <i className="bi bi-person-circle"></i> Profile
           </button>
+
         </div>
       </div>
       {selectedProduct && (
