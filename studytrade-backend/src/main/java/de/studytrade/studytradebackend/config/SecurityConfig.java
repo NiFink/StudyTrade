@@ -14,26 +14,31 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain defaultFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/users/register", "/api/v1/users/error", "/swagger-ui/**",
-                                "/api/v1/**",
-                                "/v3/api-docs/**")
-                        .permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(form -> form
-                        .loginPage("/login")  // Ensure your frontend sends login requests to /login
-                        .defaultSuccessUrl("/", true) // Redirect to /shoppage after successful login
-                )
-                .build();
-    }
+        @Bean
+        public SecurityFilterChain defaultFilterChain(HttpSecurity httpSecurity) throws Exception {
+                return httpSecurity
+                                .csrf(AbstractHttpConfigurer::disable)
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers("/api/v1/users/register", "/api/v1/users/error",
+                                                                "/swagger-ui/**",
+                                                                "/api/v1/**",
+                                                                "/v3/api-docs/**")
+                                                .permitAll()
+                                                .anyRequest().authenticated())
+                                .httpBasic(Customizer.withDefaults())
+                                .formLogin(form -> form
+                                                .loginPage("/login") // Ensure your frontend sends login requests to
+                                                                     // /login
+                                                .defaultSuccessUrl("https://localhost:3000/", true) // Redirect to
+                                                                                                    // /shoppage after
+                                                                                                    // successful
+                                // login
+                                )
+                                .build();
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 }
