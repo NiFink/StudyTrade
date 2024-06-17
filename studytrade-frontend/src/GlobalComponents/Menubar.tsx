@@ -103,7 +103,7 @@ function Menubar({
 
         <button
           onClick={homepageClick}
-          className="w-full h-12 lg:w-auto lg:h-auto hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block"
+          className="w-full h-12 sm:w-auto sm:h-auto hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block"
         >
           <i className="bi bi-shop"></i> StudyTrade
         </button>
