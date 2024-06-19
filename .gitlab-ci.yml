@@ -19,7 +19,7 @@ build-studytrade:
   image: maven:3.9-eclipse-temurin-20
   script:
     - "echo 'Starting Build Stage'"
-    - "cd .\studytrade-backend\\"
+    - "cd studytrade-backend"
     - "mvn compile"
 
 test-studytrade:
@@ -27,7 +27,7 @@ test-studytrade:
   image: maven:3.9-eclipse-temurin-20
   script:
     - "echo 'Starting Test Stage'"
-    - "cd .\studytrade-backend\\"
+    - "cd studytrade-backend"
     - "mvn test"
   artifacts:
     reports:
@@ -40,7 +40,7 @@ package-studytrade:
   image: maven:3.9-eclipse-temurin-20
   script:
     - "echo 'Starting Package Stage'"
-    - "cd .\studytrade-backend\\"
+    - "cd studytrade-backend"
     - "mvn package"
   only:
     refs:
