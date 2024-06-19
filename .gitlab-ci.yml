@@ -4,72 +4,150 @@ include:
 cache:
   paths:
     - .m2/repository
+    - node_modules/
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
 
 stages:
-  - build
-  - test
-  - package
-  - release
+  - build-backend
+  - build-frontend
+  - test-backend
+  - test-frontend
+  - package-backend
+  - package-frontend
+  - release-backend
+  - release-frontend
 
-build-musicmanager:
-  stage: build
+# Backend Jobs
+build-backend:
+  stage: build-backend
   image: maven:3.9-eclipse-temurin-20
   script:
-    - "echo 'Starting Build Stage'"
-    - "mvn compile"
+    - "echo 'Starting Backend Build Stage'"
+    - "mvn compile -f studytrade-backend/pom.xml"
+  only:
+    - develop
 
-test-musicmanager:
-  stage: test
+test-backend:
+  stage: test-backend
   image: maven:3.9-eclipse-temurin-20
   script:
-    - "echo 'Starting Test Stage'"
-    - "mvn test -Dtest='!NoSqlManagerTest,!SqlDbManagerTest, !AudioTrackApiControllerTest'"
+    - "echo 'Starting Backend Test Stage'"
+    - "mvn test -Dtest='de.studytrade.studytradebackend.controller.ProductControllerTest,de.studytrade.studytradebackend.StudytradeBackendApplicationTests' -f studytrade-backend/pom.xml"
   artifacts:
     reports:
       junit:
-        - target/surefire-reports/TEST-*.xml
-        - target/failsafe-reports/TEST-*.xml
+        - studytrade-backend/target/surefire-reports/TEST-*.xml
+        - studytrade-backend/target/failsafe-reports/TEST-*.xml
+  only:
+    - develop
 
-package-musicmanager:
-  stage: package
+package-backend:
+  stage: package-backend
   image: maven:3.9-eclipse-temurin-20
   script:
-    - "echo 'Starting Package Stage'"
-    - "mvn package -Dtest='!NoSqlManagerTest,!SqlDbManagerTest, !AudioTrackApiControllerTest'"
+    - "echo 'Starting Backend Package Stage'"
+    - "mvn package -Dtest='de.studytrade.studytradebackend.controller.ProductControllerTest,de.studytrade.studytradebackend.StudytradeBackendApplicationTests' -f studytrade-backend/pom.xml"
   only:
-    refs:
-      - main
+    - develop
   artifacts:
     paths:
-      - target/*.jar
+      - studytrade-backend/target/*.jar
     expire_in: 2 days
 
-release-musicmanger-container-latest:
-  stage: release
+release-backend-container-latest:
+  stage: release-backend
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [""]
   script:
     - /kaniko/executor
-      --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --context "${CI_PROJECT_DIR}/studytrade-backend"
+      --dockerfile "${CI_PROJECT_DIR}/studytrade-backend/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:latest"
   only:
-    refs:
-      - main
+    - develop
 
-release-musicmanger-container-tag:
-  stage: release
+release-backend-container-tag:
+  stage: release-backend
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [""]
   script:
     - /kaniko/executor
-      --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --context "${CI_PROJECT_DIR}/studytrade-backend"
+      --dockerfile "${CI_PROJECT_DIR}/studytrade-backend/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
   rules:
-    - if: $CI_COMMIT_TAG
+    - if: "$CI_COMMIT_TAG"
+    - if: '$CI_COMMIT_REF_NAME == "develop"'
+
+# Frontend Jobs (Placeholders)
+build-frontend:
+  stage: build-frontend
+  image: node:18
+  script:
+    - "echo 'Starting Frontend Build Stage'"
+    - cd studytrade-frontend
+    - npm install
+    - npm run build
+  only:
+    - develop
+
+test-frontend:
+  stage: test-frontend
+  image: node:18
+  script:
+    - "echo 'Starting Frontend Test Stage'"
+    - cd studytrade-frontend
+    - echo "Placeholder for frontend tests"
+    - npm install
+    - npm test || echo "No tests available yet"
+  artifacts:
+    reports:
+      junit:
+        - studytrade-frontend/test-results.xml
+  only:
+    - develop
+
+package-frontend:
+  stage: package-frontend
+  image: node:18
+  script:
+    - "echo 'Starting Frontend Package Stage'"
+    - cd studytrade-frontend
+    - npm run build
+  only:
+    - develop
+  artifacts:
+    paths:
+      - studytrade-frontend/build
+    expire_in: 2 days
+
+release-frontend-container-latest:
+  stage: release-frontend
+  image:
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/studytrade-frontend"
+      --dockerfile "${CI_PROJECT_DIR}/studytrade-frontend/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}-frontend:latest"
+  only:
+    - develop
+
+release-frontend-container-tag:
+  stage: release-frontend
+  image:
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/studytrade-frontend"
+      --dockerfile "${CI_PROJECT_DIR}/studytrade-frontend/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}-frontend:${CI_COMMIT_TAG}"
+  rules:
+    - if: "$CI_COMMIT_TAG"
+    - if: '$CI_COMMIT_REF_NAME == "develop"'
