@@ -4,85 +4,75 @@ include:
 cache:
   paths:
     - .m2/repository
-    - node_modules/
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
 
 stages:
-  - build-backend
-  - test-backend
-  - package-backend
-  - release-backend
-  - security
+  - build
+  - test
+  - package
+  - release
 
-# Backend Jobs
-build-backend:
-  stage: build-backend
+build-studytrade:
+  stage: build
   image: maven:3.9-eclipse-temurin-20
   script:
-    - "echo 'Starting Backend Build Stage'"
-    - "mvn compile -f studytrade-backend/pom.xml"
-  only:
-    - develop
+    - "echo 'Starting Build Stage'"
+    - "cd .\studytrade-backend\\"
+    - "mvn compile"
 
-test-backend:
-  stage: test-backend
+test-studytrade:
+  stage: test
   image: maven:3.9-eclipse-temurin-20
   script:
-    - "echo 'Starting Backend Test Stage'"
-    - "mvn test -Dtest='de.studytrade.studytradebackend.controller.ProductControllerTest,de.studytrade.studytradebackend.StudytradeBackendApplicationTests' -f studytrade-backend/pom.xml"
+    - "echo 'Starting Test Stage'"
+    - "cd .\studytrade-backend\\"
+    - "mvn test"
   artifacts:
     reports:
       junit:
-        - studytrade-backend/target/surefire-reports/TEST-*.xml
-        - studytrade-backend/target/failsafe-reports/TEST-*.xml
-  only:
-    - develop
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
 
-package-backend:
-  stage: package-backend
+package-studytrade:
+  stage: package
   image: maven:3.9-eclipse-temurin-20
   script:
-    - "echo 'Starting Backend Package Stage'"
-    - "mvn package -Dtest='de.studytrade.studytradebackend.controller.ProductControllerTest,de.studytrade.studytradebackend.StudytradeBackendApplicationTests' -f studytrade-backend/pom.xml"
+    - "echo 'Starting Package Stage'"
+    - "cd .\studytrade-backend\\"
+    - "mvn package"
   only:
-    - develop
+    refs:
+      - develop
   artifacts:
     paths:
-      - studytrade-backend/target/*.jar
+      - target/*.jar
     expire_in: 2 days
 
-release-backend-container-latest:
-  stage: release-backend
+release-studytrade-container-latest:
+  stage: release
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [""]
   script:
     - /kaniko/executor
-      --context "${CI_PROJECT_DIR}/studytrade-backend"
+      --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/studytrade-backend/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:latest"
   only:
-    - develop
+    refs:
+      - develop
 
-release-backend-container-tag:
-  stage: release-backend
+release-studytrade-container-tag:
+  stage: release
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [""]
   script:
     - /kaniko/executor
-      --context "${CI_PROJECT_DIR}/studytrade-backend"
+      --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/studytrade-backend/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
   rules:
-    - if: "$CI_COMMIT_TAG"
-    - if: '$CI_COMMIT_REF_NAME == "develop"'
-
-  # SAST Job
-sast:
-  stage: security
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "develop"'
-  # Inherit settings from the SAST template
+    - if: $CI_COMMIT_TAG
