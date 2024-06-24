@@ -58,7 +58,8 @@ release-studytrade-container-latest:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [""]
   script:
-    - /kaniko/executor
+    - ls -R ${CI_PROJECT_DIR}
+      - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/studytrade-backend/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:latest"
@@ -72,7 +73,8 @@ release-studytrade-container-tag:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [""]
   script:
-    - /kaniko/executor
+    - ls -R ${CI_PROJECT_DIR}
+      - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/studytrade-backend/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
