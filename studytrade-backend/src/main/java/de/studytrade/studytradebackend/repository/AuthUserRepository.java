@@ -15,7 +15,7 @@ public interface AuthUserRepository extends MongoRepository<AuthUser, ObjectId> 
 
     boolean existsUserByUsername(String username);
 
-    void deleteByUserId(ObjectId userId);
+    void deleteById(ObjectId userId);
 
     Optional<AuthUser> findAuthUserByVerificationCode(String code);
 }

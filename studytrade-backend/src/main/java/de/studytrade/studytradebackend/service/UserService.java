@@ -126,7 +126,7 @@ public class UserService implements UserInterface {
 
     @Override
     public void deleteUser(ObjectId userId) {
-        userRepository.deleteByUserId(userId);
+        userRepository.deleteById(userId);
     }
 
     @Override
