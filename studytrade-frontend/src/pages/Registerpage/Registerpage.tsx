@@ -43,7 +43,7 @@ function RegisterPage({
   return (
     <div className="h-screen flex items-center justify-center bg-light-red"
     style={{
-      backgroundImage: `url(${process.env.PUBLIC_URL}/logo512.png)`,
+      backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundLogin.jpg)`,
       backgroundSize: "cover",
       backgroundPosition: "center",
     }}
@@ -66,19 +66,22 @@ function RegisterPage({
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="p-2 mb-3 w-full box-border"
+          style={{ padding: "0.5rem", marginBottom: "1rem", width: "100%", border: "1px solid #ccc", borderRadius: "0.7rem", outline: "none", transition: "border-color 0.5s ease" }}
+          onFocus={(e) => { e.target.style.borderColor = "#f00"; e.target.style.borderWidth = "4px"; }}
+          onBlur={(e) => { e.target.style.borderColor = "#ccc"; e.target.style.borderWidth = "1px"; }}
         />
+
         {error && <p className="text-red-500 mb-3">{error}</p>}
         <button
           onClick={handleRegister}
-          className="px-5 py-2 mb-3 cursor-pointer bg-blue-500 text-white rounded"
+          className="px-5 py-2 mb-3 cursor-pointer bg-red-600 text-white rounded"
         >
           Register
         </button>
         <p>
           Already have an account?{" "}
           <span
-            className="text-blue-500 cursor-pointer underline"
+            className="text-red-600 cursor-pointer underline"
             onClick={backToLogin}
           >
             Login here
