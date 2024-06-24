@@ -50,7 +50,7 @@ function RegisterPage({
   >
     {/* background shine through */}
     <div className="flex flex-col items-center p-8 border border-white-500 bg-white rounded-lg shadow-lg" style={{ maxWidth: "60rem", width: "90%", height: "38rem", backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
-    <img src="/hdm-logo.png" alt="HdM Logo" className="mb-8 w-64 h-auto " />
+    <img src="/result.png" alt="HdM Logo" className="mb-8 w-64 h-auto " />
         <input
           type="password"
           placeholder="Password"
