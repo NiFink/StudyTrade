@@ -27,9 +27,8 @@ public class SecurityConfig {
                                                 .anyRequest().authenticated())
                                 .httpBasic(Customizer.withDefaults())
                                 .formLogin(form -> form
-                                                .loginPage("/login") // Ensure your frontend sends login requests to
-                                                                     // /login
-                                                .defaultSuccessUrl("https://localhost:3000/", true) // Redirect to
+                                                .loginPage("/login")
+                                                .defaultSuccessUrl("https://localhost:3000/", true)
                                 )
                                 .build();
         }
