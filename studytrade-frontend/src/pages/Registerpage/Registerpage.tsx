@@ -11,6 +11,7 @@ function RegisterPage({
 }: RegisterpageProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
@@ -19,6 +20,11 @@ function RegisterPage({
   };
 
   const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
       const response = await fetch("/api/v1/users/register", {
         method: "POST",
@@ -42,35 +48,38 @@ function RegisterPage({
 
   return (
     <div className="h-screen flex items-center justify-center bg-light-red"
-    style={{
-      backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundLogin.jpg)`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}
-  >
-    {/* background shine through */}
-    <div className="flex flex-col items-center p-8 border border-white-500 bg-white rounded-lg shadow-lg" style={{ maxWidth: "60rem", width: "90%", height: "38rem", backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
-    <img src="/hdm-logo-cut.png" alt="HdM Logo" className="mb-8 w-64 h-auto " />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: "0.5rem", marginBottom: "1rem", width: "100%", border: "1px solid #ccc", borderRadius: "0.7rem", outline: "none", transition: "border-color 0.5s ease" }}
-          onFocus={(e) => { e.target.style.borderColor = "#f00"; e.target.style.borderWidth = "4px"; }}
-          onBlur={(e) => { e.target.style.borderColor = "#ccc"; e.target.style.borderWidth = "1px"; }}
-
-        />
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundLogin.jpg)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="flex flex-col items-center p-8 bg-white bg-opacity-60 rounded-lg shadow-lg max-w-4xl w-6/12 h-104">
+        <div className="flex mb-8">
+          <img src="/hdm-logo-cut.png" alt="HdM Logo" className="w-80 h-auto mr-4" />
+          <img src="logo192.png" alt="Website Logo" className="w-64 h-auto mr-4" />
+        </div>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: "0.5rem", marginBottom: "1rem", width: "100%", border: "1px solid #ccc", borderRadius: "0.7rem", outline: "none", transition: "border-color 0.5s ease" }}
-          onFocus={(e) => { e.target.style.borderColor = "#f00"; e.target.style.borderWidth = "4px"; }}
-          onBlur={(e) => { e.target.style.borderColor = "#ccc"; e.target.style.borderWidth = "1px"; }}
+          className="p-2 mb-4 w-full border border-gray-300 rounded-lg focus:border-red-500 focus:border-4 transition duration-500 outline-none"
         />
-
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="p-2 mb-4 w-full border border-gray-300 rounded-lg focus:border-red-500 focus:border-4 transition duration-500 outline-none"
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          className="p-2 mb-4 w-full border border-gray-300 rounded-lg focus:border-red-500 focus:border-4 transition duration-500 outline-none"
+        />
         {error && <p className="text-red-500 mb-3">{error}</p>}
         <button
           onClick={handleRegister}
