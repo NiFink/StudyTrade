@@ -37,7 +37,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
     text.length > 20 ? text.slice(0, 20) + "..." : text;
 
   return (
-    <div className="px-4 py-16 sm:px-6 sm:py-24 max-w-full justify-center lg:px-8">
+    <div data-testid="product-list" className="px-4 py-16 sm:px-6 sm:py-24 max-w-full justify-center lg:px-8">
       <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
         {/* Lists all fetch Products*/}
         {products.map((product) => (
