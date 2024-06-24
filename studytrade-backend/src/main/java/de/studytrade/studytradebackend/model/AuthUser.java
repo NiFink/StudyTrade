@@ -20,7 +20,6 @@ import java.util.List;
 public class AuthUser {
     @Id
     private ObjectId id;
-    private int userId;
     @Indexed
     private String username;
     private String password;
@@ -33,7 +32,7 @@ public class AuthUser {
     private boolean isEnabled;
 
     public AuthUser(AuthUser user) {
-        this.userId = user.getUserId();
+        this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.mail = user.getMail();
