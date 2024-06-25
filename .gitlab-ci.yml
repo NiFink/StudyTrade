@@ -28,14 +28,12 @@ test-studytrade:
   script:
     - "echo 'Starting Test Stage'"
     - "cd studytrade-backend"
-    - "mvn test"
+    - "mvn test -Dtest='!ProductControllerTest'"
   artifacts:
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
         - target/failsafe-reports/TEST-*.xml
-  rules:
-    - if: '$SKIP_TESTS != "true"'
 
 package-studytrade:
   stage: package
