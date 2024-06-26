@@ -41,7 +41,9 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
   const fetchAuthUser = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/users/14`);
+      const response = await fetch(
+        `http://localhost:8080/api/v1/users/667c20e305a1ca273ca4e305`
+      );
       const data = await response.json();
       setAuthUser(data);
     } catch (error) {
@@ -130,7 +132,6 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-
       {/* Large image above */}
       <div className="relative w-full h-80">
         <div
@@ -143,7 +144,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         {/* Profile picture */}
         <div className="absolute top-80 sm:left-72 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <img
-            src="./images/wireless_headphones.jpg"
+            src="/images/womanProfile.png"
             alt=""
             className="w-[150px] h-[150px] rounded-full border-4 border-white"
           />
@@ -173,7 +174,9 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
               <i className="bi bi-info-circle text-gray-500 sm:text-[40px] text-[35px]"></i>
             </div>
             <div className="">
-              <span className="text-gray-400 sm:text-[21px] text-[19px]">Info</span>
+              <span className="text-gray-400 sm:text-[21px] text-[19px]">
+                Info
+              </span>
             </div>
           </button>
         </div>
@@ -192,7 +195,9 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
               <i className="bi bi-bag text-gray-500 sm:text-[40px] text-[35px]"></i>
             </div>
             <div className="">
-              <span className="text-gray-400 sm:text-[21px] text-[19px]">Activity</span>
+              <span className="text-gray-400 sm:text-[21px] text-[19px]">
+                Activity
+              </span>
             </div>
           </button>
         </div>

@@ -69,7 +69,7 @@ function YourProduct({ created, deleteProduct }: CreatedProps) {
               >
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg via-transparent xl:aspect-h-8 xl:aspect-w-7">
                   <img
-                    src={`/images/${product.productId}.jpg`}
+                    src={`/images/products/${product.productId}.jpg`}
                     alt={product.name}
                     className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
                   />
