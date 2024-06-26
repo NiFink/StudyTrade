@@ -2,6 +2,7 @@ package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.AuthUser;
 import jakarta.mail.MessagingException;
+import org.bson.types.ObjectId;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -12,17 +13,17 @@ public interface UserInterface {
 
     void addUser(AuthUser user, String siteURL) throws UnsupportedEncodingException, MessagingException;
 
-    Optional<AuthUser> singleUser(int userId);
+    Optional<AuthUser> singleUser(ObjectId userId);
 
-    List<Integer> favorites(int userId);
+    List<Integer> favorites(ObjectId userId);
 
     Optional<AuthUser> updateUser(AuthUser userRequest);
 
-    void updateFavorites(int userId, int productId);
+    void updateFavorites(ObjectId userId, int productId);
 
-    void deleteUser(int userId);
+    void deleteUser(ObjectId userId);
 
-    void deleteFavorite(int userId, int productId);
+    void deleteFavorite(ObjectId userId, int productId);
 
     boolean userExists(AuthUser user);
 

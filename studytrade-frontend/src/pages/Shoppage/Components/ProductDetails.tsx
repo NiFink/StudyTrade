@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
+// Define the Product interface
 interface Product {
   name: string;
   description: string;
@@ -12,23 +13,29 @@ interface Product {
   userId: { username: string };
 }
 
+// Define the ProductDetailsProps interface
 interface ProductDetailsProps {
   product: Product;
   toggleDetails: () => void;
   isDetailsOpen: boolean;
 }
 
+// Define the ProductDetails component
 function ProductDetails({
   product,
   toggleDetails,
   isDetailsOpen,
 }: ProductDetailsProps) {
+  // Create a ref to the details div
   const detailsRef = useRef<HTMLDivElement>(null);
+
+  // Convert the creation date to a more readable format
   const date = new Date(product.creationDate);
   const dateConverted =
     date.toLocaleDateString() + " " + date.getHours() + ":" + date.getMinutes();
 
   useEffect(() => {
+    // Handle click event outside the details div
     const handleClickOutside = (event: MouseEvent) => {
       if (
         detailsRef.current &&
@@ -38,21 +45,27 @@ function ProductDetails({
       }
     };
 
+    // This code runs when the component mounts (is first rendered)
+    // Add or remove the event listener based on isDetailsOpen
     if (isDetailsOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
 
+    // This code runs when the component unmounts (is removed from the DOM)
+    // Cleanup the event listener on component unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [toggleDetails, isDetailsOpen]);
 
+  // Handle closing the details view
   const handleCloseDetails = () => {
     toggleDetails();
   };
 
+  // Truncate text to a maximum of 40 characters
   const truncatedText = (text: string) =>
     text.length > 20 ? text.slice(0, 40) + "..." : text;
 
@@ -60,12 +73,12 @@ function ProductDetails({
     <>
       <div className="relative">
         {isDetailsOpen && (
-          <div className="fixed top-0 left-0 w-full h-full  bg-gray-800 bg-opacity-40 z-10"></div>
+          <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-40 z-10"></div>
         )}
         <div className="flex relative justify-center items-center z-20">
           <div
             ref={detailsRef}
-            className={`fixed  top-0 bottom-0 right-0 md:top-2 md:bottom-2 md:right-2 p-2 lg:w-[500px] md:w-full text-center bg-white ${isDetailsOpen ? "" : "hidden"} rounded-lg`}
+            className={`fixed top-0 bottom-0 right-0 md:top-2 md:bottom-2 md:right-2 p-2 lg:w-[500px] md:w-full text-center bg-white ${isDetailsOpen ? "" : "hidden"} rounded-lg`}
           >
             <div className="flex p-2 justify-between items-center">
               <button className="p-1.5" onClick={handleCloseDetails}>
@@ -79,7 +92,7 @@ function ProductDetails({
                 alt={product.name}
                 className="w-full"
               />
-              <div className="flex mt-2  p-2 justify-center">
+              <div className="flex mt-2 p-2 justify-center">
                 <i className="bi bi-person-fill "></i>
                 <h1 className="text-l ">{product.userId.username}</h1>
               </div>
@@ -129,7 +142,7 @@ function ProductDetails({
                 <p>{product.description}</p>
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 left-0 p-4">
+            <div className="absolute bottom-0 right-0 left-0 p-2">
               <div className="flex justify-evenly text-center text-white font-bold">
                 <button className="bg-red-400 w-2/5 p-2 rounded-lg ">
                   make an offer

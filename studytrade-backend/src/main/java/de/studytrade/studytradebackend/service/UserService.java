@@ -5,6 +5,7 @@ import de.studytrade.studytradebackend.repository.AuthUserRepository;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,9 @@ public class UserService implements UserInterface {
             user.setCreationDate(new Date(System.currentTimeMillis() + 3600000 * 2));
         }
         if (user.getProfileImage() == null) {
-            user.setProfileImage(user.getUserId() + ".jpg");
+            user.setProfileImage(user.getId() + ".jpg");
         }
 
-        user.setUserId(userRepository.findAll().get(userRepository.findAll().size() - 1).getUserId() + 1);
         user.setUsername(user.getUsername().toLowerCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -90,18 +90,18 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public Optional<AuthUser> singleUser(int userId) {
-        return userRepository.findUserByUserId(userId);
+    public Optional<AuthUser> singleUser(ObjectId userId) {
+        return userRepository.findAuthUserById(userId);
     }
 
     @Override
-    public List<Integer> favorites(int userId) {
-        return userRepository.findUserByUserId(userId).get().getFavorites();
+    public List<Integer> favorites(ObjectId userId) {
+        return userRepository.findAuthUserById(userId).get().getFavorites();
     }
 
     @Override
     public Optional<AuthUser> updateUser(AuthUser userRequest) {
-        AuthUser existingUser = userRepository.findUserByUserId(userRequest.getUserId()).get();
+        AuthUser existingUser = userRepository.findAuthUserById(userRequest.getId()).get();
 
         // Change data only if it exists in userRequest
         existingUser.setUsername(
@@ -118,20 +118,20 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public void updateFavorites(int userId, int productId) {
-        AuthUser user = userRepository.findUserByUserId(userId).get();
+    public void updateFavorites(ObjectId userId, int productId) {
+        AuthUser user = userRepository.findAuthUserById(userId).get();
         user.getFavorites().add(productId);
         userRepository.save(user);
     }
 
     @Override
-    public void deleteUser(int userId) {
-        userRepository.deleteByUserId(userId);
+    public void deleteUser(ObjectId userId) {
+        userRepository.deleteById(userId);
     }
 
     @Override
-    public void deleteFavorite(int userId, int productId) {
-        AuthUser user = userRepository.findUserByUserId(userId).get();
+    public void deleteFavorite(ObjectId userId, int productId) {
+        AuthUser user = userRepository.findAuthUserById(userId).get();
         user.getFavorites().remove(user.getFavorites().indexOf(productId));
         userRepository.save(user);
     }

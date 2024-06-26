@@ -26,6 +26,11 @@ public class ProductService implements ProductInterface {
     }
 
     @Override
+    public List<Product> getMultipleProducts(List<Integer> productId) {
+        return productRepository.findByProductIdIn(productId);
+    }
+
+    @Override
     public List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category,
             String sort) {
         // Standardwerte festlegen, falls erforderlich

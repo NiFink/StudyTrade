@@ -9,13 +9,13 @@ import java.util.Optional;
 
 @Repository
 public interface AuthUserRepository extends MongoRepository<AuthUser, ObjectId> {
-    Optional<AuthUser> findUserByUserId(int userId);
+    Optional<AuthUser> findAuthUserById(ObjectId userId);
 
     Optional<AuthUser> findByUsername(String username);
 
     boolean existsUserByUsername(String username);
 
-    void deleteByUserId(int userId);
+    void deleteById(ObjectId userId);
 
     Optional<AuthUser> findAuthUserByVerificationCode(String code);
 }

@@ -9,6 +9,8 @@ public interface ProductInterface {
 
     Optional<Product> singleProduct(int productId);
 
+    List<Product> getMultipleProducts(List<Integer> productId);
+
     List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category, String sort);
 
     List<Product> searchProducts(String search);
@@ -18,4 +20,5 @@ public interface ProductInterface {
     Optional<Product> updateProduct(Product productRequest);
 
     void deleteProduct(int productId);
+
 }
