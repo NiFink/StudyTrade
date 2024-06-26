@@ -88,7 +88,7 @@ function ProductDetails({
             </div>
             <div className="max-h-[84vh] overflow-y-scroll">
               <img
-                src={`/images/${product.productId}.jpg`}
+                src={`/images/products/${product.productId}.jpg`}
                 alt={product.name}
                 className="w-full"
               />
