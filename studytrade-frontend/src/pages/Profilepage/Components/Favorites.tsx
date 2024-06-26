@@ -39,8 +39,8 @@ function Favorites({ favorites, deleteProduct }: FavoritesProps) {
   };
 
   return (
-    <div className="mt-36 px-4 lg:px-32 flex flex-wrap gap-4 relative">
-      <div className="absolute -mt-20 left-56 transform -translate-x-1/2 flex items-center">
+    <div className="sm:mt-36 mt-32 px-4 lg:px-32 flex flex-wrap gap-4 relative">
+      <div className="absolute -mt-20 sm:left-56 left-32 transform -translate-x-1/2 flex items-center">
         <i className="bi bi-bag-heart text-black text-[55px]"></i>
         <span className="text-black font-bold text-[23px] ml-2 mt-3">
           Your favorites:

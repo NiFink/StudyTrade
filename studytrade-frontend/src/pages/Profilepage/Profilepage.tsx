@@ -130,17 +130,18 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
   return (
     <div className="min-h-screen bg-white">
+
       {/* Large image above */}
       <div className="relative w-full h-80">
         <div
-          className="absolute inset-0 bg-fixed bg-cover bg-center"
+          className="absolute inset-0 bg-fixed sm:bg-cover sm:bg-center bg-right-bottom"
           style={{ backgroundImage: "url(./images/hdm_picture2.jpg)" }}
         >
           <div className="absolute inset-0 bg-black opacity-20"></div>
         </div>
 
         {/* Profile picture */}
-        <div className="absolute top-80 left-72 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute top-80 sm:left-72 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <img
             src="./images/wireless_headphones.jpg"
             alt=""
@@ -161,18 +162,18 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
       {/* info button */}
       <div className="relative">
-        <div className="absolute top-10 right-0 bottom-20 flex justify-end items-center">
+        <div className="absolute sm:top-10 top-24 right-0 sm:bottom-20 flex justify-end items-center">
           <button
-            className={`text-black w-64 h-36 hover:bg-gray-200 active:bg-gray-300 ${
+            className={`text-black sm:w-64 w-52 sm:h-36 h-28 hover:bg-gray-200 active:bg-gray-300 ${
               activeButton === "info" ? "border-b-2 border-black" : ""
             }`}
             onClick={() => setActiveButton("info")}
           >
             <div className="mt-6 leading-3">
-              <i className="bi bi-info-circle text-gray-500 text-[40px]"></i>
+              <i className="bi bi-info-circle text-gray-500 sm:text-[40px] text-[35px]"></i>
             </div>
             <div className="">
-              <span className="text-gray-400 text-[21px]">Info</span>
+              <span className="text-gray-400 sm:text-[21px] text-[19px]">Info</span>
             </div>
           </button>
         </div>
@@ -180,25 +181,25 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
       {/* activity button */}
       <div className="relative">
-        <div className="absolute top-10 right-64 bottom-20 flex justify-end items-center">
+        <div className="absolute sm:top-10 top-24 sm:right-64 sm:bottom-20 flex justify-end items-center">
           <button
-            className={`text-black w-64 h-36 hover:bg-gray-200 active:bg-gray-300 ${
+            className={`text-black sm:w-64 w-52 sm:h-36 h-28 hover:bg-gray-200 active:bg-gray-300 ${
               activeButton === "activity" ? "border-b-2 border-black" : ""
             }`}
             onClick={() => setActiveButton("activity")}
           >
             <div className="mt-6 leading-3">
-              <i className="bi bi-bag text-gray-500 text-[40px]"></i>
+              <i className="bi bi-bag text-gray-500 sm:text-[40px] text-[35px]"></i>
             </div>
             <div className="">
-              <span className="text-gray-400 text-[21px]">Activity</span>
+              <span className="text-gray-400 sm:text-[21px] text-[19px]">Activity</span>
             </div>
           </button>
         </div>
       </div>
 
       {/* Indented gray strip */}
-      <div className="relative w-full h-6 mt-28 bg-gray-200">
+      <div className="relative w-full h-6 sm:mt-28 mt-52 bg-gray-200">
         <div className="absolute inset-0 bg-gray-200 shadow-inner"></div>
       </div>
 
