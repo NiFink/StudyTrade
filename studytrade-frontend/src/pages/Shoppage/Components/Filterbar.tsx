@@ -15,28 +15,51 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
 
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [priceError, setPriceError] = useState(false);
 
   const handleConditionChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedCondition(event.target.value);
   };
 
-  const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setMinPrice(event.target.value);
+  const handleMinPriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    // Updated regex to match positive numbers from 0 to 100000
+    const regex = /^(100000|[1-9][0-9]{0,4}|0)$/;
+
+    if (inputValue === "" || regex.test(inputValue)) {
+      setMinPrice(inputValue);
+    }
   };
 
-  const handleMaxPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setMaxPrice(event.target.value);
+  const handleMaxPriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    // Updated regex to match positive numbers from 0 to 100000
+    const regex = /^(100000|[1-9][0-9]{0,4}|0)$/;
+
+    if (inputValue === "" || regex.test(inputValue)) {
+      setMaxPrice(inputValue);
+    }
   };
   const filter = () => {
     document.querySelector("#filter")?.classList.toggle("hidden");
   };
+
   const filterButton = () => {
-    fetchProducts(
-      undefined,
-      minPrice == "" ? 0 : Number(minPrice),
-      maxPrice == "" ? 100000 : Number(maxPrice),
-      selectedCondition
-    );
+    if (parseInt(minPrice) < parseInt(maxPrice)) {
+      fetchProducts(
+        undefined,
+        minPrice == "" ? 0 : Number(minPrice),
+        maxPrice == "" ? 100000 : Number(maxPrice),
+        selectedCondition
+      );
+    } else {
+      setPriceError(true);
+      setTimeout(() => {
+        setPriceError(false);
+      }, 3000);
+    }
   };
 
   return (
@@ -89,6 +112,14 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
               >
                 Filter
               </div>
+              {priceError && (
+                <div className="fixed bottom-0 left-0 w-full flex justify-center z-50">
+                  <div className="bg-red-400 text-white py-2 px-4 rounded shadow-md">
+                    Your minimal price is higher than your maximal price. This
+                    doesn't work.
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <hr className="my-2 text-black" />
