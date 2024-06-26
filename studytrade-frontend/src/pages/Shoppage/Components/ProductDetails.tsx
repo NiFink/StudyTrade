@@ -88,7 +88,7 @@ function ProductDetails({
             </div>
             <div className="max-h-[84vh] overflow-y-scroll">
               <img
-                src={`/images/${product.productId}.jpg`}
+                src={`/images/products/${product.productId}.jpg`}
                 alt={product.name}
                 className="w-full"
               />
@@ -142,7 +142,7 @@ function ProductDetails({
                 <p>{product.description}</p>
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 left-0 p-4">
+            <div className="absolute bottom-0 right-0 left-0 p-2">
               <div className="flex justify-evenly text-center text-white font-bold">
                 <button className="bg-red-400 w-2/5 p-2 rounded-lg ">
                   make an offer

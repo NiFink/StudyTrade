@@ -17,23 +17,18 @@ public class SecurityConfig {
         @Bean
         public SecurityFilterChain defaultFilterChain(HttpSecurity httpSecurity) throws Exception {
                 return httpSecurity
-                                .csrf(AbstractHttpConfigurer::disable)
+                                .csrf(csrf -> csrf.disable())
                                 .authorizeHttpRequests(auth -> auth
-                                                /*
-                                                 * .requestMatchers("/api/v1/users/register", "/api/v1/users/error",
-                                                 * "/swagger-ui/**",
-                                                 * "/api/v1/**",
-                                                 * "/v3/api-docs/**")
-                                                 * .permitAll()
-                                                 * .anyRequest().authenticated()
-                                                 */
-                                                .anyRequest().permitAll())
+                                                .requestMatchers("/api/v1/users/register", "/api/v1/users/error",
+                                                                "/swagger-ui/**",
+                                                                "/api/v1/**",
+                                                                "/v3/api-docs/**")
+                                                .permitAll()
+                                                .anyRequest().authenticated())
                                 .httpBasic(Customizer.withDefaults())
                                 .formLogin(form -> form
-                                                .loginPage("/login") // Ensure your frontend sends login requests to
-                                                                     // /login
-                                                .defaultSuccessUrl("/", true) // Redirect to /shoppage after successful
-                                                                              // login
+                                                .loginPage("/login")
+                                                .defaultSuccessUrl("https://localhost:3000/", true)
                                 )
                                 .build();
         }

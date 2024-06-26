@@ -17,15 +17,16 @@ function Loginpage({
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("/login", {
+      const response = await fetch("http://localhost:8080/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded", // Use form-urlencoded
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
           username: username,
           password: password,
         }),
+        credentials: "include",
       });
 
       if (response.ok) {

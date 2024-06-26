@@ -37,7 +37,10 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
     text.length > 20 ? text.slice(0, 20) + "..." : text;
 
   return (
-    <div className="px-4 py-16 sm:px-6 sm:py-24 max-w-full justify-center lg:px-8">
+    <div
+      data-testid="product-list"
+      className="px-4 py-16 sm:px-6 sm:py-24 max-w-full justify-center lg:px-8"
+    >
       <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 xl:gap-x-8">
         {/* Lists all fetch Products*/}
         {products.map((product) => (
@@ -48,7 +51,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
           >
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg via-transparent xl:aspect-h-8 xl:aspect-w-7">
               <img
-                src={`/images/${product.productId}.jpg`}
+                src={`/images/products/${product.productId}.jpg`}
                 alt={product.name}
                 className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
               />

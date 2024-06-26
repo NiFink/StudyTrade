@@ -56,5 +56,4 @@ class ProductControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(products, response.getBody());
     }
-
 }

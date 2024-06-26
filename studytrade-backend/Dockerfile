@@ -13,7 +13,7 @@ ARG JAR_FILE=target/*.jar
 # Copy the Spring Boot jar to the container
 # COPY ./target/studytrade-backend.jar /app.jar
 
-RUN mvn package 
+RUN mvn package -DskipTests
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
