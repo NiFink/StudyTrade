@@ -94,7 +94,7 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/{productId}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete single product", description = "Delete single product by id")
     public ResponseEntity<String> deleteProduct(
             @PathVariable @Schema(description = "ID of the product") ObjectId id) {

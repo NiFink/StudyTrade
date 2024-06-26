@@ -66,11 +66,11 @@ public class UserController {
         return new ResponseEntity<>(userService.singleUser(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}/favorites")
+    @GetMapping("/{id}/favorites")
     @Operation(summary = "Get favorites of a User by ID", description = "Get favorites of a User by ID")
-    public ResponseEntity<List<Integer>> getFavorites(
-            @PathVariable @Schema(description = "ID of the User") ObjectId userId) {
-        return new ResponseEntity<>(userService.favorites(userId), HttpStatus.OK);
+    public ResponseEntity<List<ObjectId>> getFavorites(
+            @PathVariable @Schema(description = "ID of the User") ObjectId id) {
+        return new ResponseEntity<>(userService.favorites(id), HttpStatus.OK);
     }
 
     private String getSiteURL(HttpServletRequest request) {
@@ -91,12 +91,12 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{userId}/favorites/{productId}")
+    @PutMapping("/{userId}/favorites/{id}")
     @Operation(summary = "Update favorites of a User", description = "Update favorites of a User by ID")
     public ResponseEntity<String> updateFavorites(@PathVariable @Schema(description = "ID of the User") ObjectId userId,
-            @PathVariable @Schema(description = "ID of the Product") int productId) {
+            @PathVariable @Schema(description = "ID of the Product") ObjectId id) {
         try {
-            userService.updateFavorites(userId, productId);
+            userService.updateFavorites(userId, id);
             return new ResponseEntity<>("Favorites updated successfully", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to update favorites: " + e.getMessage(),
@@ -118,9 +118,9 @@ public class UserController {
     @DeleteMapping("/{userId}/favorites/{productId}")
     @Operation(summary = "Delete a favorite of a User", description = "Delete a favorite of a User by userID and productID")
     public ResponseEntity<String> deleteFavorite(@PathVariable @Schema(description = "ID of the User") ObjectId userId,
-            @PathVariable @Schema(description = "ID of the Product") int productId) {
+            @PathVariable @Schema(description = "ID of the Product") ObjectId id) {
         try {
-            userService.deleteFavorite(userId, productId);
+            userService.deleteFavorite(userId, id);
             return new ResponseEntity<>("Favorite deleted successfully", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to delete favorite: " + e.getMessage(),
