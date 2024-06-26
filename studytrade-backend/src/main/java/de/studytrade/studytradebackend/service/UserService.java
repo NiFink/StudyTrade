@@ -95,7 +95,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public List<Integer> favorites(ObjectId userId) {
+    public List<ObjectId> favorites(ObjectId userId) {
         return userRepository.findAuthUserById(userId).get().getFavorites();
     }
 
@@ -118,7 +118,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public void updateFavorites(ObjectId userId, int productId) {
+    public void updateFavorites(ObjectId userId, ObjectId productId) {
         AuthUser user = userRepository.findAuthUserById(userId).get();
         user.getFavorites().add(productId);
         userRepository.save(user);
@@ -130,7 +130,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public void deleteFavorite(ObjectId userId, int productId) {
+    public void deleteFavorite(ObjectId userId, ObjectId productId) {
         AuthUser user = userRepository.findAuthUserById(userId).get();
         user.getFavorites().remove(user.getFavorites().indexOf(productId));
         userRepository.save(user);

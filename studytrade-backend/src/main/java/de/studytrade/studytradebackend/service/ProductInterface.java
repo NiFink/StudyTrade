@@ -1,15 +1,17 @@
 package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.Product;
+import org.bson.types.ObjectId;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductInterface {
     List<Product> allProducts();
 
-    Optional<Product> singleProduct(int productId);
+    Optional<Product> singleProduct(ObjectId productId);
 
-    List<Product> getMultipleProducts(List<Integer> productId);
+    List<Product> getMultipleProducts(List<ObjectId> productId);
 
     List<Product> filterProducts(Float minPrice, Float maxPrice, String condition, List<String> category, String sort);
 
@@ -19,6 +21,6 @@ public interface ProductInterface {
 
     Optional<Product> updateProduct(Product productRequest);
 
-    void deleteProduct(int productId);
+    void deleteProduct(ObjectId productId);
 
 }
