@@ -43,7 +43,7 @@ function SearchList({ products, onProductClick }: SearchListProps) {
           onClick={() => handleProductClick(product)}
         >
           <img
-            src={`/images/${product.productId}.jpg`}
+            src={product.img}
             alt={product.name}
             className="w-16 h-16 mr-2 inline-block"
           />
