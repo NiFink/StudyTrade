@@ -15,15 +15,15 @@ public interface UserInterface {
 
     Optional<AuthUser> singleUser(ObjectId userId);
 
-    List<Integer> favorites(ObjectId userId);
+    List<ObjectId> favorites(ObjectId userId);
 
     Optional<AuthUser> updateUser(AuthUser userRequest);
 
-    void updateFavorites(ObjectId userId, int productId);
+    void updateFavorites(ObjectId userId, ObjectId productId);
 
     void deleteUser(ObjectId userId);
 
-    void deleteFavorite(ObjectId userId, int productId);
+    void deleteFavorite(ObjectId userId, ObjectId productId);
 
     boolean userExists(AuthUser user);
 

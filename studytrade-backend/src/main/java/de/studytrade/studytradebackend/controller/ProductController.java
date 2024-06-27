@@ -4,6 +4,7 @@ import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.service.ProductInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,18 +26,18 @@ public class ProductController {
         return new ResponseEntity<>(productService.allProducts(), HttpStatus.OK);
     }
 
-    @GetMapping("/{productId}")
+    @GetMapping("/{id}")
     @Operation(summary = "Get single product", description = "Get single product by id")
     public ResponseEntity<Optional<Product>> getSingleProduct(
-            @PathVariable @Schema(description = "ID of the product") int productId) {
-        return new ResponseEntity<>(productService.singleProduct(productId), HttpStatus.OK);
+            @PathVariable @Schema(description = "ID of the product") ObjectId id) {
+        return new ResponseEntity<>(productService.singleProduct(id), HttpStatus.OK);
     }
 
     @GetMapping("/multiple")
     @Operation(summary = "Get multiple products", description = "Get list of products")
     public ResponseEntity<List<Product>> getMultipleProducts(
-            @RequestParam(required = true) @Schema(description = "List of the IDs of the products", type = "array") List<Integer> productId) {
-        return new ResponseEntity<>(productService.getMultipleProducts(productId), HttpStatus.OK);
+            @RequestParam(required = true) @Schema(description = "List of the IDs of the products", type = "array") List<ObjectId> id) {
+        return new ResponseEntity<>(productService.getMultipleProducts(id), HttpStatus.OK);
     }
 
     @GetMapping("/filter")
@@ -93,12 +94,12 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/{productId}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete single product", description = "Delete single product by id")
     public ResponseEntity<String> deleteProduct(
-            @PathVariable @Schema(description = "ID of the product") int productId) {
+            @PathVariable @Schema(description = "ID of the product") ObjectId id) {
         try {
-            productService.deleteProduct(productId);
+            productService.deleteProduct(id);
             return new ResponseEntity<>("Product deleted successfully", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to delete product: " + e.getMessage(),

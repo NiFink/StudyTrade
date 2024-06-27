@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -29,9 +30,12 @@ public class UserService implements UserInterface {
 
     public void addUser(AuthUser user, String siteURL) throws UnsupportedEncodingException, MessagingException {
 
-        if (user.getCreationDate() == null) {
-            user.setCreationDate(new Date(System.currentTimeMillis() + 3600000 * 2));
-        }
+        Date currentDate = new Date(System.currentTimeMillis() + 3600000 * 2);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String creationDateString = dateFormat.format(currentDate);
+        user.setCreationDate(creationDateString);
+
         if (user.getProfileImage() == null) {
             user.setProfileImage(user.getId() + ".jpg");
         }
@@ -95,7 +99,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public List<Integer> favorites(ObjectId userId) {
+    public List<ObjectId> favorites(ObjectId userId) {
         return userRepository.findAuthUserById(userId).get().getFavorites();
     }
 
@@ -118,7 +122,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public void updateFavorites(ObjectId userId, int productId) {
+    public void updateFavorites(ObjectId userId, ObjectId productId) {
         AuthUser user = userRepository.findAuthUserById(userId).get();
         user.getFavorites().add(productId);
         userRepository.save(user);
@@ -130,7 +134,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public void deleteFavorite(ObjectId userId, int productId) {
+    public void deleteFavorite(ObjectId userId, ObjectId productId) {
         AuthUser user = userRepository.findAuthUserById(userId).get();
         user.getFavorites().remove(user.getFavorites().indexOf(productId));
         userRepository.save(user);

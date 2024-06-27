@@ -8,7 +8,7 @@ interface Product {
   condition: string;
   price: number;
   img: string;
-  productId: number;
+  productId: string;
   creationDate: string;
   userId: { username: string };
 }
@@ -88,7 +88,7 @@ function ProductDetails({
             </div>
             <div className="max-h-[84vh] overflow-y-scroll">
               <img
-                src={`/images/products/${product.productId}.jpg`}
+                src={product.img}
                 alt={product.name}
                 className="w-full"
               />
