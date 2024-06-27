@@ -46,36 +46,35 @@ function Loginpage({
   {/* background and logo */}
   return (
     <div
-      className="h-screen flex items-center justify-center bg-light-red"
-      style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL}/logo512.png)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="flex flex-col items-center p-8 border border-white-500 bg-white rounded-lg shadow-lg" style={{ maxWidth: "60rem", width: "90%", height: "38rem", backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
-      <img src="/hdm-logo.png" alt="HdM Logo" className="mb-8 w-64 h-auto " />
+      className="h-screen flex flex-col items-center justify-center bg-light-red relative z-0">
+      <img
+        src="./images/backgroundLogin.jpg"
+        alt="Background"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+    />
+      <div className="flex flex-col items-center p-8 bg-white bg-opacity-60 rounded-lg shadow-lg max-w-xl w-11/12 md:w-1/2 lg:w-2/5 h-auto relative z-10">
+        <img
+          src="/hdm-logo-cut.png"
+          alt="HdM Logo"
+          className="w-64 h-auto mb-8 md:mb-12"
+        />
         
         {/* required input fields */}
         <input
-          type="text"
+          type="username"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          style={{ padding: "0.5rem", marginBottom: "1rem", width: "100%", border: "1px solid #ccc", borderRadius: "0.7rem", outline: "none", transition: "border-color 0.5s ease" }}
-          onFocus={(e) => { e.target.style.borderColor = "#f00"; e.target.style.borderWidth = "4px"; }}
-          onBlur={(e) => { e.target.style.borderColor = "#ccc"; e.target.style.borderWidth = "1px"; }}
+          className="p-3 mb-4 w-11/12 md:w-5/6 lg:w-4/5 border border-gray-300 rounded-lg focus:border-red-500 focus:border-4 transition duration-500 outline-none"
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: "0.5rem", marginBottom: "1rem", width: "100%", border: "1px solid #ccc", borderRadius: "0.7rem", outline: "none", transition: "border-color 0.5s ease" }}
-          onFocus={(e) => { e.target.style.borderColor = "#f00"; e.target.style.borderWidth = "4px"; }}
-          onBlur={(e) => { e.target.style.borderColor = "#ccc"; e.target.style.borderWidth = "1px"; }}
+          className="p-3 mb-4 w-11/12 md:w-5/6 lg:w-4/5 border border-gray-300 rounded-lg focus:border-red-500 focus:border-4 transition duration-500 outline-none"
         />
-        {error && <p className="text-red-500 mb-3">{error}</p>}
+        {error && <p className="text-red-500 mb-3 md:mb-4">{error}</p>}
         
         {/* buttons to click */}
         <button
@@ -90,7 +89,7 @@ function Loginpage({
         >
           Homepage
         </button>
-        <p className="mt-4 mb-2">
+        <p className="mt-4 mb-2 text-center">
           You don't have an account?{" "}
           <span
             className="text-red-500 cursor-pointer underline"
