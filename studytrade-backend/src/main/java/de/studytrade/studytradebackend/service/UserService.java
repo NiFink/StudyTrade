@@ -1,7 +1,9 @@
 package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.AuthUser;
+import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.repository.AuthUserRepository;
+import de.studytrade.studytradebackend.repository.ProductRepository;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
@@ -21,6 +23,9 @@ import java.util.Optional;
 public class UserService implements UserInterface {
     @Autowired
     private AuthUserRepository userRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private SendEmailInterface sendEmailService;
@@ -49,7 +54,7 @@ public class UserService implements UserInterface {
 
         userRepository.save(user);
 
-        sendEmail(user,siteURL);
+        sendEmail(user, siteURL);
 
     }
 
@@ -61,7 +66,7 @@ public class UserService implements UserInterface {
                 + "Thank you,<br>"
                 + "Your StudyTrade Team.";
 
-        sendEmailService.sendVerificationEmail(user, siteURL,subject, content);
+        sendEmailService.sendVerificationEmail(user, siteURL, subject, content);
 
     }
 
@@ -86,8 +91,8 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public boolean userExists(AuthUser user){
-        if(!userRepository.existsUserByUsername(user.getUsername())){
+    public boolean userExists(AuthUser user) {
+        if (!userRepository.existsUserByUsername(user.getUsername())) {
             return false;
         }
         return true;
@@ -99,7 +104,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public List<ObjectId> favorites(ObjectId userId) {
+    public List<Product> favorites(ObjectId userId) {
         return userRepository.findAuthUserById(userId).get().getFavorites();
     }
 
@@ -124,7 +129,7 @@ public class UserService implements UserInterface {
     @Override
     public void updateFavorites(ObjectId userId, ObjectId productId) {
         AuthUser user = userRepository.findAuthUserById(userId).get();
-        user.getFavorites().add(productId);
+        user.getFavorites().add(productRepository.findProductById(productId).get());
         userRepository.save(user);
     }
 

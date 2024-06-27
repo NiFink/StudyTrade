@@ -1,6 +1,7 @@
 package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.AuthUser;
+import de.studytrade.studytradebackend.model.Product;
 import jakarta.mail.MessagingException;
 import org.bson.types.ObjectId;
 
@@ -15,7 +16,7 @@ public interface UserInterface {
 
     Optional<AuthUser> singleUser(ObjectId userId);
 
-    List<ObjectId> favorites(ObjectId userId);
+    List<Product> favorites(ObjectId userId);
 
     Optional<AuthUser> updateUser(AuthUser userRequest);
 

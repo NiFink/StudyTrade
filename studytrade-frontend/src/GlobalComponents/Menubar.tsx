@@ -1,23 +1,12 @@
 import React, { ChangeEvent, useState, useRef, useEffect } from "react";
 import SearchList from "./SearchList";
 import ProductDetails from "../pages/Shoppage/Components/ProductDetails";
+import { Product } from "../interfaces/Product";
 
 interface MenubarProps {
   shoppageClick: () => void;
   profilepageClick: () => void;
   homepageClick: () => void;
-}
-
-interface Product {
-  name: string;
-  description: string;
-  category: string[];
-  condition: string;
-  price: number;
-  img: string;
-  productId: string;
-  creationDate: string;
-  userId: { username: string };
 }
 
 function Menubar({
@@ -47,7 +36,7 @@ function Menubar({
 
     // Regex to disallow specific characters
     const regex = /^[^{}\[\]$`;]*$/;
-    if (inputValue === '' || regex.test(inputValue)) {
+    if (inputValue === "" || regex.test(inputValue)) {
       setInputValue(inputValue);
     }
 
@@ -107,7 +96,6 @@ function Menubar({
   return (
     <div className="sm:fixed z-10 bg-white w-full">
       <div className="items-center mx-5 my-3 flex flex-col sm:flex-row sm:space-y-0 space-y-2  justify-between border-b border-gray-300 py-2 overflow-hidden sm:overflow-visible">
-
         <button
           onClick={homepageClick}
           className="w-full h-12 sm:w-auto sm:h-auto hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow sm:block"
@@ -115,7 +103,6 @@ function Menubar({
           <i className="bi bi-shop"></i> StudyTrade
         </button>
         <div className="flex space-x-7">
-
           {/*search element to find products with loupe icon*/}
           <div className="flex justify-center items-center">
             <div className="relative" ref={containerRef}>
@@ -130,7 +117,9 @@ function Menubar({
                   placeholder="Search..."
                   id="searchInput"
                   className={`rounded-full bg-gray-100 focus:outline-none appearance-none flex-grow px-2 transition-width duration-500 ${
-                    isSearchListExp ? "sm:w-64 w-[73vw]  opacity-100" : "w-0 opacity-0"
+                    isSearchListExp
+                      ? "sm:w-64 w-[73vw]  opacity-100"
+                      : "w-0 opacity-0"
                   }`}
                   value={inputValue}
                   onChange={handleChange}
@@ -165,7 +154,6 @@ function Menubar({
           >
             <i className="bi bi-person-circle"></i> Profile
           </button>
-
         </div>
       </div>
       {selectedProduct && (

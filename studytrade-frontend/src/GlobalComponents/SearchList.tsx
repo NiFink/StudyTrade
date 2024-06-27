@@ -1,17 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-// Define the Product interface to specify the shape of the product object
-interface Product {
-  name: string;
-  description: string;
-  category: string[];
-  condition: string;
-  price: number;
-  img: string;
-  productId: string;
-  creationDate: string;
-  userId: { username: string };
-}
+import { Product } from "../interfaces/Product";
 
 // Define the SearchListProps interface to specify the props that the SearchList component will receive
 interface SearchListProps {
@@ -38,7 +26,7 @@ function SearchList({ products, onProductClick }: SearchListProps) {
     <ul className="absolute bg-white shadow-lg rounded-lg mt-2 w-full max-w-md z-10">
       {products.map((product) => (
         <li
-          key={product.productId}
+          key={product._id}
           className="p-2  border-gray-200 flex cursor-pointer"
           onClick={() => handleProductClick(product)}
         >

@@ -1,6 +1,7 @@
 package de.studytrade.studytradebackend.controller;
 
 import de.studytrade.studytradebackend.model.AuthUser;
+import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.service.EmailValidatorInterface;
 import de.studytrade.studytradebackend.service.UserInterface;
 import io.swagger.v3.oas.annotations.Operation;
@@ -68,9 +69,9 @@ public class UserController {
 
     @GetMapping("/{id}/favorites")
     @Operation(summary = "Get favorites of a User by ID", description = "Get favorites of a User by ID")
-    public ResponseEntity<List<ObjectId>> getFavorites(
+    public ResponseEntity<List<Product>> getFavorites(
             @PathVariable @Schema(description = "ID of the User") ObjectId id) {
-        return new ResponseEntity<>(userService.favorites(id), HttpStatus.OK);
+        return new ResponseEntity<List<Product>>(userService.favorites(id), HttpStatus.OK);
     }
 
     private String getSiteURL(HttpServletRequest request) {

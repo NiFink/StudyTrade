@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 import ProductDetails from "./ProductDetails";
-
-interface Product {
-  name: string;
-  description: string;
-  category: string[];
-  condition: string;
-  price: number;
-  img: string;
-  productId: string;
-  creationDate: string;
-  userId: { username: string };
-}
+import { Product } from "../../../interfaces/Product";
 
 interface ProductProps {
   products: Product[];
@@ -45,7 +34,7 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
         {/* Lists all fetch Products*/}
         {products.map((product) => (
           <button
-            key={product.productId}
+            key={product._id}
             onClick={() => handleProductClick(product)}
             className="group relative items-center justify-center overflow-hidden cursor-pointer"
           >

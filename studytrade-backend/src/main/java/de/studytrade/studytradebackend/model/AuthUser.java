@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.Date;
 import java.util.List;
@@ -26,8 +27,10 @@ public class AuthUser {
     private String mail;
     private String creationDate;
     private String profileImage;
-    private List<ObjectId> createdProducts;
-    private List<ObjectId> favorites;
+    @DocumentReference
+    private List<Product> createdProducts;
+    @DocumentReference
+    private List<Product> favorites;
     private String verificationCode;
     private boolean isEnabled;
 
