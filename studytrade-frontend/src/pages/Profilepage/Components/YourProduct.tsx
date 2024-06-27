@@ -1,21 +1,10 @@
 import { useState } from "react";
 import ProductDetails from "../../Shoppage/Components/ProductDetails";
+import { Product } from "../../../interfaces/Product";
 
 interface CreatedProps {
   created: Product[];
-  deleteProduct: (productId: number) => void;
-}
-
-interface Product {
-  name: string;
-  description: string;
-  category: string[];
-  condition: string;
-  price: number;
-  img: string;
-  productId: number;
-  creationDate: string;
-  userId: { username: string };
+  deleteProduct: (_id: string) => void;
 }
 
 function YourProduct({ created, deleteProduct }: CreatedProps) {
@@ -35,8 +24,8 @@ function YourProduct({ created, deleteProduct }: CreatedProps) {
     setDetailsOpen(!isDetailsOpen);
   };
 
-  const deleteClick = (productId: number) => {
-    deleteProduct(productId);
+  const deleteClick = (_id: string) => {
+    deleteProduct(_id);
   };
 
   return (
@@ -60,7 +49,7 @@ function YourProduct({ created, deleteProduct }: CreatedProps) {
           </button>
           {created.map((product) => (
             <div
-              key={product.productId}
+              key={product._id}
               className="group relative items-center justify-center overflow-hidden "
             >
               <button
@@ -69,7 +58,7 @@ function YourProduct({ created, deleteProduct }: CreatedProps) {
               >
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg via-transparent xl:aspect-h-8 xl:aspect-w-7">
                   <img
-                    src={`/images/products/${product.productId}.jpg`}
+                    src={`${product.img}`}
                     alt={product.name}
                     className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
                   />
@@ -86,7 +75,7 @@ function YourProduct({ created, deleteProduct }: CreatedProps) {
                 </div>
               </button>
               <button
-                onClick={() => deleteClick(product.productId)}
+                onClick={() => deleteClick(product._id)}
                 className="hidden group-hover:block bg-gray-300 absolute top-2 right-2 w-9 h-9 rounded-lg z-50"
               >
                 <i className="bi bi-trash-fill text-black text-[25px]"></i>

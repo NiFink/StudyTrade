@@ -3,27 +3,23 @@ import ProductList from "../Components/ProductList";
 
 const mockProducts = [
   {
-    productId:"667c24c605a1ca273ca4e31a",
-    userId: {
-      username: "6651e5e58ae50b7dd1e74add"
-    },
-    name: "Used textbook: \"Introduction to Computer Science\"",
-    description: "A used textbook for an introduction to computer science, in good condition.",
-    category: [
-      "Books"
-    ],
+    _id: "667c24c605a1ca273ca4e31a",
+    username: "6651e5e58ae50b7dd1e74add",
+    name: 'Used textbook: "Introduction to Computer Science"',
+    description:
+      "A used textbook for an introduction to computer science, in good condition.",
+    category: ["Books"],
     condition: "used",
     price: 29.99,
     img: "./images/computer_science_textbook.jpg",
     creationDate: "2024-04-28T12:46:50.286Z",
-  }
+  },
 ];
-
 
 const mockToggleDetails = jest.fn();
 const mockIsDetailsOpen = false;
 
-test('ProductList renders ProductList component', () => {
+test("ProductList renders ProductList component", () => {
   render(
     <ProductList
       products={mockProducts}
@@ -31,6 +27,6 @@ test('ProductList renders ProductList component', () => {
       isDetailsOpen={mockIsDetailsOpen}
     />
   );
-  const productListElement = screen.getByTestId('product-list');
+  const productListElement = screen.getByTestId("product-list");
   expect(productListElement).toBeInTheDocument();
 });

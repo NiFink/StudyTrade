@@ -1,36 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Favorites from "./Components/Favorites";
 import YourProduct from "./Components/YourProduct";
-import ProductDetails from "../Shoppage/Components/ProductDetails";
 import Info from "./Components/Info";
+import { Product } from "../../interfaces/Product";
+import { AuthUser } from "../../interfaces/AuthUser";
 
 interface ProfilepageProps {
   homepageClick?: () => void;
-}
-
-interface Product {
-  name: string;
-  description: string;
-  category: string[];
-  condition: string;
-  price: number;
-  img: string;
-  productId: number;
-  creationDate: string;
-  userId: { username: string };
-}
-
-interface AuthUser {
-  userId: number;
-  username: string;
-  password: string;
-  mail: string;
-  creationDate: string;
-  profileImage: string;
-  createdProducts: number[];
-  favorites: number[];
-  verificationCode: string;
-  isEnabled: boolean;
 }
 
 function Profilepage({ homepageClick }: ProfilepageProps) {
@@ -46,70 +22,29 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
       );
       const data = await response.json();
       setAuthUser(data);
+      setFavorites(data.favorites);
+      setCreated(data.createdProducts);
     } catch (error) {
       console.error("Error fetching user:", error);
     }
   };
 
-  const fetchFavorites = async () => {
-    if (authUser && authUser.favorites && authUser.favorites.length > 0) {
-      try {
-        const queryString = createQueryString(authUser.favorites);
-        const response = await fetch(
-          `http://localhost:8080/api/v1/products/multiple?${queryString}`
-        );
-        const data = await response.json();
-        setFavorites(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    } else {
-      setFavorites([]); // Ensure favorites is an empty array if no favorites
-    }
-  };
-
-  const fetchCreated = async () => {
+  const deleteProduct = async (_id: string) => {
     if (
       authUser &&
       authUser.createdProducts &&
       authUser.createdProducts.length > 0
     ) {
       try {
-        const queryString = createQueryString(authUser.createdProducts);
-        console.log(createQueryString);
+        console.log(_id);
         const response = await fetch(
-          `http://localhost:8080/api/v1/products/multiple?${queryString}`
-        );
-        const data = await response.json();
-        setCreated(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    } else {
-      setCreated([]); // Ensure favorites is an empty array if no favorites
-    }
-  };
-
-  const createQueryString = (productIds: number[] = []) => {
-    return productIds.map((id) => `productId=${id}`).join("&");
-  };
-
-  const deleteProduct = async (productId: number) => {
-    if (
-      authUser &&
-      authUser.createdProducts &&
-      authUser.createdProducts.length > 0
-    ) {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/api/v1/products/${productId}`,
+          `http://localhost:8080/api/v1/products/${_id}`,
           {
             method: "DELETE",
           }
         );
         if (response.ok) {
-          fetchCreated();
-          fetchFavorites();
+          fetchAuthUser();
         } else {
           console.error("Error deleting product:", response.statusText);
         }
@@ -124,11 +59,6 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
   useEffect(() => {
     fetchAuthUser();
   }, []);
-
-  useEffect(() => {
-    fetchFavorites();
-    fetchCreated();
-  }, [authUser]);
 
   return (
     <div className="min-h-screen bg-white">

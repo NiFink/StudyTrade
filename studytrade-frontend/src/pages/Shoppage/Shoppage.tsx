@@ -2,21 +2,10 @@ import ProductList from "./Components/ProductList";
 import Categoriesbar from "./Components/Categoriesbar";
 import Filterbar from "./Components/Filterbar";
 import { useEffect, useState } from "react";
+import { Product } from "../../interfaces/Product";
 
 interface ShoppageProps {
   homepageClick?: () => void;
-}
-
-interface Product {
-  name: string;
-  description: string;
-  category: string[];
-  condition: string;
-  price: number;
-  img: string;
-  productId: string;
-  creationDate: string;
-  userId: { username: string };
 }
 
 function Shoppage({ homepageClick }: ShoppageProps) {
@@ -67,7 +56,7 @@ function Shoppage({ homepageClick }: ShoppageProps) {
   };
 
   return (
-    <div >
+    <div>
       <Filterbar
         toggleCategories={toggleCategories}
         fetchProducts={fetchProducts}

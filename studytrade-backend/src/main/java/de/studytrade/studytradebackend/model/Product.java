@@ -26,8 +26,7 @@ public class Product {
     private Float price;
     private String img;
     private Date creationDate;
-    @DocumentReference
-    private AuthUser userId;
+    private String username;
 
     public Product(Product product) {
         this.id = product.getId();
@@ -38,6 +37,6 @@ public class Product {
         this.price = product.getPrice();
         this.img = product.getImg();
         this.creationDate = product.getCreationDate();
-        this.userId = product.getUserId();
+        this.username = product.getUsername();
     }
 }
