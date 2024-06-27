@@ -133,7 +133,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Large image above */}
-      <div className="relative w-full h-80">
+      <div className="relative w-full sm:h-80 h-44">
         <div
           className="absolute inset-0 bg-fixed sm:bg-cover sm:bg-center bg-right-bottom"
           style={{ backgroundImage: "url(./images/hdm_picture2.jpg)" }}
@@ -142,7 +142,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
         </div>
 
         {/* Profile picture */}
-        <div className="absolute top-80 sm:left-72 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute sm:top-80 top-44 sm:left-72 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <img
             src="/images/womanProfile.png"
             alt=""
@@ -152,7 +152,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
       </div>
 
       {/* Profile names */}
-      <div className="ml-96 pt-2">
+      <div className="sm:ml-96 flex justify-center sm:justify-start sm:pt-2 pt-20">
         <div className="flex flex-col">
           <span className="text-black font-bold text-[23px] leading-6">
             {authUser?.username}
@@ -163,7 +163,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
       {/* info button */}
       <div className="relative">
-        <div className="absolute sm:top-10 top-24 right-0 sm:bottom-20 flex justify-end items-center">
+        <div className="absolute sm:top-10 top-12 right-0 sm:bottom-20 flex justify-end items-center">
           <button
             className={`text-black sm:w-64 w-52 sm:h-36 h-28 hover:bg-gray-200 active:bg-gray-300 ${
               activeButton === "info" ? "border-b-2 border-black" : ""
@@ -184,7 +184,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
 
       {/* activity button */}
       <div className="relative">
-        <div className="absolute sm:top-10 top-24 sm:right-64 sm:bottom-20 flex justify-end items-center">
+        <div className="absolute sm:top-10 top-12 sm:right-64 sm:bottom-20 flex justify-end items-center">
           <button
             className={`text-black sm:w-64 w-52 sm:h-36 h-28 hover:bg-gray-200 active:bg-gray-300 ${
               activeButton === "activity" ? "border-b-2 border-black" : ""
@@ -204,7 +204,7 @@ function Profilepage({ homepageClick }: ProfilepageProps) {
       </div>
 
       {/* Indented gray strip */}
-      <div className="relative w-full h-6 sm:mt-28 mt-52 bg-gray-200">
+      <div className="relative w-full h-6 sm:mt-28 mt-40 bg-gray-200">
         <div className="absolute inset-0 bg-gray-200 shadow-inner"></div>
       </div>
 
