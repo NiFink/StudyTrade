@@ -15,6 +15,7 @@ function Loginpage({
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  {/* checks if the login works, otherwise an error message pops up */}
   const handleLogin = async () => {
     try {
       const response = await fetch("http://localhost:8080/login", {
@@ -42,6 +43,7 @@ function Loginpage({
     }
   };
 
+  {/* background and logo */}
   return (
     <div
       className="h-screen flex items-center justify-center bg-light-red"
@@ -51,9 +53,10 @@ function Loginpage({
         backgroundPosition: "center",
       }}
     >
-      {/* background shine through */}
       <div className="flex flex-col items-center p-8 border border-white-500 bg-white rounded-lg shadow-lg" style={{ maxWidth: "60rem", width: "90%", height: "38rem", backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
       <img src="/hdm-logo.png" alt="HdM Logo" className="mb-8 w-64 h-auto " />
+        
+        {/* required input fields */}
         <input
           type="text"
           placeholder="Username"
@@ -73,6 +76,8 @@ function Loginpage({
           onBlur={(e) => { e.target.style.borderColor = "#ccc"; e.target.style.borderWidth = "1px"; }}
         />
         {error && <p className="text-red-500 mb-3">{error}</p>}
+        
+        {/* buttons to click */}
         <button
           onClick={handleLogin}
           className="px-5 py-2 mb-3 cursor-pointer bg-red-600 text-white rounded"
