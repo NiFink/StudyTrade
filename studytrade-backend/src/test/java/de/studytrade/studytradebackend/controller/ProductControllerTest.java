@@ -15,7 +15,6 @@ import java.util.*;
 
 @SpringBootTest
 class ProductControllerTest {
-    /*
 
     @Autowired
     private ProductController productController;
@@ -32,8 +31,7 @@ class ProductControllerTest {
         product1.setCategory(Arrays.asList("Clothing", "Home"));
         product1.setCondition("New");
         product1.setPrice(50.99f);
-        product1.setImg("product1.jpg");
-        product1.setProductId(1);
+        product1.setImg("product1.jpg");;
         product1.setCreationDate(new Date());
         // product1.setUserId(123);
 
@@ -44,7 +42,6 @@ class ProductControllerTest {
         product2.setCondition("Used");
         product2.setPrice(29.99f);
         product2.setImg("product2.jpg");
-        product2.setProductId(2);
         product2.setCreationDate(new Date());
         // product2.setUserId(456);
 
@@ -57,5 +54,5 @@ class ProductControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(products, response.getBody());
     }
-*/
+
 }
