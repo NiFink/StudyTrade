@@ -15,7 +15,9 @@ function RegisterPage({
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
-  {/* callback functions */}
+  {
+    /* callback functions */
+  }
   const backToLogin = () => {
     if (clickBackToLogin) clickBackToLogin();
   };
@@ -26,8 +28,10 @@ function RegisterPage({
       return;
     }
 
-    {/* check whether the mail is an hdm-mail, then registration succes/error message pops up */}
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@hdm-stuttgart.de\.([a-zA-Z]{2,})$/;
+    {
+      /* check whether the mail is an hdm-mail, then registration succes/error message pops up */
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@hdm-stuttgart\.de$/;
 
     if (!emailRegex.test(email)) {
       setError("Please use an hdm-email ending with @hdm-stuttgart.de");
@@ -57,21 +61,22 @@ function RegisterPage({
 
   const passwordMatch = password === confirmPassword;
 
-  {/* background and logo */}
+  {
+    /* background and logo */
+  }
   return (
-    <div
-    className="h-screen flex flex-col items-center justify-center bg-light-red relative z-0">
+    <div className="h-screen flex flex-col items-center justify-center bg-light-red relative z-0">
       <img
         src="./images/backgroundLogin.jpg"
         alt="Background"
         className="absolute inset-0 w-full h-full object-cover z-0"
-    />
+      />
       <div className="flex flex-col items-center p-8 bg-white bg-opacity-60 rounded-lg shadow-lg max-w-xl w-11/12 md:w-1/2 lg:w-2/5 h-auto relative z-10">
-          <img
-            src="/hdm-logo-cut.png"
-            alt="HdM Logo"
-            className="w-64 h-auto mr-4 md:mr-6"
-          />
+        <img
+          src="/hdm-logo-cut.png"
+          alt="HdM Logo"
+          className="w-64 h-auto mr-4 md:mr-6"
+        />
 
         {/* necessary input fields to register */}
         <input
@@ -107,9 +112,9 @@ function RegisterPage({
         {!passwordMatch && (
           <p className="text-red-500 mb-3 md:mb-4">Passwords do not match</p>
         )}
-        
+
         {error && <p className="text-red-500 mb-3 md:mb-4">{error}</p>}
-        
+
         {/* register button */}
         <button
           onClick={handleRegister}
