@@ -24,9 +24,9 @@ public class AuthUser {
     private String username;
     private String password;
     private String mail;
-    private Date creationDate;
+    private String creationDate;
     private String profileImage;
-    private List<Integer> createdProducts;
+    private List<ObjectId> createdProducts;
     private List<ObjectId> favorites;
     private String verificationCode;
     private boolean isEnabled;

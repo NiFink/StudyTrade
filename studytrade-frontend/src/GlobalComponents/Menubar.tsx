@@ -15,7 +15,7 @@ interface Product {
   condition: string;
   price: number;
   img: string;
-  productId: number;
+  productId: string;
   creationDate: string;
   userId: { username: string };
 }
