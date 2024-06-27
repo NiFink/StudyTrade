@@ -3,6 +3,7 @@ import ProductList from "../Components/ProductList";
 
 const mockProducts = [
   {
+    productId:"667c24c605a1ca273ca4e31a",
     userId: {
       username: "6651e5e58ae50b7dd1e74add"
     },
@@ -21,7 +22,7 @@ const mockProducts = [
 
 const mockToggleDetails = jest.fn();
 const mockIsDetailsOpen = false;
-/*
+
 test('ProductList renders ProductList component', () => {
   render(
     <ProductList
@@ -32,4 +33,4 @@ test('ProductList renders ProductList component', () => {
   );
   const productListElement = screen.getByTestId('product-list');
   expect(productListElement).toBeInTheDocument();
-});*/
+});
