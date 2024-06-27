@@ -2,6 +2,7 @@ package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.repository.ProductRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -21,13 +22,13 @@ public class ProductService implements ProductInterface {
     }
 
     @Override
-    public Optional<Product> singleProduct(int productId) {
-        return productRepository.findProductByProductId(productId);
+    public Optional<Product> singleProduct(ObjectId productId) {
+        return productRepository.findProductById(productId);
     }
 
     @Override
-    public List<Product> getMultipleProducts(List<Integer> productId) {
-        return productRepository.findByProductIdIn(productId);
+    public List<Product> getMultipleProducts(List<ObjectId> productId) {
+        return productRepository.findByIdIn(productId);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class ProductService implements ProductInterface {
 
     @Override
     public Optional<Product> updateProduct(Product productRequest) {
-        Product existingProduct = productRepository.findProductByProductId(productRequest.getProductId()).get();
+        Product existingProduct = productRepository.findProductById(productRequest.getId()).get();
 
         // Change data only if it exists in productRequest
         existingProduct
@@ -96,7 +97,7 @@ public class ProductService implements ProductInterface {
     }
 
     @Override
-    public void deleteProduct(int productId) {
-        productRepository.deleteByProductId(productId);
+    public void deleteProduct(ObjectId productId) {
+        productRepository.deleteById(productId);
     }
 }

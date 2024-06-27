@@ -3,6 +3,10 @@ import ProductList from "../Components/ProductList";
 
 const mockProducts = [
   {
+    productId:"667c24c605a1ca273ca4e31a",
+    userId: {
+      username: "6651e5e58ae50b7dd1e74add"
+    },
     name: "Used textbook: \"Introduction to Computer Science\"",
     description: "A used textbook for an introduction to computer science, in good condition.",
     category: [
@@ -11,11 +15,7 @@ const mockProducts = [
     condition: "used",
     price: 29.99,
     img: "./images/computer_science_textbook.jpg",
-    productId: 5,
     creationDate: "2024-04-28T12:46:50.286Z",
-    userId: {
-      username: "6651e5e58ae50b7dd1e74add"
-    }
   }
 ];
 

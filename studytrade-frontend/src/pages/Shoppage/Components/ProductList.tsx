@@ -8,7 +8,7 @@ interface Product {
   condition: string;
   price: number;
   img: string;
-  productId: number;
+  productId: string;
   creationDate: string;
   userId: { username: string };
 }
@@ -51,8 +51,8 @@ function ProductList({ products, toggleDetails, isDetailsOpen }: ProductProps) {
           >
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg via-transparent xl:aspect-h-8 xl:aspect-w-7">
               <img
-                src={`/images/products/${product.productId}.jpg`}
-                alt={product.name}
+                src={product.img}
+                alt={product.name + " " + product.img}
                 className="h-full w-full object-cover object-center group-hover:rotate-3 group-hover:scale-125 transition-transform duration-500"
               />
               <div className="absolute bottom-0 left-0 inset-0 bg-gradient-to-b from-transparent to-black/30 group-hover:to-black/50 rounded-lg">
