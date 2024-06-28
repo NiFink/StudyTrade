@@ -47,7 +47,10 @@ function FilterBar({ toggleCategories, fetchProducts }: FilterBarProps) {
   };
 
   const filterButton = () => {
-    if (parseInt(minPrice) < parseInt(maxPrice)) {
+    if (
+      minPrice == "" ||
+      maxPrice == "" || 
+      parseInt(minPrice) < parseInt(maxPrice)) {
       fetchProducts(
         undefined,
         minPrice == "" ? 0 : Number(minPrice),

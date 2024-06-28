@@ -32,6 +32,9 @@ git clone https://gitlab.mi.hdm-stuttgart.de/nk150/studytrade-se3.git
 # Clone the repository using SSH
 git clone git@gitlab.mi.hdm-stuttgart.de:nk150/studytrade-se3.git
 
+# Open Project
+cd studytrade-se3
+
 # Install dependencies for the frontend
 cd studytrade-frontend
 npm install
@@ -45,18 +48,18 @@ mvn install
 ## Usage
 
 ```bash
-# Build Docker images and start containers
+# Build Docker images and start containers (http://localhost:3000/)
 cd ..
 docker-compose up
 
 # Stop and remove Docker containers and images
 docker-compose down --rmi all -v
 
-# Start the frontend app
+# Start the frontend app (http://localhost:3000/)
 cd studytrade-frontend
 npm start
 
-# Start the backend app
+# Start the backend app (http://localhost:8080/swagger-ui/index.html#/)
 cd ../studytrade-backend
 mvn spring-boot:run
 ```
