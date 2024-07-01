@@ -1,5 +1,4 @@
 import {Product} from './Product';
-import { ObjectId } from 'mongodb';
 
 export interface AuthUser {
 	_id: string;

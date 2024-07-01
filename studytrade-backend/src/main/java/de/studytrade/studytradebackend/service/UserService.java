@@ -4,6 +4,8 @@ import de.studytrade.studytradebackend.model.AuthUser;
 import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.repository.AuthUserRepository;
 import de.studytrade.studytradebackend.repository.ProductRepository;
+import de.studytrade.studytradebackend.service.interfaces.SendEmailInterface;
+import de.studytrade.studytradebackend.service.interfaces.UserInterface;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
@@ -141,7 +143,7 @@ public class UserService implements UserInterface {
     @Override
     public void deleteFavorite(ObjectId userId, ObjectId productId) {
         AuthUser user = userRepository.findAuthUserById(userId).get();
-        user.getFavorites().remove(user.getFavorites().indexOf(productId));
+        user.getFavorites().remove(productRepository.findProductById(productId).get());
         userRepository.save(user);
     }
 }

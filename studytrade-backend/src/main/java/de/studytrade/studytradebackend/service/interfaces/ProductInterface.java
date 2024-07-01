@@ -1,4 +1,4 @@
-package de.studytrade.studytradebackend.service;
+package de.studytrade.studytradebackend.service.interfaces;
 
 import de.studytrade.studytradebackend.model.Product;
 import org.bson.types.ObjectId;

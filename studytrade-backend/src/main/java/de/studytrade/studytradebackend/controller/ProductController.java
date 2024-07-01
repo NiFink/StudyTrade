@@ -1,7 +1,7 @@
 package de.studytrade.studytradebackend.controller;
 
 import de.studytrade.studytradebackend.model.Product;
-import de.studytrade.studytradebackend.service.ProductInterface;
+import de.studytrade.studytradebackend.service.interfaces.ProductInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.bson.types.ObjectId;

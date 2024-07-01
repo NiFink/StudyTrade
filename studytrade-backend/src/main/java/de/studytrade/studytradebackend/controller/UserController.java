@@ -2,8 +2,8 @@ package de.studytrade.studytradebackend.controller;
 
 import de.studytrade.studytradebackend.model.AuthUser;
 import de.studytrade.studytradebackend.model.Product;
-import de.studytrade.studytradebackend.service.EmailValidatorInterface;
-import de.studytrade.studytradebackend.service.UserInterface;
+import de.studytrade.studytradebackend.service.interfaces.EmailValidatorInterface;
+import de.studytrade.studytradebackend.service.interfaces.UserInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,7 +35,8 @@ public class UserController {
 
     @PostMapping("/register")
     @Operation(summary = "Register a new User", description = "Register a new User with HdM email")
-    public ResponseEntity registerUser(@RequestBody @Schema(description = "User to be registered") AuthUser user,
+    public ResponseEntity<String> registerUser(
+            @RequestBody @Schema(description = "User to be registered") AuthUser user,
             HttpServletRequest request) {
         try {
             if (userService.userExists(user)) {

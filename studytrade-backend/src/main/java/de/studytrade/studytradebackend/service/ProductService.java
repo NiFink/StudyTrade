@@ -2,6 +2,8 @@ package de.studytrade.studytradebackend.service;
 
 import de.studytrade.studytradebackend.model.Product;
 import de.studytrade.studytradebackend.repository.ProductRepository;
+import de.studytrade.studytradebackend.service.interfaces.ProductInterface;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

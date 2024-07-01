@@ -3,8 +3,8 @@ package de.studytrade.studytradebackend.IntegrationTests.UserControllerTests.Pos
 import de.studytrade.studytradebackend.controller.UserController;
 import de.studytrade.studytradebackend.model.AuthUser;
 import de.studytrade.studytradebackend.model.Product;
-import de.studytrade.studytradebackend.service.EmailValidatorInterface;
 import de.studytrade.studytradebackend.service.UserService;
+import de.studytrade.studytradebackend.service.interfaces.EmailValidatorInterface;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.bson.types.ObjectId;
@@ -37,7 +37,8 @@ public class UserControllerPositiveTest {
     private EmailValidatorInterface emailValidatorInterface;
 
     /**
-     * Test tests the registerUser method to see if the positive response actually happens.
+     * Test tests the registerUser method to see if the positive response actually
+     * happens.
      * It blocks any method that comes from the service class.
      * And verify that it has only been used once.
      *
@@ -60,7 +61,7 @@ public class UserControllerPositiveTest {
         when(request.getRequestURL()).thenReturn(new StringBuffer(url));
         when(request.getServletPath()).thenReturn("/api/v1/users/register");
 
-        ResponseEntity result = userController.registerUser(user, request);
+        ResponseEntity<String> result = userController.registerUser(user, request);
 
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
         assertEquals("User added successfully", result.getBody());
@@ -72,8 +73,10 @@ public class UserControllerPositiveTest {
 
     /**
      * This test case verifies that when a verification code is provided,
-     * the UserController's verifyUser method returns the expected success string ("verify_success").
-     * It also checks that the UserService's verify method is called exactly once with any String argument.
+     * the UserController's verifyUser method returns the expected success string
+     * ("verify_success").
+     * It also checks that the UserService's verify method is called exactly once
+     * with any String argument.
      */
     @Test
     public void testVerifyUser() {
@@ -91,8 +94,10 @@ public class UserControllerPositiveTest {
 
     /**
      * Tests the getSingleUser method in the UserController class.
-     * Verifies that the UserController correctly returns an HTTP OK status when a valid user ID is provided,
-     * and ensures the UserService's singleUser method is called once with any Integer argument.
+     * Verifies that the UserController correctly returns an HTTP OK status when a
+     * valid user ID is provided,
+     * and ensures the UserService's singleUser method is called once with any
+     * Integer argument.
      */
     @Test
     public void testSingleUser() {
@@ -113,7 +118,8 @@ public class UserControllerPositiveTest {
 
     /**
      * Tests the getAllUsers method in the UserController class.
-     * Verifies that the UserController returns an HTTP OK status when requesting all users,
+     * Verifies that the UserController returns an HTTP OK status when requesting
+     * all users,
      * and ensures the UserService's allUsers method is called once.
      */
     @Test
@@ -124,7 +130,7 @@ public class UserControllerPositiveTest {
         user.setUsername("test");
         user.setPassword("password123");
 
-        AuthUser[] authUsers = {user, user};
+        AuthUser[] authUsers = { user, user };
         when(userService.allUsers()).thenReturn(List.of(authUsers));
         ResponseEntity<List<AuthUser>> result = userController.getAllUsers();
         assertEquals(HttpStatus.OK, result.getStatusCode());
@@ -134,12 +140,14 @@ public class UserControllerPositiveTest {
 
     /**
      * Tests the getFavorites method in the UserController class.
-     * Verifies that the UserController returns an HTTP OK status when requesting a user's favorites,
-     * and ensures the UserService's favorites method is called once with any Integer argument.
+     * Verifies that the UserController returns an HTTP OK status when requesting a
+     * user's favorites,
+     * and ensures the UserService's favorites method is called once with any
+     * Integer argument.
      */
     @Test
     public void testGetFavorites() {
-        Product[] users = {new Product()};
+        Product[] users = { new Product() };
 
         when(userService.favorites(any(ObjectId.class))).thenReturn(List.of(users));
 
@@ -150,8 +158,10 @@ public class UserControllerPositiveTest {
 
     /**
      * Tests the updateUser method in the UserController class.
-     * Verifies that the UserController returns an HTTP OK status and a success message when updating a user,
-     * and ensures the UserService's updateUser method is called once with any AuthUser argument.
+     * Verifies that the UserController returns an HTTP OK status and a success
+     * message when updating a user,
+     * and ensures the UserService's updateUser method is called once with any
+     * AuthUser argument.
      */
     @Test
     public void testUpdateUser() {
@@ -172,8 +182,10 @@ public class UserControllerPositiveTest {
 
     /**
      * Tests the updateFavorites method in the UserController class.
-     * Verifies that the UserController returns an HTTP OK status and a success message when updating user favorites,
-     * and ensures the UserService's updateFavorites method is called once with any two Integer arguments.
+     * Verifies that the UserController returns an HTTP OK status and a success
+     * message when updating user favorites,
+     * and ensures the UserService's updateFavorites method is called once with any
+     * two Integer arguments.
      */
     @Test
     public void testUpdateFavorites() {
@@ -191,8 +203,10 @@ public class UserControllerPositiveTest {
 
     /**
      * Tests the deleteUser method in the UserController class.
-     * Verifies that the UserController returns an HTTP OK status and a success message when deleting a user,
-     * and ensures the UserService's deleteUser method is called once with any Integer argument.
+     * Verifies that the UserController returns an HTTP OK status and a success
+     * message when deleting a user,
+     * and ensures the UserService's deleteUser method is called once with any
+     * Integer argument.
      */
     @Test
     public void testDeleteUser() {
@@ -209,8 +223,10 @@ public class UserControllerPositiveTest {
 
     /**
      * Tests the deleteFavorite method in the UserController class.
-     * Verifies that the UserController returns an HTTP OK status and a success message when deleting a user's favorite,
-     * and ensures the UserService's deleteFavorite method is called once with any two Integer arguments.
+     * Verifies that the UserController returns an HTTP OK status and a success
+     * message when deleting a user's favorite,
+     * and ensures the UserService's deleteFavorite method is called once with any
+     * two Integer arguments.
      */
     @Test
     public void testDeleteFavorites() {
@@ -225,7 +241,5 @@ public class UserControllerPositiveTest {
         assertEquals("Favorite deleted successfully", result.getBody());
         verify(userService, times(1)).deleteFavorite(any(ObjectId.class), any(ObjectId.class));
     }
-
-
 
 }

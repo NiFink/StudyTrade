@@ -1,4 +1,4 @@
-package de.studytrade.studytradebackend;
+package de.studytrade.studytradebackend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;

@@ -3,6 +3,7 @@ package de.studytrade.studytradebackend.repository;
 import de.studytrade.studytradebackend.model.AuthUser;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -15,7 +16,7 @@ public interface AuthUserRepository extends MongoRepository<AuthUser, ObjectId> 
 
     boolean existsUserByUsername(String username);
 
-    void deleteById(ObjectId userId);
+    void deleteById(@NonNull ObjectId userId);
 
     Optional<AuthUser> findAuthUserByVerificationCode(String code);
 }
