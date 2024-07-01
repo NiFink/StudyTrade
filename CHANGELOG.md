@@ -8,11 +8,11 @@
 
   - Implemented search capabilities to allow users to find products quickly and efficiently.
 
-- **Create filter functionality** (#20)
+- **Create filter functionality** (#29)
 
   - Added filters to narrow down search results based on various criteria.
 
-- **Create mail authentication** (#17)
+- **Create mail authentication** (#28)
 
   - Integrated email authentication for secure user login.
 
@@ -28,7 +28,7 @@
 
   - Designed and implemented a user-friendly login and settings page for user account management.
 
-- **Create Profile** (#16)
+- **Create Profile** (#17)
 
   - Implemented a profile feature for users to manage their personal information.
 
@@ -40,7 +40,7 @@
 
   - Developed the landing page for the application to provide an intuitive entry point for users.
 
-- **Create Connection between Front and Backend** (#9)
+- **Create Connection between Front and Backend** (#8)
 
   - Established a robust connection between the frontend and backend to ensure seamless data exchange.
 
