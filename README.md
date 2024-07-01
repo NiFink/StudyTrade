@@ -1,125 +1,97 @@
 # StudyTrade SE3
 
-## Description
+## Beschreibung
 
-A brief description of the project and its purpose.
+Das Software-Entwicklungsprojekt StudyTrade ist eine Webanwendung ausschließlich für Studenten der Hochschule der Medien. Auf dieser können sie Profile erstellen und Produkte hochladen. Über die Homepage können die User daraufhin nach Produkten suchen und die verschiedenen Funktionen der Seite betrachten. Nach den Eigenschaften von Produkten kann auf der Produktseite gefiltert werden, um diese anschließend in der Produktübersicht anzuschauen.
 
-## Table of Contents
+## Inhaltsverzeichnis
 
 1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Configuration](#configuration)
-4. [Testing](#testing)
-5. [Contributing](#contributing)
-6. [License](#license)
-7. [Authors](#authors)
-8. [Version History](#version-history)
-9. [Additional Information](#additional-information)
+2. [Verwendung](#verwendung)
+3. [Tests](#tests)
+4. [Autoren](#autoren)
+5. [Versionsgeschichte](#versionsgeschichte)
+6. [Zusätzliche Informationen](#zusätzliche-informationen)
 
 ## Installation
 
-### Prerequisites
+### Voraussetzungen
 
-- Java 17 or higher
-- A current web browser
+- Java 17 oder höher
+- Ein aktueller Webbrowser
 
-### Installation Guide
+### Installationsanleitung
 
 ```bash
-# Clone the repository using HTTPS
+# Klone das Repository über HTTPS
 git clone https://gitlab.mi.hdm-stuttgart.de/nk150/studytrade-se3.git
 
-# Clone the repository using SSH
+# Klone das Repository über SSH
 git clone git@gitlab.mi.hdm-stuttgart.de:nk150/studytrade-se3.git
 
-# Open Project
+# Öffne das Projekt
 cd studytrade-se3
 
-# Install dependencies for the frontend
+# Installiere Abhängigkeiten für das Frontend
 cd studytrade-frontend
 npm install
 
-# Install dependencies for the backend
+# Installiere Abhängigkeiten für das Backend
 cd ../studytrade-backend
 mvn install
 
 ```
 
-## Usage
+## Verwendung
 
 ```bash
-# Build Docker images and start containers (http://localhost:3000/)
+# Baue Docker-Images und starte Container (http://localhost:3000/)
 cd ..
 docker-compose up
 
-# Stop and remove Docker containers and images
+# Stoppe und entferne Docker-Container und -Images
 docker-compose down --rmi all -v
 
-# Start the frontend app (http://localhost:3000/)
+# Starte die Frontend-Anwendung (http://localhost:3000/)
 cd studytrade-frontend
 npm start
 
-# Start the backend app (http://localhost:8080/swagger-ui/index.html#/)
+# Starte die Backend-Anwendung (http://localhost:8080/swagger-ui/index.html#/)
 cd ../studytrade-backend
 mvn spring-boot:run
 ```
 
-## Configuration
+## Tests
 
-### Configuration Options
-
-- server.port: The port on which the application runs (default: 8080).
-- spring.datasource.url: The URL of the database connection.
-- spring.mail.host: The SMTP server host for sending emails.
-- spring.mail.port: The SMTP server port for sending emails.
-
-## Testing
-
-### Test Guide
+### Anleitung zum Testen
 
 ```bash
-# Tests ausführen
-# Run backend tests
+# Führe Backend-Tests aus
 cd studytrade-backend
 mvn test
 
-# Run frontend tests
+# Führe Frontend-Tests aus
 cd ../studytrade-frontend
 npm test
 ```
 
-## Contributing
+## Autoren
 
-### Contribution Guidelines
+### Hauptautoren:
 
-- Create a pull request
-- Follow the code style guidelines
+- Jan Sander (js485@hdm-stuttgart.de),
+- Nils Fink (nf056@hdm-stuttgart.de),
+- Lisa Kohls (lk210@hdm-stuttgart.de),
+- Niklas Kieß (nk150@hdm-stuttgart.de),
+- Ryan Röhrich (rr062@hdm-stuttgart.de),
+- Jessica Schmidt (js496@hdm-stuttgart.de)
 
-### Reporting Issues
-
-- Please report issues via email to the main authors.
-
-## License
-
-This project is reserved for use by the development team and the instructor only.
-
-## Authors
-
-### Main Authors:
-
-- Jan Sander(js485@hdm-stuttgart.de),
-- Nils Fink(nf056@hdm-stuttgart.de),
-- Lisa Kohls(lk210@hdm-stuttgart.de),
-- Niklas Kiess(nk150@hdm-stuttgart.de),
-- Ryan Röhrich(rr062@hdm-stuttgart.de),
-- Jessi Schmidt(js496@hdm-stuttgart.de)
-
-## Version History
+## Versionsgeschichte
 
 ### v1.0.0
 
-- Initial release
+- First release (siehe CHANGELOG.md)
 
-## Additional Information
+## Zusätzliche Informationen
 
 - Wiki
