@@ -18,7 +18,7 @@ function Loginpage({
   {/* checks if the login works, otherwise an error message pops up */}
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:8080/login", {
+      const response = await fetch("http://localhost:8080/perform_login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -27,7 +27,7 @@ function Loginpage({
           username: username,
           password: password,
         }),
-        credentials: "include",
+        credentials: "include"
       });
 
       if (response.ok) {
