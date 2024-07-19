@@ -117,7 +117,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{userId}/favorites/{productId}")
+    @DeleteMapping("/{userId}/favorites/{id}")
     @Operation(summary = "Delete a favorite of a User", description = "Delete a favorite of a User by userID and productID")
     public ResponseEntity<String> deleteFavorite(@PathVariable @Schema(description = "ID of the User") ObjectId userId,
             @PathVariable @Schema(description = "ID of the Product") ObjectId id) {

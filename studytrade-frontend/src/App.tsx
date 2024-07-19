@@ -39,7 +39,7 @@ function App() {
                 <Loginpage
                     homepageClick={() => setSite("Homepage")}
                     registerClick={() => setSite("Registerpage")}
-                    onLoginSuccess={() => setSite("Shoppage")}
+                    onLoginSuccess={() => setSite("Homepage")}
                 />
             )}
             {currentSite === "Registerpage" && (
