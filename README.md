@@ -88,6 +88,10 @@ npm test
 
 ## Versionsgeschichte
 
+### v1.0.1
+
+- Final release (siehe CHANGELOG.md)
+
 ### v1.0.0
 
 - First release (siehe CHANGELOG.md)
