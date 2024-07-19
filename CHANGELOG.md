@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.1 (19.07.2024)
+
+### 🔧 Improvements
+
+- **Add Integration Tests and Unit Tests** (#14)
+
+  - Implemented new Tests for Backend
+
 ## v1.0.0 (01.07.2024)
 
 ### 🚀 New Features
